@@ -1,1 +1,1 @@
-MY PORTFOLIO WEBSITE - USING Next.js React & Node
+MY PORTFOLIO WEBSITE - USING Next.js, React & Node
