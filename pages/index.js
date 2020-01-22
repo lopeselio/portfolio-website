@@ -10,7 +10,14 @@ class Index extends React.Component{
 
   render(){
     return(
-      <h1> I am Index Page from Class Component. Currently in progress</h1>
+      React.createElement(
+        "h1",
+        {
+          className:"title"
+        },
+        "I am Index Page from Class Component. Currently in progress "
+      )
+      
     )
   }
 }
