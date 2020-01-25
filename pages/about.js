@@ -10,7 +10,7 @@ class About extends React.Component {
     return (
       <BaseLayout>
       <h1> I am About Page </h1>
-      <Header/>
+      {/* <Header/> */}
       </BaseLayout>
     )
   }

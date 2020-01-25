@@ -139,97 +139,119 @@ const BaseLayout = props => {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var next_link__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! next/link */ "./node_modules/next/link.js");
-/* harmony import */ var next_link__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(next_link__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var styled_jsx_style__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! styled-jsx/style */ "styled-jsx/style");
+/* harmony import */ var styled_jsx_style__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(styled_jsx_style__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var next_link__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! next/link */ "./node_modules/next/link.js");
+/* harmony import */ var next_link__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(next_link__WEBPACK_IMPORTED_MODULE_2__);
 var _jsxFileName = "C:\\Users\\Elio\\Desktop\\Portfolio-Website\\components\\shared\\Header.js";
-var __jsx = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement;
+
+var __jsx = react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement;
 
 
 
-class Header extends react__WEBPACK_IMPORTED_MODULE_0___default.a.Component {
+class Header extends react__WEBPACK_IMPORTED_MODULE_1___default.a.Component {
   render() {
     debugger;
     const title = this.props.title;
-    return __jsx(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, {
+    return __jsx(react__WEBPACK_IMPORTED_MODULE_1___default.a.Fragment, {
       __source: {
         fileName: _jsxFileName,
         lineNumber: 10
       },
       __self: this
     }, __jsx("p", {
+      className: "jsx-1127298210",
       __source: {
         fileName: _jsxFileName,
         lineNumber: 11
       },
       __self: this
-    }, title), this.props.children, __jsx(next_link__WEBPACK_IMPORTED_MODULE_1___default.a, {
-      href: "/",
+    }, title), this.props.children, __jsx("p", {
+      className: "jsx-1127298210" + " " + 'customClass',
       __source: {
         fileName: _jsxFileName,
         lineNumber: 13
       },
       __self: this
-    }, __jsx("a", {
+    }, "I am styled p element"), __jsx(next_link__WEBPACK_IMPORTED_MODULE_2___default.a, {
+      href: "/",
       __source: {
         fileName: _jsxFileName,
         lineNumber: 14
       },
       __self: this
-    }, " Home")), __jsx(next_link__WEBPACK_IMPORTED_MODULE_1___default.a, {
-      href: "/about",
+    }, __jsx("a", {
+      style: {
+        'fontSize': '20px'
+      },
+      className: "jsx-1127298210",
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 16
+        lineNumber: 15
       },
       __self: this
-    }, __jsx("a", {
+    }, " Home")), __jsx(next_link__WEBPACK_IMPORTED_MODULE_2___default.a, {
+      href: "/about",
       __source: {
         fileName: _jsxFileName,
         lineNumber: 17
       },
       __self: this
-    }, " About")), __jsx(next_link__WEBPACK_IMPORTED_MODULE_1___default.a, {
-      href: "/portfolio",
+    }, __jsx("a", {
+      className: "jsx-1127298210",
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 19
+        lineNumber: 18
       },
       __self: this
-    }, __jsx("a", {
+    }, " About")), __jsx(next_link__WEBPACK_IMPORTED_MODULE_2___default.a, {
+      href: "/portfolio",
       __source: {
         fileName: _jsxFileName,
         lineNumber: 20
       },
       __self: this
-    }, " Portfolio")), __jsx(next_link__WEBPACK_IMPORTED_MODULE_1___default.a, {
-      href: "/blogs",
+    }, __jsx("a", {
+      className: "jsx-1127298210",
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 22
+        lineNumber: 21
       },
       __self: this
-    }, __jsx("a", {
+    }, " Portfolio")), __jsx(next_link__WEBPACK_IMPORTED_MODULE_2___default.a, {
+      href: "/blogs",
       __source: {
         fileName: _jsxFileName,
         lineNumber: 23
       },
       __self: this
-    }, " Blog")), __jsx(next_link__WEBPACK_IMPORTED_MODULE_1___default.a, {
-      href: "/cv",
+    }, __jsx("a", {
+      className: "jsx-1127298210",
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 25
+        lineNumber: 24
       },
       __self: this
-    }, __jsx("a", {
+    }, " Blog")), __jsx(next_link__WEBPACK_IMPORTED_MODULE_2___default.a, {
+      href: "/cv",
       __source: {
         fileName: _jsxFileName,
         lineNumber: 26
       },
       __self: this
-    }, " CV")));
+    }, __jsx("a", {
+      className: "jsx-1127298210",
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 27
+      },
+      __self: this
+    }, " CV")), __jsx(styled_jsx_style__WEBPACK_IMPORTED_MODULE_0___default.a, {
+      id: "1127298210",
+      __self: this
+    }, "a.jsx-1127298210{font-size:20px;}.customColor.jsx-1127298210{color:red;}\n/*# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIkM6XFxVc2Vyc1xcRWxpb1xcRGVza3RvcFxcUG9ydGZvbGlvLVdlYnNpdGVcXGNvbXBvbmVudHNcXHNoYXJlZFxcSGVhZGVyLmpzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQThCWSxBQUlZLEFBRWEsVUFDWixLQUhBIiwiZmlsZSI6IkM6XFxVc2Vyc1xcRWxpb1xcRGVza3RvcFxcUG9ydGZvbGlvLVdlYnNpdGVcXGNvbXBvbmVudHNcXHNoYXJlZFxcSGVhZGVyLmpzIiwic291cmNlc0NvbnRlbnQiOlsiaW1wb3J0IFJlYWN0IGZyb20gJ3JlYWN0JztcclxuaW1wb3J0IExpbmsgZnJvbSAnbmV4dC9saW5rJ1xyXG5cclxuXHJcbmNsYXNzIEhlYWRlciBleHRlbmRzIFJlYWN0LkNvbXBvbmVudCB7XHJcbiAgcmVuZGVyKCkge1xyXG4gICAgZGVidWdnZXI7XHJcbiAgICBjb25zdCB0aXRsZSA9IHRoaXMucHJvcHMudGl0bGU7IFxyXG4gICAgcmV0dXJuKFxyXG4gICAgICA8UmVhY3QuRnJhZ21lbnQ+XHJcbiAgICAgICAgPHA+e3RpdGxlfTwvcD5cclxuICAgICAgICB7dGhpcy5wcm9wcy5jaGlsZHJlbn1cclxuICAgICAgICA8cCBjbGFzc05hbWU9J2N1c3RvbUNsYXNzJz5JIGFtIHN0eWxlZCBwIGVsZW1lbnQ8L3A+XHJcbiAgICAgICAgPExpbmsgaHJlZiA9IFwiL1wiPlxyXG4gICAgICAgICAgPGEgc3R5bGU9e3snZm9udFNpemUnOicyMHB4J319PiBIb21lPC9hPlxyXG4gICAgICAgIDwvTGluaz5cclxuICAgICAgICA8TGluayBocmVmID0gXCIvYWJvdXRcIj5cclxuICAgICAgICAgIDxhPiBBYm91dDwvYT5cclxuICAgICAgICA8L0xpbms+XHJcbiAgICAgICAgPExpbmsgaHJlZiA9IFwiL3BvcnRmb2xpb1wiPlxyXG4gICAgICAgICAgPGE+IFBvcnRmb2xpbzwvYT5cclxuICAgICAgICA8L0xpbms+XHJcbiAgICAgICAgPExpbmsgaHJlZiA9IFwiL2Jsb2dzXCI+XHJcbiAgICAgICAgICA8YT4gQmxvZzwvYT5cclxuICAgICAgICA8L0xpbms+XHJcbiAgICAgICAgPExpbmsgaHJlZiA9IFwiL2N2XCI+XHJcbiAgICAgICAgICA8YT4gQ1Y8L2E+XHJcbiAgICAgICAgPC9MaW5rPlxyXG4gICAgICAgIDxzdHlsZSBqc3g+XHJcbiAgICAgICAgICB7XHJcbiAgICAgICAgICAgIGBcclxuICAgICAgICAgICAgYSB7XHJcbiAgICAgICAgICAgICAgZm9udC1zaXplOiAyMHB4XHJcbiAgICAgICAgICAgIH07XHJcbiAgICAgICAgICAgIC5jdXN0b21Db2xvciB7XHJcbiAgICAgICAgICAgICAgY29sb3I6IHJlZDtcclxuICAgICAgICAgICAgfVxyXG4gICAgICAgICAgICBgXHJcbiAgICAgICAgICB9XHJcbiAgICAgICAgPC9zdHlsZT5cclxuXHJcbiAgICAgIDwvUmVhY3QuRnJhZ21lbnQ+XHJcblxyXG4gICAgKVxyXG4gIH1cclxufVxyXG5leHBvcnQgZGVmYXVsdCBIZWFkZXI7Il19 */\n/*@ sourceURL=C:\\\\Users\\\\Elio\\\\Desktop\\\\Portfolio-Website\\\\components\\\\shared\\\\Header.js */"));
   }
 
 }
@@ -2232,6 +2254,17 @@ module.exports = require("react");
 /***/ (function(module, exports) {
 
 module.exports = require("react-is");
+
+/***/ }),
+
+/***/ "styled-jsx/style":
+/*!***********************************!*\
+  !*** external "styled-jsx/style" ***!
+  \***********************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = require("styled-jsx/style");
 
 /***/ }),
 
