@@ -1,6 +1,6 @@
 import React from 'react';
-import Header from './../components/shared/Header';
-import BaseLayout from '../components/layouts/BaseLayout';
+// import Header from './../components/shared/Header';
+import BaseLayout from './../components/layouts/BaseLayout'
 // const Index = () => {
 //   return(
 //     <h1> I am Index Page </h1>
@@ -14,12 +14,14 @@ class Index extends React.Component{
     return(
       <BaseLayout>
         <h1> I am Index Page from Class Component</h1>
-        <Header title={'I am a Header component'} > 
-          <h1> I am a header subtitle </h1>
-        </Header>
+        
       </BaseLayout>
       
     )
   }
 }
 export default Index;
+
+// <Header title={'I am a Header component'} > 
+//   <h1> I am a header subtitle </h1>
+// </Header>
