@@ -35,8 +35,9 @@ class Header extends React.Component {
             a {
               font-size: 20px
             };
-            .customColor {
+            .customClass {
               color: red;
+              font-size: 20px;
             }
             `
           }
