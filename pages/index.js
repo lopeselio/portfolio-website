@@ -10,10 +10,10 @@ import SuperComponent from './../components/SuperComponents'
 
 
 class Index extends SuperComponent{
-  constructor() {
-    debugger;
-    super();
-    debugger;
+  constructor(props) {
+    // debugger;
+    super(props);
+    // debugger;
 
     this.state = {
       title: 'I am Index Page'

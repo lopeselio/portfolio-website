@@ -4,8 +4,8 @@ import BaseLayout from './../components/layouts/BaseLayout'
 
 class SuperComponent extends React.Component {
 
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.someVariable = 'Just someVariable';
   }
 

@@ -88,59 +88,10 @@ module.exports =
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 3);
+/******/ 	return __webpack_require__(__webpack_require__.s = 5);
 /******/ })
 /************************************************************************/
 /******/ ({
-
-/***/ "./components/SuperComponents.js":
-/*!***************************************!*\
-  !*** ./components/SuperComponents.js ***!
-  \***************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _components_layouts_BaseLayout__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./../components/layouts/BaseLayout */ "./components/layouts/BaseLayout.js");
-var _jsxFileName = "C:\\Users\\Elio\\Desktop\\Portfolio-Website\\components\\SuperComponents.js";
-var __jsx = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement;
-
-
-
-class SuperComponent extends react__WEBPACK_IMPORTED_MODULE_0___default.a.Component {
-  constructor(props) {
-    super(props);
-    this.someVariable = 'Just someVariable';
-  }
-
-  alertName(title) {
-    alert(title);
-  }
-
-  render() {
-    return __jsx(_components_layouts_BaseLayout__WEBPACK_IMPORTED_MODULE_1__["default"], {
-      __source: {
-        fileName: _jsxFileName,
-        lineNumber: 17
-      },
-      __self: this
-    }, __jsx("h1", {
-      __source: {
-        fileName: _jsxFileName,
-        lineNumber: 18
-      },
-      __self: this
-    }, " I am Blog Page "));
-  }
-
-}
-
-/* harmony default export */ __webpack_exports__["default"] = (SuperComponent);
-
-/***/ }),
 
 /***/ "./components/layouts/BaseLayout.js":
 /*!******************************************!*\
@@ -2110,9 +2061,9 @@ module.exports = __webpack_require__(/*! ./dist/client/link */ "./node_modules/n
 
 /***/ }),
 
-/***/ "./pages/index.js":
+/***/ "./pages/about.js":
 /*!************************!*\
-  !*** ./pages/index.js ***!
+  !*** ./pages/about.js ***!
   \************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
@@ -2121,83 +2072,34 @@ module.exports = __webpack_require__(/*! ./dist/client/link */ "./node_modules/n
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _components_layouts_BaseLayout__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./../components/layouts/BaseLayout */ "./components/layouts/BaseLayout.js");
-/* harmony import */ var _components_SuperComponents__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./../components/SuperComponents */ "./components/SuperComponents.js");
-var _jsxFileName = "C:\\Users\\Elio\\Desktop\\Portfolio-Website\\pages\\index.js";
+/* harmony import */ var _components_shared_Header__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./../components/shared/Header */ "./components/shared/Header.js");
+/* harmony import */ var _components_layouts_BaseLayout__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./../components/layouts/BaseLayout */ "./components/layouts/BaseLayout.js");
+var _jsxFileName = "C:\\Users\\Elio\\Desktop\\Portfolio-Website\\pages\\about.js";
 var __jsx = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement;
- // import Header from './../components/shared/Header';
 
 
- // const Index = () => {
-//   return(
-//     <h1> I am Index Page </h1>
-//   )
-// }
 
-class Index extends _components_SuperComponents__WEBPACK_IMPORTED_MODULE_2__["default"] {
-  constructor(props) {
-    // debugger;
-    super(props); // debugger;
 
-    this.state = {
-      title: 'I am Index Page'
-    };
-    console.log('constructor');
-  }
-
-  componentDidMount() {
-    console.log('componentDidMount');
-  }
-
-  componentDidUpdate() {
-    console.log('componentDidUpdate');
-  }
-
-  componentWillUnmount() {
-    console.log('componentWillUnmount');
-  }
-
-  updateTitle() {
-    this.setState({
-      title: 'I am Updated Index Page'
-    });
-  }
-
+class About extends react__WEBPACK_IMPORTED_MODULE_0___default.a.Component {
   render() {
-    return __jsx(_components_layouts_BaseLayout__WEBPACK_IMPORTED_MODULE_1__["default"], {
+    return __jsx(_components_layouts_BaseLayout__WEBPACK_IMPORTED_MODULE_2__["default"], {
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 42
+        lineNumber: 11
       },
       __self: this
     }, __jsx("h1", {
-      className: "fromPage",
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 43
+        lineNumber: 12
       },
       __self: this
-    }, " I am Index Page from Class Component"), __jsx("h2", {
-      __source: {
-        fileName: _jsxFileName,
-        lineNumber: 44
-      },
-      __self: this
-    }, this.state.title), __jsx("button", {
-      onClick: () => this.updateTitle(),
-      __source: {
-        fileName: _jsxFileName,
-        lineNumber: 45
-      },
-      __self: this
-    }, " Change Title"));
+    }, " I am About Page "));
   }
 
 }
 
-/* harmony default export */ __webpack_exports__["default"] = (Index); // <Header title={'I am a Header component'} > 
-//   <h1> I am a header subtitle </h1>
-// </Header>
+/* harmony default export */ __webpack_exports__["default"] = (About);
 
 /***/ }),
 
@@ -2212,14 +2114,14 @@ class Index extends _components_SuperComponents__WEBPACK_IMPORTED_MODULE_2__["de
 
 /***/ }),
 
-/***/ 3:
+/***/ 5:
 /*!******************************!*\
-  !*** multi ./pages/index.js ***!
+  !*** multi ./pages/about.js ***!
   \******************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\Users\Elio\Desktop\Portfolio-Website\pages\index.js */"./pages/index.js");
+module.exports = __webpack_require__(/*! C:\Users\Elio\Desktop\Portfolio-Website\pages\about.js */"./pages/about.js");
 
 
 /***/ }),
@@ -2401,4 +2303,4 @@ module.exports = require("url");
 /***/ })
 
 /******/ });
-//# sourceMappingURL=index.js.map
+//# sourceMappingURL=about.js.map
