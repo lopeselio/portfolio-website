@@ -2164,30 +2164,34 @@ class Index extends _components_SuperComponents__WEBPACK_IMPORTED_MODULE_2__["de
   }
 
   render() {
+    debugger;
+    const {
+      title
+    } = this.state;
     return __jsx(_components_layouts_BaseLayout__WEBPACK_IMPORTED_MODULE_1__["default"], {
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 42
+        lineNumber: 44
       },
       __self: this
     }, __jsx("h1", {
       className: "fromPage",
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 43
+        lineNumber: 45
       },
       __self: this
     }, " I am Index Page from Class Component"), __jsx("h2", {
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 44
+        lineNumber: 46
       },
       __self: this
-    }, this.state.title), __jsx("button", {
+    }, title), __jsx("button", {
       onClick: () => this.updateTitle(),
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 45
+        lineNumber: 47
       },
       __self: this
     }, " Change Title"));
