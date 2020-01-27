@@ -2199,9 +2199,22 @@ class Index extends _components_SuperComponents__WEBPACK_IMPORTED_MODULE_2__["de
 
 }
 
-/* harmony default export */ __webpack_exports__["default"] = (Index); // <Header title={'I am a Header component'} > 
-//   <h1> I am a header subtitle </h1>
-// </Header>
+/* harmony default export */ __webpack_exports__["default"] = (Index);
+
+__jsx(Header, {
+  title: 'I am a Header component',
+  __source: {
+    fileName: _jsxFileName,
+    lineNumber: 55
+  },
+  __self: undefined
+}, __jsx("h1", {
+  __source: {
+    fileName: _jsxFileName,
+    lineNumber: 56
+  },
+  __self: undefined
+}, " I am a header subtitle "));
 
 /***/ }),
 
