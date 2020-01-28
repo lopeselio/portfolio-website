@@ -52,6 +52,3 @@ class Index extends SuperComponent{
 }
 export default Index;
 
-{/* <Header title={'I am a Header component'} > 
-  <h1> I am a header subtitle </h1>
-</Header> */}
