@@ -34,7 +34,7 @@ class Index extends SuperComponent{
   }
 
   updateTitle() {
-    this.setState({title: 'I am Index Page'})
+    this.setState({title: 'I am Updated Index Page'})
   }
 
   render(){
