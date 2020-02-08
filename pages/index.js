@@ -8,14 +8,20 @@ import axios from 'axios';
 
 class Index extends SuperComponent{
 
-  static getInitialProps() {
-    // console.log('I am get getInitialProps');
-    axios.get('https://jsonplaceholder.typicode.com/todos/1').then(
-      (data) => console.log(data)
-    )
-    .catch(err => console.error(err))
+  static async getInitialProps() {
+    let userData = {};
+    try{
+      const response = await axios.get('https://jsonplaceholder.typicode.com/todos/1');
+      userData = response.data;
+        
+      
 
-    return{initialData: [1,2,3,4]};
+    }catch(err) {console.error(err);}
+    // console.log('I am get getInitialProps');
+   
+    
+
+    return{initialData: [1,2,3,4], userData: userData};
   }
   constructor(props) {
     // debugger;
@@ -48,11 +54,13 @@ class Index extends SuperComponent{
   render(){
     debugger;
     const {title} = this.state;
-    const initialData = this.props.initialData;
+    // const initialData = this.props.initialData;
+    const {initialData, userData} = this.props;
     return(
       <BaseLayout>
         <h1 className='fromPage'> I am Index Page from Class Component</h1>
         <h2>{title}</h2>
+        <h1>{userData.title}</h1>
         <button onClick = { () => this.updateTitle() }> Change Title</button>
       </BaseLayout>
       

@@ -2134,11 +2134,20 @@ var __jsx = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement;
  // const axios = require('axios').default;
 
 class Index extends _components_SuperComponents__WEBPACK_IMPORTED_MODULE_2__["default"] {
-  static getInitialProps() {
-    // console.log('I am get getInitialProps');
-    axios__WEBPACK_IMPORTED_MODULE_3___default.a.get('https://jsonplaceholder.typicode.com/todos/1').then(data => console.log(data)).catch(err => console.error(err));
+  static async getInitialProps() {
+    let userData = {};
+
+    try {
+      const response = await axios__WEBPACK_IMPORTED_MODULE_3___default.a.get('https://jsonplaceholder.typicode.com/todos/1');
+      userData = response.data;
+    } catch (err) {
+      console.error(err);
+    } // console.log('I am get getInitialProps');
+
+
     return {
-      initialData: [1, 2, 3, 4]
+      initialData: [1, 2, 3, 4],
+      userData: userData
     };
   }
 
@@ -2175,32 +2184,42 @@ class Index extends _components_SuperComponents__WEBPACK_IMPORTED_MODULE_2__["de
     debugger;
     const {
       title
-    } = this.state;
-    const initialData = this.props.initialData;
+    } = this.state; // const initialData = this.props.initialData;
+
+    const {
+      initialData,
+      userData
+    } = this.props;
     return __jsx(_components_layouts_BaseLayout__WEBPACK_IMPORTED_MODULE_1__["default"], {
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 53
+        lineNumber: 60
       },
       __self: this
     }, __jsx("h1", {
       className: "fromPage",
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 54
+        lineNumber: 61
       },
       __self: this
     }, " I am Index Page from Class Component"), __jsx("h2", {
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 55
+        lineNumber: 62
       },
       __self: this
-    }, title), __jsx("button", {
+    }, title), __jsx("h1", {
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 63
+      },
+      __self: this
+    }, userData.title), __jsx("button", {
       onClick: () => this.updateTitle(),
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 56
+        lineNumber: 64
       },
       __self: this
     }, " Change Title"));
