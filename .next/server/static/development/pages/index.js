@@ -88,7 +88,7 @@ module.exports =
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 3);
+/******/ 	return __webpack_require__(__webpack_require__.s = 4);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -2123,18 +2123,25 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _components_layouts_BaseLayout__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./../components/layouts/BaseLayout */ "./components/layouts/BaseLayout.js");
 /* harmony import */ var _components_SuperComponents__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./../components/SuperComponents */ "./components/SuperComponents.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! axios */ "axios");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_3__);
 var _jsxFileName = "C:\\Users\\Elio\\Desktop\\Portfolio-Website\\pages\\index.js";
 var __jsx = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement;
  // import Header from './../components/shared/Header';
 
 
- // const Index = () => {
-//   return(
-//     <h1> I am Index Page </h1>
-//   )
-// }
+
+ // const axios = require('axios').default;
 
 class Index extends _components_SuperComponents__WEBPACK_IMPORTED_MODULE_2__["default"] {
+  static getInitialProps() {
+    // console.log('I am get getInitialProps');
+    axios__WEBPACK_IMPORTED_MODULE_3___default.a.get('https://jsonplaceholder.typicode.com/todos/1').then(data => console.log(data)).catch(err => console.error(err));
+    return {
+      initialData: [1, 2, 3, 4]
+    };
+  }
+
   constructor(props) {
     // debugger;
     super(props); // debugger;
@@ -2150,6 +2157,7 @@ class Index extends _components_SuperComponents__WEBPACK_IMPORTED_MODULE_2__["de
   }
 
   componentDidUpdate() {
+    console.log();
     console.log('componentDidUpdate');
   }
 
@@ -2168,30 +2176,31 @@ class Index extends _components_SuperComponents__WEBPACK_IMPORTED_MODULE_2__["de
     const {
       title
     } = this.state;
+    const initialData = this.props.initialData;
     return __jsx(_components_layouts_BaseLayout__WEBPACK_IMPORTED_MODULE_1__["default"], {
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 44
+        lineNumber: 53
       },
       __self: this
     }, __jsx("h1", {
       className: "fromPage",
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 45
+        lineNumber: 54
       },
       __self: this
     }, " I am Index Page from Class Component"), __jsx("h2", {
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 46
+        lineNumber: 55
       },
       __self: this
     }, title), __jsx("button", {
       onClick: () => this.updateTitle(),
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 47
+        lineNumber: 56
       },
       __self: this
     }, " Change Title"));
@@ -2219,7 +2228,7 @@ class Index extends _components_SuperComponents__WEBPACK_IMPORTED_MODULE_2__["de
 
 /***/ }),
 
-/***/ 3:
+/***/ 4:
 /*!******************************!*\
   !*** multi ./pages/index.js ***!
   \******************************/
@@ -2228,6 +2237,17 @@ class Index extends _components_SuperComponents__WEBPACK_IMPORTED_MODULE_2__["de
 
 module.exports = __webpack_require__(/*! C:\Users\Elio\Desktop\Portfolio-Website\pages\index.js */"./pages/index.js");
 
+
+/***/ }),
+
+/***/ "axios":
+/*!************************!*\
+  !*** external "axios" ***!
+  \************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = require("axios");
 
 /***/ }),
 

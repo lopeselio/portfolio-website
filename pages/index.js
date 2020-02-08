@@ -1,19 +1,21 @@
 import React from 'react';
 // import Header from './../components/shared/Header';
-import BaseLayout from './../components/layouts/BaseLayout'
-import SuperComponent from './../components/SuperComponents'
-// const Index = () => {
-//   return(
-//     <h1> I am Index Page </h1>
-//   )
-// }
+import BaseLayout from './../components/layouts/BaseLayout';
+import SuperComponent from './../components/SuperComponents';
+import axios from 'axios';
 
+// const axios = require('axios').default;
 
 class Index extends SuperComponent{
 
   static getInitialProps() {
-    console.log('I am get getInitialProps');
-    return{};
+    // console.log('I am get getInitialProps');
+    axios.get('https://jsonplaceholder.typicode.com/todos/1').then(
+      (data) => console.log(data)
+    )
+    .catch(err => console.error(err))
+
+    return{initialData: [1,2,3,4]};
   }
   constructor(props) {
     // debugger;
@@ -46,6 +48,7 @@ class Index extends SuperComponent{
   render(){
     debugger;
     const {title} = this.state;
+    const initialData = this.props.initialData;
     return(
       <BaseLayout>
         <h1 className='fromPage'> I am Index Page from Class Component</h1>
