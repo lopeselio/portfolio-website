@@ -10,6 +10,11 @@ import SuperComponent from './../components/SuperComponents'
 
 
 class Index extends SuperComponent{
+
+  static getInitialProps() {
+    console.log('I am get getInitialProps');
+    return{};
+  }
   constructor(props) {
     // debugger;
     super(props);
@@ -26,6 +31,7 @@ class Index extends SuperComponent{
   }
 
   componentDidUpdate() {
+    console.log();
     console.log('componentDidUpdate');
   }
 
