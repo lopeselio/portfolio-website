@@ -1,5 +1,5 @@
 import React from 'react';
-import Link from 'next/link'
+import Link from 'next/link';
 
 import '../../styles/main.scss'
 
@@ -20,7 +20,7 @@ class Header extends React.Component {
         <Link href = "/about">
           <a> About</a>
         </Link>
-        <Link href = "/portfolio">
+        <Link href = "/portfolios">
           <a> Portfolio</a>
         </Link>
         <Link href = "/blogs">
