@@ -88,59 +88,10 @@ module.exports =
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 3);
+/******/ 	return __webpack_require__(__webpack_require__.s = 5);
 /******/ })
 /************************************************************************/
 /******/ ({
-
-/***/ "./components/SuperComponents.js":
-/*!***************************************!*\
-  !*** ./components/SuperComponents.js ***!
-  \***************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _components_layouts_BaseLayout__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./../components/layouts/BaseLayout */ "./components/layouts/BaseLayout.js");
-var _jsxFileName = "C:\\Users\\Elio\\Desktop\\Portfolio-Website\\components\\SuperComponents.js";
-var __jsx = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement;
-
-
-
-class SuperComponent extends react__WEBPACK_IMPORTED_MODULE_0___default.a.Component {
-  constructor(props) {
-    super(props);
-    this.someVariable = 'Just someVariable';
-  }
-
-  alertName(title) {
-    alert(title);
-  }
-
-  render() {
-    return __jsx(_components_layouts_BaseLayout__WEBPACK_IMPORTED_MODULE_1__["default"], {
-      __source: {
-        fileName: _jsxFileName,
-        lineNumber: 17
-      },
-      __self: this
-    }, __jsx("h1", {
-      __source: {
-        fileName: _jsxFileName,
-        lineNumber: 18
-      },
-      __self: this
-    }, " I am Blog Page "));
-  }
-
-}
-
-/* harmony default export */ __webpack_exports__["default"] = (SuperComponent);
-
-/***/ }),
 
 /***/ "./components/layouts/BaseLayout.js":
 /*!******************************************!*\
@@ -2110,10 +2061,10 @@ module.exports = __webpack_require__(/*! ./dist/client/link */ "./node_modules/n
 
 /***/ }),
 
-/***/ "./pages/index.js":
-/*!************************!*\
-  !*** ./pages/index.js ***!
-  \************************/
+/***/ "./pages/portfolio.js":
+/*!****************************!*\
+  !*** ./pages/portfolio.js ***!
+  \****************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -2121,118 +2072,52 @@ module.exports = __webpack_require__(/*! ./dist/client/link */ "./node_modules/n
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _components_layouts_BaseLayout__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./../components/layouts/BaseLayout */ "./components/layouts/BaseLayout.js");
-/* harmony import */ var _components_SuperComponents__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./../components/SuperComponents */ "./components/SuperComponents.js");
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! axios */ "axios");
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_3__);
-var _jsxFileName = "C:\\Users\\Elio\\Desktop\\Portfolio-Website\\pages\\index.js";
+/* harmony import */ var _components_layouts_BaseLayout__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../components/layouts/BaseLayout */ "./components/layouts/BaseLayout.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! axios */ "axios");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_2__);
+var _jsxFileName = "C:\\Users\\Elio\\Desktop\\Portfolio-Website\\pages\\portfolio.js";
 var __jsx = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement;
- // import Header from './../components/shared/Header';
 
 
 
- // const axios = require('axios').default;
 
-class Index extends _components_SuperComponents__WEBPACK_IMPORTED_MODULE_2__["default"] {
+class Portfolios extends react__WEBPACK_IMPORTED_MODULE_0___default.a.Component {
   static async getInitialProps() {
-    let userData = {};
+    let posts = [];
 
     try {
-      const response = await axios__WEBPACK_IMPORTED_MODULE_3___default.a.get('https://jsonplaceholder.typicode.com/todos/1');
-      userData = response.data;
+      const response = await axios__WEBPACK_IMPORTED_MODULE_2___default.a.get('https://jsonplaceholder.typicode.com/posts');
+      posts = response.data;
     } catch (err) {
       console.error(err);
-    } // console.log('I am get getInitialProps');
-
+    }
 
     return {
-      initialData: [1, 2, 3, 4],
-      userData: userData
+      posts
     };
-  }
-
-  constructor(props) {
-    // debugger;
-    super(props); // debugger;
-
-    this.state = {
-      title: 'I am Index Page'
-    };
-    console.log('constructor');
-  }
-
-  componentDidMount() {
-    console.log('componentDidMount');
-  }
-
-  componentDidUpdate() {
-    console.log();
-    console.log('componentDidUpdate');
-  }
-
-  componentWillUnmount() {
-    console.log('componentWillUnmount');
-  }
-
-  updateTitle() {
-    this.setState({
-      title: 'I am Updated Index Page'
-    });
   }
 
   render() {
     debugger;
-    const {
-      title
-    } = this.state; // const initialData = this.props.initialData;
-
-    const {
-      initialData,
-      userData
-    } = this.props;
+    console.log(this.props);
     return __jsx(_components_layouts_BaseLayout__WEBPACK_IMPORTED_MODULE_1__["default"], {
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 60
+        lineNumber: 20
       },
       __self: this
     }, __jsx("h1", {
-      className: "fromPage",
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 61
+        lineNumber: 21
       },
       __self: this
-    }, " I am Index Page from Class Component"), __jsx("h2", {
-      __source: {
-        fileName: _jsxFileName,
-        lineNumber: 62
-      },
-      __self: this
-    }, title), __jsx("h1", {
-      __source: {
-        fileName: _jsxFileName,
-        lineNumber: 63
-      },
-      __self: this
-    }, userData.title), __jsx("button", {
-      onClick: () => this.updateTitle(),
-      __source: {
-        fileName: _jsxFileName,
-        lineNumber: 64
-      },
-      __self: this
-    }, " Change Title"));
+    }, " I am Portfolio Page "));
   }
 
 }
 
-/* harmony default export */ __webpack_exports__["default"] = (Index);
-{
-  /* <Header title={'I am a Header component'} > 
-   <h1> I am a header subtitle </h1>
-  </Header> */
-}
+/* harmony default export */ __webpack_exports__["default"] = (Portfolios);
 
 /***/ }),
 
@@ -2247,14 +2132,14 @@ class Index extends _components_SuperComponents__WEBPACK_IMPORTED_MODULE_2__["de
 
 /***/ }),
 
-/***/ 3:
-/*!******************************!*\
-  !*** multi ./pages/index.js ***!
-  \******************************/
+/***/ 5:
+/*!**********************************!*\
+  !*** multi ./pages/portfolio.js ***!
+  \**********************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\Users\Elio\Desktop\Portfolio-Website\pages\index.js */"./pages/index.js");
+module.exports = __webpack_require__(/*! C:\Users\Elio\Desktop\Portfolio-Website\pages\portfolio.js */"./pages/portfolio.js");
 
 
 /***/ }),
@@ -2447,4 +2332,4 @@ module.exports = require("url");
 /***/ })
 
 /******/ });
-//# sourceMappingURL=index.js.map
+//# sourceMappingURL=portfolio.js.map
