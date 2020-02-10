@@ -11,14 +11,26 @@ class Portfolios extends React.Component {
     }catch(err) {
       console.error(err);
     }
-    return{posts};
+    return{posts :posts.splice(0,10)};
+  }
+  renderPosts(posts) {
+    debugger;
+    return posts.map((post) => {
+      return (
+        <li> {post.title} </li>
+      )
+    })
   }
   render() {
+    const {posts} = this.props;
     debugger;
     console.log(this.props);
     return(
       <BaseLayout>
       <h1> I am Portfolio Page </h1>
+      <ul>
+        {this.renderPosts(posts)}
+      </ul>
       </BaseLayout>
     )
   }

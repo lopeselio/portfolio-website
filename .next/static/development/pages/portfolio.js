@@ -11453,23 +11453,44 @@ function (_React$Component) {
   }
 
   Object(_babel_runtime_corejs2_helpers_esm_createClass__WEBPACK_IMPORTED_MODULE_2__["default"])(Portfolios, [{
+    key: "renderPosts",
+    value: function renderPosts(posts) {
+      debugger;
+      return posts.map(function (post) {
+        return __jsx("li", {
+          __source: {
+            fileName: _jsxFileName,
+            lineNumber: 20
+          },
+          __self: this
+        }, " ", post.title, " ");
+      });
+    }
+  }, {
     key: "render",
     value: function render() {
+      var posts = this.props.posts;
       debugger;
       console.log(this.props);
       return __jsx(_components_layouts_BaseLayout__WEBPACK_IMPORTED_MODULE_7__["default"], {
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 20
+          lineNumber: 29
         },
         __self: this
       }, __jsx("h1", {
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 21
+          lineNumber: 30
         },
         __self: this
-      }, " I am Portfolio Page "));
+      }, " I am Portfolio Page "), __jsx("ul", {
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 31
+        },
+        __self: this
+      }, this.renderPosts(posts)));
     }
   }], [{
     key: "getInitialProps",
@@ -11497,7 +11518,7 @@ function (_React$Component) {
 
             case 11:
               return _context.abrupt("return", {
-                posts: posts
+                posts: posts.splice(0, 10)
               });
 
             case 12:

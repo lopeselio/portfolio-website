@@ -2093,26 +2093,48 @@ class Portfolios extends react__WEBPACK_IMPORTED_MODULE_0___default.a.Component 
     }
 
     return {
-      posts
+      posts: posts.splice(0, 10)
     };
   }
 
+  renderPosts(posts) {
+    debugger;
+    return posts.map(post => {
+      return __jsx("li", {
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 20
+        },
+        __self: this
+      }, " ", post.title, " ");
+    });
+  }
+
   render() {
+    const {
+      posts
+    } = this.props;
     debugger;
     console.log(this.props);
     return __jsx(_components_layouts_BaseLayout__WEBPACK_IMPORTED_MODULE_1__["default"], {
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 20
+        lineNumber: 29
       },
       __self: this
     }, __jsx("h1", {
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 21
+        lineNumber: 30
       },
       __self: this
-    }, " I am Portfolio Page "));
+    }, " I am Portfolio Page "), __jsx("ul", {
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 31
+      },
+      __self: this
+    }, this.renderPosts(posts)));
   }
 
 }
