@@ -2110,6 +2110,7 @@ class Portfolios extends react__WEBPACK_IMPORTED_MODULE_0___default.a.Component 
         },
         __self: this
       }, __jsx(next_link__WEBPACK_IMPORTED_MODULE_3___default.a, {
+        as: `/portfolio/${post.id}`,
         href: `/portfolio?title=${post.title}`,
         __source: {
           fileName: _jsxFileName,
