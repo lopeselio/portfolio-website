@@ -17,6 +17,8 @@ var _whitespace = require("../util/whitespace");
 
 var _scopeflags = require("../util/scopeflags");
 
+var _util = require("./util");
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function () { return cache; }; return cache; }
@@ -50,7 +52,7 @@ class StatementParser extends _expression.default {
 
     file.program = this.finishNode(program, "Program");
     file.comments = this.state.comments;
-    if (this.options.tokens) file.tokens = this.state.tokens;
+    if (this.options.tokens) file.tokens = this.tokens;
     return this.finishNode(file, "File");
   }
 
@@ -432,18 +434,16 @@ class StatementParser extends _expression.default {
       return this.parseFor(node, init);
     }
 
-    const refShorthandDefaultPos = {
-      start: 0
-    };
-    const init = this.parseExpression(true, refShorthandDefaultPos);
+    const refExpressionErrors = new _util.ExpressionErrors();
+    const init = this.parseExpression(true, refExpressionErrors);
 
     if (this.match(_types2.types._in) || this.isContextual("of")) {
+      this.toAssignable(init);
       const description = this.isContextual("of") ? "for-of statement" : "for-in statement";
-      this.toAssignable(init, undefined, description);
       this.checkLVal(init, undefined, undefined, description);
       return this.parseForIn(node, init, awaitAt);
-    } else if (refShorthandDefaultPos.start) {
-      this.unexpected(refShorthandDefaultPos.start);
+    } else {
+      this.checkExpressionErrors(refExpressionErrors, true);
     }
 
     if (awaitAt > -1) {

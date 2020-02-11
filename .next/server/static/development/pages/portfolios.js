@@ -2101,9 +2101,9 @@ class Portfolios extends react__WEBPACK_IMPORTED_MODULE_0___default.a.Component 
   }
 
   renderPosts(posts) {
-    debugger;
-    return posts.map(post => {
+    return posts.map((post, index) => {
       return __jsx("li", {
+        key: index,
         __source: {
           fileName: _jsxFileName,
           lineNumber: 22
@@ -2111,7 +2111,7 @@ class Portfolios extends react__WEBPACK_IMPORTED_MODULE_0___default.a.Component 
         __self: this
       }, __jsx(next_link__WEBPACK_IMPORTED_MODULE_3___default.a, {
         as: `/portfolio/${post.id}`,
-        href: `/portfolio?title=${post.title}`,
+        href: "/portfolio/[id]",
         __source: {
           fileName: _jsxFileName,
           lineNumber: 23

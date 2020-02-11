@@ -17,6 +17,8 @@ var _identifier = require("../util/identifier");
 
 var _scopeflags = require("../util/scopeflags");
 
+var _util = require("./util");
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function () { return cache; }; return cache; }
@@ -24,7 +26,7 @@ function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
 
 class ExpressionParser extends _lval.default {
-  checkDuplicatedProto(prop, protoRef) {
+  checkDuplicatedProto(prop, protoRef, refExpressionErrors) {
     if (prop.type === "SpreadElement" || prop.computed || prop.kind || prop.shorthand) {
       return;
     }
@@ -33,8 +35,14 @@ class ExpressionParser extends _lval.default {
     const name = key.type === "Identifier" ? key.name : String(key.value);
 
     if (name === "__proto__") {
-      if (protoRef.used && !protoRef.start) {
-        protoRef.start = key.start;
+      if (protoRef.used) {
+        if (refExpressionErrors) {
+          if (refExpressionErrors.doubleProto === -1) {
+            refExpressionErrors.doubleProto = key.start;
+          }
+        } else {
+          this.raise(key.start, "Redefinition of __proto__ property");
+        }
       }
 
       protoRef.used = true;
@@ -61,17 +69,17 @@ class ExpressionParser extends _lval.default {
     return expr;
   }
 
-  parseExpression(noIn, refShorthandDefaultPos) {
+  parseExpression(noIn, refExpressionErrors) {
     const startPos = this.state.start;
     const startLoc = this.state.startLoc;
-    const expr = this.parseMaybeAssign(noIn, refShorthandDefaultPos);
+    const expr = this.parseMaybeAssign(noIn, refExpressionErrors);
 
     if (this.match(_types.types.comma)) {
       const node = this.startNodeAt(startPos, startLoc);
       node.expressions = [expr];
 
       while (this.eat(_types.types.comma)) {
-        node.expressions.push(this.parseMaybeAssign(noIn, refShorthandDefaultPos));
+        node.expressions.push(this.parseMaybeAssign(noIn, refExpressionErrors));
       }
 
       this.toReferencedList(node.expressions);
@@ -81,7 +89,7 @@ class ExpressionParser extends _lval.default {
     return expr;
   }
 
-  parseMaybeAssign(noIn, refShorthandDefaultPos, afterLeftParse, refNeedsArrowPos) {
+  parseMaybeAssign(noIn, refExpressionErrors, afterLeftParse, refNeedsArrowPos) {
     const startPos = this.state.start;
     const startLoc = this.state.startLoc;
 
@@ -99,22 +107,20 @@ class ExpressionParser extends _lval.default {
       }
     }
 
-    let failOnShorthandAssign;
+    let ownExpressionErrors;
 
-    if (refShorthandDefaultPos) {
-      failOnShorthandAssign = false;
+    if (refExpressionErrors) {
+      ownExpressionErrors = false;
     } else {
-      refShorthandDefaultPos = {
-        start: 0
-      };
-      failOnShorthandAssign = true;
+      refExpressionErrors = new _util.ExpressionErrors();
+      ownExpressionErrors = true;
     }
 
     if (this.match(_types.types.parenL) || this.match(_types.types.name)) {
       this.state.potentialArrowAt = this.state.start;
     }
 
-    let left = this.parseMaybeConditional(noIn, refShorthandDefaultPos, refNeedsArrowPos);
+    let left = this.parseMaybeConditional(noIn, refExpressionErrors, refNeedsArrowPos);
 
     if (afterLeftParse) {
       left = afterLeftParse.call(this, left, startPos, startLoc);
@@ -133,34 +139,39 @@ class ExpressionParser extends _lval.default {
         this.expectPlugin("logicalAssignment");
       }
 
-      node.left = this.match(_types.types.eq) ? this.toAssignable(left, undefined, "assignment expression") : left;
+      if (this.match(_types.types.eq)) {
+        node.left = this.toAssignable(left);
+        refExpressionErrors.doubleProto = -1;
+      } else {
+        node.left = left;
+      }
 
-      if (refShorthandDefaultPos.start >= node.left.start) {
-        refShorthandDefaultPos.start = 0;
+      if (refExpressionErrors.shorthandAssign >= node.left.start) {
+        refExpressionErrors.shorthandAssign = -1;
       }
 
       this.checkLVal(left, undefined, undefined, "assignment expression");
       this.next();
       node.right = this.parseMaybeAssign(noIn);
       return this.finishNode(node, "AssignmentExpression");
-    } else if (failOnShorthandAssign && refShorthandDefaultPos.start) {
-      this.unexpected(refShorthandDefaultPos.start);
+    } else if (ownExpressionErrors) {
+      this.checkExpressionErrors(refExpressionErrors, true);
     }
 
     return left;
   }
 
-  parseMaybeConditional(noIn, refShorthandDefaultPos, refNeedsArrowPos) {
+  parseMaybeConditional(noIn, refExpressionErrors, refNeedsArrowPos) {
     const startPos = this.state.start;
     const startLoc = this.state.startLoc;
     const potentialArrowAt = this.state.potentialArrowAt;
-    const expr = this.parseExprOps(noIn, refShorthandDefaultPos);
+    const expr = this.parseExprOps(noIn, refExpressionErrors);
 
     if (expr.type === "ArrowFunctionExpression" && expr.start === potentialArrowAt) {
       return expr;
     }
 
-    if (refShorthandDefaultPos && refShorthandDefaultPos.start) return expr;
+    if (this.checkExpressionErrors(refExpressionErrors, false)) return expr;
     return this.parseConditional(expr, noIn, startPos, startLoc, refNeedsArrowPos);
   }
 
@@ -177,17 +188,17 @@ class ExpressionParser extends _lval.default {
     return expr;
   }
 
-  parseExprOps(noIn, refShorthandDefaultPos) {
+  parseExprOps(noIn, refExpressionErrors) {
     const startPos = this.state.start;
     const startLoc = this.state.startLoc;
     const potentialArrowAt = this.state.potentialArrowAt;
-    const expr = this.parseMaybeUnary(refShorthandDefaultPos);
+    const expr = this.parseMaybeUnary(refExpressionErrors);
 
     if (expr.type === "ArrowFunctionExpression" && expr.start === potentialArrowAt) {
       return expr;
     }
 
-    if (refShorthandDefaultPos && refShorthandDefaultPos.start) {
+    if (this.checkExpressionErrors(refExpressionErrors, false)) {
       return expr;
     }
 
@@ -195,7 +206,7 @@ class ExpressionParser extends _lval.default {
   }
 
   parseExprOp(left, leftStartPos, leftStartLoc, minPrec, noIn) {
-    const prec = this.state.type.binop;
+    let prec = this.state.type.binop;
 
     if (prec != null && (!noIn || !this.match(_types.types._in))) {
       if (prec > minPrec) {
@@ -214,11 +225,15 @@ class ExpressionParser extends _lval.default {
         }
 
         const op = this.state.type;
+        const logical = op === _types.types.logicalOR || op === _types.types.logicalAND;
+        const coalesce = op === _types.types.nullishCoalescing;
 
         if (op === _types.types.pipeline) {
           this.expectPlugin("pipelineOperator");
           this.state.inPipeline = true;
           this.checkPipelineAtInfixOperator(left, leftStartPos);
+        } else if (coalesce) {
+          prec = _types.types.logicalAND.binop;
         }
 
         this.next();
@@ -230,16 +245,13 @@ class ExpressionParser extends _lval.default {
         }
 
         node.right = this.parseExprOpRightExpr(op, prec, noIn);
+        this.finishNode(node, logical || coalesce ? "LogicalExpression" : "BinaryExpression");
+        const nextOp = this.state.type;
 
-        if (op === _types.types.nullishCoalescing) {
-          if (left.type === "LogicalExpression" && left.operator !== "??" && !(left.extra && left.extra.parenthesized)) {
-            throw this.raise(left.start, `Nullish coalescing operator(??) requires parens when mixing with logical operators`);
-          } else if (node.right.type === "LogicalExpression" && node.right.operator !== "??" && !(node.right.extra && node.right.extra.parenthesized)) {
-            throw this.raise(node.right.start, `Nullish coalescing operator(??) requires parens when mixing with logical operators`);
-          }
+        if (coalesce && (nextOp === _types.types.logicalOR || nextOp === _types.types.logicalAND) || logical && nextOp === _types.types.nullishCoalescing) {
+          throw this.raise(this.state.start, `Nullish coalescing operator(??) requires parens when mixing with logical operators`);
         }
 
-        this.finishNode(node, op === _types.types.logicalOR || op === _types.types.logicalAND || op === _types.types.nullishCoalescing ? "LogicalExpression" : "BinaryExpression");
         return this.parseExprOp(node, leftStartPos, leftStartLoc, minPrec, noIn);
       }
     }
@@ -276,7 +288,7 @@ class ExpressionParser extends _lval.default {
     return this.parseExprOp(this.parseMaybeUnary(), startPos, startLoc, op.rightAssociative ? prec - 1 : prec, noIn);
   }
 
-  parseMaybeUnary(refShorthandDefaultPos) {
+  parseMaybeUnary(refExpressionErrors) {
     if (this.isContextual("await") && this.isAwaitAllowed()) {
       return this.parseAwait();
     } else if (this.state.type.prefix) {
@@ -291,10 +303,7 @@ class ExpressionParser extends _lval.default {
 
       this.next();
       node.argument = this.parseMaybeUnary();
-
-      if (refShorthandDefaultPos && refShorthandDefaultPos.start) {
-        this.unexpected(refShorthandDefaultPos.start);
-      }
+      this.checkExpressionErrors(refExpressionErrors, true);
 
       if (update) {
         this.checkLVal(node.argument, undefined, undefined, "prefix operation");
@@ -313,8 +322,8 @@ class ExpressionParser extends _lval.default {
 
     const startPos = this.state.start;
     const startLoc = this.state.startLoc;
-    let expr = this.parseExprSubscripts(refShorthandDefaultPos);
-    if (refShorthandDefaultPos && refShorthandDefaultPos.start) return expr;
+    let expr = this.parseExprSubscripts(refExpressionErrors);
+    if (this.checkExpressionErrors(refExpressionErrors, false)) return expr;
 
     while (this.state.type.postfix && !this.canInsertSemicolon()) {
       const node = this.startNodeAt(startPos, startLoc);
@@ -329,17 +338,13 @@ class ExpressionParser extends _lval.default {
     return expr;
   }
 
-  parseExprSubscripts(refShorthandDefaultPos) {
+  parseExprSubscripts(refExpressionErrors) {
     const startPos = this.state.start;
     const startLoc = this.state.startLoc;
     const potentialArrowAt = this.state.potentialArrowAt;
-    const expr = this.parseExprAtom(refShorthandDefaultPos);
+    const expr = this.parseExprAtom(refExpressionErrors);
 
     if (expr.type === "ArrowFunctionExpression" && expr.start === potentialArrowAt) {
-      return expr;
-    }
-
-    if (refShorthandDefaultPos && refShorthandDefaultPos.start) {
       return expr;
     }
 
@@ -518,9 +523,7 @@ class ExpressionParser extends _lval.default {
         innerParenStart = this.state.start;
       }
 
-      elts.push(this.parseExprListItem(false, possibleAsyncArrow ? {
-        start: 0
-      } : undefined, possibleAsyncArrow ? {
+      elts.push(this.parseExprListItem(false, possibleAsyncArrow ? new _util.ExpressionErrors() : undefined, possibleAsyncArrow ? {
         start: 0
       } : undefined, allowPlaceholder));
     }
@@ -551,7 +554,7 @@ class ExpressionParser extends _lval.default {
     return this.parseSubscripts(this.parseExprAtom(), startPos, startLoc, true);
   }
 
-  parseExprAtom(refShorthandDefaultPos) {
+  parseExprAtom(refExpressionErrors) {
     if (this.state.type === _types.types.slash) this.readRegexp();
     const canBeArrow = this.state.potentialArrowAt === this.state.start;
     let node;
@@ -682,7 +685,7 @@ class ExpressionParser extends _lval.default {
           this.state.inFSharpPipelineDirectBody = false;
           node = this.startNode();
           this.next();
-          node.elements = this.parseExprList(_types.types.bracketR, true, refShorthandDefaultPos, node);
+          node.elements = this.parseExprList(_types.types.bracketR, true, refExpressionErrors, node);
 
           if (!this.state.maybeInArrowParameters) {
             this.toReferencedList(node.elements);
@@ -696,7 +699,7 @@ class ExpressionParser extends _lval.default {
         {
           const oldInFSharpPipelineDirectBody = this.state.inFSharpPipelineDirectBody;
           this.state.inFSharpPipelineDirectBody = false;
-          const ret = this.parseObj(false, refShorthandDefaultPos);
+          const ret = this.parseObj(false, refExpressionErrors);
           this.state.inFSharpPipelineDirectBody = oldInFSharpPipelineDirectBody;
           return ret;
         }
@@ -866,9 +869,7 @@ class ExpressionParser extends _lval.default {
     const innerStartPos = this.state.start;
     const innerStartLoc = this.state.startLoc;
     const exprList = [];
-    const refShorthandDefaultPos = {
-      start: 0
-    };
+    const refExpressionErrors = new _util.ExpressionErrors();
     const refNeedsArrowPos = {
       start: 0
     };
@@ -896,7 +897,7 @@ class ExpressionParser extends _lval.default {
         this.checkCommaAfterRest(41);
         break;
       } else {
-        exprList.push(this.parseMaybeAssign(false, refShorthandDefaultPos, this.parseParenItem, refNeedsArrowPos));
+        exprList.push(this.parseMaybeAssign(false, refExpressionErrors, this.parseParenItem, refNeedsArrowPos));
       }
     }
 
@@ -933,11 +934,7 @@ class ExpressionParser extends _lval.default {
 
     if (optionalCommaStart) this.unexpected(optionalCommaStart);
     if (spreadStart) this.unexpected(spreadStart);
-
-    if (refShorthandDefaultPos.start) {
-      this.unexpected(refShorthandDefaultPos.start);
-    }
-
+    this.checkExpressionErrors(refExpressionErrors, true);
     if (refNeedsArrowPos.start) this.unexpected(refNeedsArrowPos.start);
     this.toReferencedListDeep(exprList, true);
 
@@ -1057,7 +1054,7 @@ class ExpressionParser extends _lval.default {
     return this.finishNode(node, "TemplateLiteral");
   }
 
-  parseObj(isPattern, refShorthandDefaultPos) {
+  parseObj(isPattern, refExpressionErrors) {
     const propHash = Object.create(null);
     let first = true;
     const node = this.startNode();
@@ -1077,18 +1074,17 @@ class ExpressionParser extends _lval.default {
         }
       }
 
-      const prop = this.parseObjectMember(isPattern, refShorthandDefaultPos);
-      if (!isPattern) this.checkDuplicatedProto(prop, propHash);
+      const prop = this.parseObjectMember(isPattern, refExpressionErrors);
+
+      if (!isPattern) {
+        this.checkDuplicatedProto(prop, propHash, refExpressionErrors);
+      }
 
       if (prop.shorthand) {
         this.addExtra(prop, "shorthand", true);
       }
 
       node.properties.push(prop);
-    }
-
-    if (!this.match(_types.types.eq) && propHash.start !== undefined) {
-      this.raise(propHash.start, "Redefinition of __proto__ property");
     }
 
     return this.finishNode(node, isPattern ? "ObjectPattern" : "ObjectExpression");
@@ -1098,7 +1094,7 @@ class ExpressionParser extends _lval.default {
     return !prop.computed && prop.key.type === "Identifier" && prop.key.name === "async" && (this.match(_types.types.name) || this.match(_types.types.num) || this.match(_types.types.string) || this.match(_types.types.bracketL) || this.state.type.keyword || this.match(_types.types.star)) && !this.hasPrecedingLineBreak();
   }
 
-  parseObjectMember(isPattern, refShorthandDefaultPos) {
+  parseObjectMember(isPattern, refExpressionErrors) {
     let decorators = [];
 
     if (this.match(_types.types.at)) {
@@ -1137,7 +1133,7 @@ class ExpressionParser extends _lval.default {
 
     prop.method = false;
 
-    if (isPattern || refShorthandDefaultPos) {
+    if (isPattern || refExpressionErrors) {
       startPos = this.state.start;
       startLoc = this.state.startLoc;
     }
@@ -1157,7 +1153,7 @@ class ExpressionParser extends _lval.default {
       isAsync = false;
     }
 
-    this.parseObjPropValue(prop, startPos, startLoc, isGenerator, isAsync, isPattern, refShorthandDefaultPos, containsEsc);
+    this.parseObjPropValue(prop, startPos, startLoc, isGenerator, isAsync, isPattern, refExpressionErrors, containsEsc);
     return prop;
   }
 
@@ -1204,11 +1200,11 @@ class ExpressionParser extends _lval.default {
     }
   }
 
-  parseObjectProperty(prop, startPos, startLoc, isPattern, refShorthandDefaultPos) {
+  parseObjectProperty(prop, startPos, startLoc, isPattern, refExpressionErrors) {
     prop.shorthand = false;
 
     if (this.eat(_types.types.colon)) {
-      prop.value = isPattern ? this.parseMaybeDefault(this.state.start, this.state.startLoc) : this.parseMaybeAssign(false, refShorthandDefaultPos);
+      prop.value = isPattern ? this.parseMaybeDefault(this.state.start, this.state.startLoc) : this.parseMaybeAssign(false, refExpressionErrors);
       return this.finishNode(prop, "ObjectProperty");
     }
 
@@ -1217,9 +1213,9 @@ class ExpressionParser extends _lval.default {
 
       if (isPattern) {
         prop.value = this.parseMaybeDefault(startPos, startLoc, prop.key.__clone());
-      } else if (this.match(_types.types.eq) && refShorthandDefaultPos) {
-        if (!refShorthandDefaultPos.start) {
-          refShorthandDefaultPos.start = this.state.start;
+      } else if (this.match(_types.types.eq) && refExpressionErrors) {
+        if (refExpressionErrors.shorthandAssign === -1) {
+          refExpressionErrors.shorthandAssign = this.state.start;
         }
 
         prop.value = this.parseMaybeDefault(startPos, startLoc, prop.key.__clone());
@@ -1232,8 +1228,8 @@ class ExpressionParser extends _lval.default {
     }
   }
 
-  parseObjPropValue(prop, startPos, startLoc, isGenerator, isAsync, isPattern, refShorthandDefaultPos, containsEsc) {
-    const node = this.parseObjectMethod(prop, isGenerator, isAsync, isPattern, containsEsc) || this.parseObjectProperty(prop, startPos, startLoc, isPattern, refShorthandDefaultPos);
+  parseObjPropValue(prop, startPos, startLoc, isGenerator, isAsync, isPattern, refExpressionErrors, containsEsc) {
+    const node = this.parseObjectMethod(prop, isGenerator, isAsync, isPattern, containsEsc) || this.parseObjectProperty(prop, startPos, startLoc, isPattern, refExpressionErrors);
     if (!node) this.unexpected();
     return node;
   }
@@ -1287,10 +1283,15 @@ class ExpressionParser extends _lval.default {
     const oldMaybeInArrowParameters = this.state.maybeInArrowParameters;
     const oldYieldPos = this.state.yieldPos;
     const oldAwaitPos = this.state.awaitPos;
+
+    if (params) {
+      this.state.maybeInArrowParameters = true;
+      this.setArrowFunctionParameters(node, params, trailingCommaPos);
+    }
+
     this.state.maybeInArrowParameters = false;
     this.state.yieldPos = -1;
     this.state.awaitPos = -1;
-    if (params) this.setArrowFunctionParameters(node, params, trailingCommaPos);
     this.parseFunctionBody(node, true);
     this.scope.exit();
     this.state.maybeInArrowParameters = oldMaybeInArrowParameters;
@@ -1300,7 +1301,7 @@ class ExpressionParser extends _lval.default {
   }
 
   setArrowFunctionParameters(node, params, trailingCommaPos) {
-    node.params = this.toAssignableList(params, true, "arrow function parameters", trailingCommaPos);
+    node.params = this.toAssignableList(params, trailingCommaPos);
   }
 
   parseFunctionBodyAndFinish(node, type, isMethod = false) {
@@ -1363,7 +1364,7 @@ class ExpressionParser extends _lval.default {
     }
   }
 
-  parseExprList(close, allowEmpty, refShorthandDefaultPos, nodeForExtra) {
+  parseExprList(close, allowEmpty, refExpressionErrors, nodeForExtra) {
     const elts = [];
     let first = true;
 
@@ -1383,13 +1384,13 @@ class ExpressionParser extends _lval.default {
         }
       }
 
-      elts.push(this.parseExprListItem(allowEmpty, refShorthandDefaultPos));
+      elts.push(this.parseExprListItem(allowEmpty, refExpressionErrors));
     }
 
     return elts;
   }
 
-  parseExprListItem(allowEmpty, refShorthandDefaultPos, refNeedsArrowPos, allowPlaceholder) {
+  parseExprListItem(allowEmpty, refExpressionErrors, refNeedsArrowPos, allowPlaceholder) {
     let elt;
 
     if (allowEmpty && this.match(_types.types.comma)) {
@@ -1397,7 +1398,7 @@ class ExpressionParser extends _lval.default {
     } else if (this.match(_types.types.ellipsis)) {
       const spreadNodeStartPos = this.state.start;
       const spreadNodeStartLoc = this.state.startLoc;
-      elt = this.parseParenItem(this.parseSpread(refShorthandDefaultPos, refNeedsArrowPos), spreadNodeStartPos, spreadNodeStartLoc);
+      elt = this.parseParenItem(this.parseSpread(refExpressionErrors, refNeedsArrowPos), spreadNodeStartPos, spreadNodeStartLoc);
     } else if (this.match(_types.types.question)) {
       this.expectPlugin("partialApplication");
 
@@ -1409,7 +1410,7 @@ class ExpressionParser extends _lval.default {
       this.next();
       elt = this.finishNode(node, "ArgumentPlaceholder");
     } else {
-      elt = this.parseMaybeAssign(false, refShorthandDefaultPos, this.parseParenItem, refNeedsArrowPos);
+      elt = this.parseMaybeAssign(false, refExpressionErrors, this.parseParenItem, refNeedsArrowPos);
     }
 
     return elt;

@@ -102,7 +102,7 @@ var _default = superClass => class extends superClass {
     }
   }
 
-  checkDuplicatedProto(prop, protoRef) {
+  checkDuplicatedProto(prop, protoRef, refExpressionErrors) {
     if (prop.type === "SpreadElement" || prop.computed || prop.method || prop.shorthand) {
       return;
     }
@@ -111,8 +111,12 @@ var _default = superClass => class extends superClass {
     const name = key.type === "Identifier" ? key.name : String(key.value);
 
     if (name === "__proto__" && prop.kind === "init") {
-      if (protoRef.used && !protoRef.start) {
-        protoRef.start = key.start;
+      if (protoRef.used) {
+        if (refExpressionErrors && refExpressionErrors.doubleProto === -1) {
+          refExpressionErrors.doubleProto = key.start;
+        } else {
+          this.raise(key.start, "Redefinition of __proto__ property");
+        }
       }
 
       protoRef.used = true;
@@ -148,7 +152,7 @@ var _default = superClass => class extends superClass {
     classBody.body.push(method);
   }
 
-  parseExprAtom(refShorthandDefaultPos) {
+  parseExprAtom(refExpressionErrors) {
     switch (this.state.type) {
       case _types.types.num:
       case _types.types.string:
@@ -170,7 +174,7 @@ var _default = superClass => class extends superClass {
         return this.estreeParseLiteral(false);
 
       default:
-        return super.parseExprAtom(refShorthandDefaultPos);
+        return super.parseExprAtom(refExpressionErrors);
     }
   }
 
@@ -209,8 +213,8 @@ var _default = superClass => class extends superClass {
     return node;
   }
 
-  parseObjectProperty(prop, startPos, startLoc, isPattern, refShorthandDefaultPos) {
-    const node = super.parseObjectProperty(prop, startPos, startLoc, isPattern, refShorthandDefaultPos);
+  parseObjectProperty(prop, startPos, startLoc, isPattern, refExpressionErrors) {
+    const node = super.parseObjectProperty(prop, startPos, startLoc, isPattern, refExpressionErrors);
 
     if (node) {
       node.kind = "init";
@@ -220,22 +224,22 @@ var _default = superClass => class extends superClass {
     return node;
   }
 
-  toAssignable(node, isBinding, contextDescription) {
+  toAssignable(node) {
     if (isSimpleProperty(node)) {
-      this.toAssignable(node.value, isBinding, contextDescription);
+      this.toAssignable(node.value);
       return node;
     }
 
-    return super.toAssignable(node, isBinding, contextDescription);
+    return super.toAssignable(node);
   }
 
-  toAssignableObjectExpressionProp(prop, isBinding, isLast) {
+  toAssignableObjectExpressionProp(prop, isLast) {
     if (prop.kind === "get" || prop.kind === "set") {
       throw this.raise(prop.key.start, "Object pattern can't contain getter or setter");
     } else if (prop.method) {
       throw this.raise(prop.key.start, "Object pattern can't contain methods");
     } else {
-      super.toAssignableObjectExpressionProp(prop, isBinding, isLast);
+      super.toAssignableObjectExpressionProp(prop, isLast);
     }
   }
 

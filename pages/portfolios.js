@@ -16,11 +16,11 @@ class Portfolios extends React.Component {
     return{posts :posts.splice(0,10)};
   }
   renderPosts(posts) {
-    debugger;
-    return posts.map((post) => {
+    
+    return posts.map((post, index) => {
       return (
-        <li>
-          <Link as={`/portfolio/${post.id}`} href={`/portfolio?title=${post.title}`}>
+        <li key={index}>
+          <Link as={`/portfolio/${post.id}`} href="/portfolio/[id]">
             <a style={{'fontSize':'20px'}}> {post.title} </a>
           </Link> 
         </li>

@@ -11458,9 +11458,9 @@ function (_React$Component) {
   Object(_babel_runtime_corejs2_helpers_esm_createClass__WEBPACK_IMPORTED_MODULE_2__["default"])(Portfolios, [{
     key: "renderPosts",
     value: function renderPosts(posts) {
-      debugger;
-      return posts.map(function (post) {
+      return posts.map(function (post, index) {
         return __jsx("li", {
+          key: index,
           __source: {
             fileName: _jsxFileName,
             lineNumber: 22
@@ -11468,7 +11468,7 @@ function (_React$Component) {
           __self: this
         }, __jsx(next_link__WEBPACK_IMPORTED_MODULE_9___default.a, {
           as: "/portfolio/".concat(post.id),
-          href: "/portfolio?title=".concat(post.title),
+          href: "/portfolio/[id]",
           __source: {
             fileName: _jsxFileName,
             lineNumber: 23
