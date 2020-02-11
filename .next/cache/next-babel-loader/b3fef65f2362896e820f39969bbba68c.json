@@ -1,0 +1,1 @@
+{"ast":null,"code":"var __jsx = React.createElement;\nimport React from 'react';\nimport BaseLayout from './../components/layouts/BaseLayout';\n\nclass CV extends React.Component {\n  render() {\n    return __jsx(BaseLayout, null, __jsx(\"h1\", null, \" I am CV Page \"));\n  }\n\n}\n\nexport default CV;","map":null,"metadata":{},"sourceType":"module"}

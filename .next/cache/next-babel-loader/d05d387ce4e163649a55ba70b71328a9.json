@@ -1,0 +1,1 @@
+{"ast":null,"code":"var __jsx = React.createElement;\nimport React from 'react';\nimport Header from './../shared/Header';\n\nvar BaseLayout = function BaseLayout(props) {\n  return __jsx(React.Fragment, null, __jsx(Header, null), props.children);\n};\n\nexport default BaseLayout;","map":null,"metadata":{},"sourceType":"module"}
