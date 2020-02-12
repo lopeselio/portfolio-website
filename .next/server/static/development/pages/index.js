@@ -88,10 +88,46 @@ module.exports =
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 4);
+/******/ 	return __webpack_require__(__webpack_require__.s = 6);
 /******/ })
 /************************************************************************/
 /******/ ({
+
+/***/ "./components/SuperComponents.js":
+/*!***************************************!*\
+  !*** ./components/SuperComponents.js ***!
+  \***************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _components_layouts_BaseLayout__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./../components/layouts/BaseLayout */ "./components/layouts/BaseLayout.js");
+var __jsx = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement;
+
+
+
+class SuperComponent extends react__WEBPACK_IMPORTED_MODULE_0___default.a.Component {
+  constructor(props) {
+    super(props);
+    this.someVariable = 'Just someVariable';
+  }
+
+  alertName(title) {
+    alert(title);
+  }
+
+  render() {
+    return __jsx(_components_layouts_BaseLayout__WEBPACK_IMPORTED_MODULE_1__["default"], null, __jsx("h1", null, " I am Blog Page "));
+  }
+
+}
+
+/* harmony default export */ __webpack_exports__["default"] = (SuperComponent);
+
+/***/ }),
 
 /***/ "./components/layouts/BaseLayout.js":
 /*!******************************************!*\
@@ -1855,10 +1891,10 @@ module.exports = __webpack_require__(/*! ./dist/client/link */ "./node_modules/n
 
 /***/ }),
 
-/***/ "./pages/portfolios.js":
-/*!*****************************!*\
-  !*** ./pages/portfolios.js ***!
-  \*****************************/
+/***/ "./pages/index.js":
+/*!************************!*\
+  !*** ./pages/index.js ***!
+  \************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -1866,61 +1902,89 @@ module.exports = __webpack_require__(/*! ./dist/client/link */ "./node_modules/n
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _components_layouts_BaseLayout__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../components/layouts/BaseLayout */ "./components/layouts/BaseLayout.js");
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! axios */ "axios");
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var next_link__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! next/link */ "./node_modules/next/link.js");
-/* harmony import */ var next_link__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(next_link__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _components_layouts_BaseLayout__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./../components/layouts/BaseLayout */ "./components/layouts/BaseLayout.js");
+/* harmony import */ var _components_SuperComponents__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./../components/SuperComponents */ "./components/SuperComponents.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! axios */ "axios");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_3__);
 var __jsx = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement;
+ // import Header from './../components/shared/Header';
 
 
 
+ // const axios = require('axios').default;
 
-
-class Portfolios extends react__WEBPACK_IMPORTED_MODULE_0___default.a.Component {
+class Index extends _components_SuperComponents__WEBPACK_IMPORTED_MODULE_2__["default"] {
   static async getInitialProps() {
-    let posts = [];
+    let userData = {};
 
     try {
-      const response = await axios__WEBPACK_IMPORTED_MODULE_2___default.a.get('https://jsonplaceholder.typicode.com/posts');
-      posts = response.data;
+      const response = await axios__WEBPACK_IMPORTED_MODULE_3___default.a.get('https://jsonplaceholder.typicode.com/todos/1');
+      userData = response.data;
     } catch (err) {
       console.error(err);
-    }
+    } // console.log('I am get getInitialProps');
+
 
     return {
-      posts: posts.splice(0, 10)
+      initialData: [1, 2, 3, 4],
+      userData: userData
     };
   }
 
-  renderPosts(posts) {
-    return posts.map((post, index) => {
-      return __jsx("li", {
-        key: index
-      }, __jsx(next_link__WEBPACK_IMPORTED_MODULE_3___default.a, {
-        as: `/portfolio/${post.id}`,
-        href: "/portfolio/[id]"
-      }, __jsx("a", {
-        style: {
-          'fontSize': '20px'
-        }
-      }, " ", post.title, " ")));
+  constructor(props) {
+    // debugger;
+    super(props); // debugger;
+
+    this.state = {
+      title: 'I am Index Page'
+    };
+    console.log('constructor');
+  }
+
+  componentDidMount() {
+    console.log('componentDidMount');
+  }
+
+  componentDidUpdate() {
+    console.log();
+    console.log('componentDidUpdate');
+  }
+
+  componentWillUnmount() {
+    console.log('componentWillUnmount');
+  }
+
+  updateTitle() {
+    this.setState({
+      title: 'I am Updated Index Page'
     });
   }
 
   render() {
     debugger;
     const {
-      posts
+      title
+    } = this.state; // const initialData = this.props.initialData;
+
+    const {
+      initialData,
+      userData
     } = this.props;
-    debugger;
-    console.log(this.props);
-    return __jsx(_components_layouts_BaseLayout__WEBPACK_IMPORTED_MODULE_1__["default"], null, __jsx("h1", null, " I am Portfolios Page "), __jsx("ul", null, this.renderPosts(posts)));
+    return __jsx(_components_layouts_BaseLayout__WEBPACK_IMPORTED_MODULE_1__["default"], null, __jsx("h1", {
+      className: "fromPage"
+    }, " I am Index Page from Class Component"), __jsx("h2", null, title), __jsx("h1", null, userData.title), __jsx("button", {
+      onClick: () => this.updateTitle()
+    }, " Change Title"));
   }
 
 }
 
-/* harmony default export */ __webpack_exports__["default"] = (Portfolios);
+/* harmony default export */ __webpack_exports__["default"] = (Index);
+{
+  /* <Header title={'I am a Header component'} > 
+   <h1> I am a header subtitle </h1>
+  </Header> */
+}
 
 /***/ }),
 
@@ -1935,14 +1999,14 @@ class Portfolios extends react__WEBPACK_IMPORTED_MODULE_0___default.a.Component 
 
 /***/ }),
 
-/***/ 4:
-/*!***********************************!*\
-  !*** multi ./pages/portfolios.js ***!
-  \***********************************/
+/***/ 6:
+/*!******************************!*\
+  !*** multi ./pages/index.js ***!
+  \******************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\Users\Elio\Desktop\Portfolio-Website\pages\portfolios.js */"./pages/portfolios.js");
+module.exports = __webpack_require__(/*! C:\Users\Elio\Desktop\Portfolio-Website\pages\index.js */"./pages/index.js");
 
 
 /***/ }),
@@ -2080,4 +2144,4 @@ module.exports = require("url");
 /***/ })
 
 /******/ });
-//# sourceMappingURL=portfolios.js.map
+//# sourceMappingURL=index.js.map
