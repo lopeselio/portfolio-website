@@ -1,5 +1,5 @@
 import React from 'react';
-import BaseLayout from './../../components/layouts/BaseLayout'
+import BaseLayout from './../components/layouts/BaseLayout'
 import { withRouter } from 'next/router';
 import axios from 'axios';
 
