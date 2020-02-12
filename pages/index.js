@@ -3,7 +3,7 @@ import React from 'react';
 import BaseLayout from './../components/layouts/BaseLayout';
 // import SuperComponent from './../components/SuperComponents';
 // import axios from 'axios';
-import {Button} from 'reactstrap';
+import {Button, Container} from 'reactstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 class Index extends React.Component{
@@ -13,7 +13,9 @@ class Index extends React.Component{
     const {initialData, userData} = this.props;
     return(
       <BaseLayout>
-        <Button color="danger">Danger!</Button>
+        <Container>
+          <Button color="danger">Danger!</Button>
+        </Container>   
       </BaseLayout>
       
     )
