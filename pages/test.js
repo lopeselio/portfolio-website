@@ -4,15 +4,17 @@ import { withRouter } from 'next/router';
 import axios from 'axios';
 
 class Test extends React.Component {
-  static async getInitialProps(context) {
+  static async getInitialProps({query}) {
+    const testId = query.id
     
-    return{};
+    return{testId};
   }
 
-  render() {     
+  render() {  
+    const {testId} = this.props;   
     return(
       <BaseLayout>
-        <h1>I am Test Page</h1>
+        <h1>I am Test Page with ID of {testId}</h1>
       </BaseLayout>
     )
   }
