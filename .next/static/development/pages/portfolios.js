@@ -12730,7 +12730,7 @@ function (_React$Component) {
 
 /***/ }),
 
-/***/ 1:
+/***/ 3:
 /*!****************************************************************************************************************************************************!*\
   !*** multi next-client-pages-loader?page=%2Fportfolios&absolutePagePath=C%3A%5CUsers%5CElio%5CDesktop%5CPortfolio-Website%5Cpages%5Cportfolios.js ***!
   \****************************************************************************************************************************************************/
@@ -12753,5 +12753,5 @@ module.exports = dll_ef0ff7c60362f24a921f;
 
 /***/ })
 
-},[[1,"static/runtime/webpack.js","styles"]]]);
+},[[3,"static/runtime/webpack.js","styles"]]]);
 //# sourceMappingURL=portfolios.js.map
