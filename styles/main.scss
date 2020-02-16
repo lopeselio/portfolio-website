@@ -1,4 +1,40 @@
+@font-face {
+  font-family: 'Montserrat';
+  src: url('/static/fonts/Montserrat-Regular.ttf');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Montserrat';
+  src: url('/static/fonts/Montserrat-Light.ttf');
+  font-weight: lighter;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Montserrat';
+  src: url('/static/fonts/Montserrat-Bold.ttf');
+  font-weight: bold;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Montserrat';
+  src: url('/static/fonts/Montserrat-Italic.ttf');
+  font-weight: normal;
+  font-style: italic;
+}
+
+html, body {
+  font-family: 'Montserrat', 'Helvetica' !important;
+}
+
 .customClassFromFile {
   color: blue;
   font-size: 30px;
+}
+
+.fromPage {
+  font-size: 50px;
 }
