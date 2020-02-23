@@ -1,29 +1,25 @@
-import React from 'react';
-import Link from 'next/link';
-import {Link as NextLink} from '../../routes'
+import React from 'react'
+import Link from 'next/link'
 
 import '../../styles/main.scss'
 
-
 class Header extends React.Component {
-  render() {
-    debugger;
-    const title = this.props.title; 
-    return(
-      <React.Fragment>
-        <Link href = "/">
-          <a style={{'fontSize':'20px'}}> Home</a>
+  render () {
+    return (
+      <>
+        <Link href='/'>
+          <a style={{ fontSize: '20px' }}> Home</a>
         </Link>
-        <Link href = "/about">
+        <Link href='/about'>
           <a> About</a>
         </Link>
-        <Link href = "/portfolios">
+        <Link href='/portfolios'>
           <a> Portfolio</a>
         </Link>
-        <Link href = "/blogs">
+        <Link href='/blogs'>
           <a> Blog</a>
         </Link>
-        <Link href = "/cv">
+        <Link href='/cv'>
           <a> CV</a>
         </Link>
         {/* <NextLink route='test' params={{id:'2'}}>Test 2</NextLink>
@@ -43,9 +39,9 @@ class Header extends React.Component {
           }
         </style>
 
-      </React.Fragment>
+      </>
 
     )
   }
 }
-export default Header;
+export default Header
