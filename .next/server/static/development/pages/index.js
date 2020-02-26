@@ -88,7 +88,7 @@ module.exports =
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 5);
+/******/ 	return __webpack_require__(__webpack_require__.s = 3);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -110,7 +110,17 @@ var __jsx = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement;
 
 
 const BaseLayout = props => {
-  return __jsx(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, __jsx(_shared_Header__WEBPACK_IMPORTED_MODULE_1__["default"], null), props.children);
+  const {
+    className,
+    children
+  } = props;
+  return __jsx("div", {
+    className: "layout-container"
+  }, __jsx(_shared_Header__WEBPACK_IMPORTED_MODULE_1__["default"], null), __jsx("main", {
+    className: `cover ${className}`
+  }, __jsx("div", {
+    className: "wrapper"
+  }, children)));
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (BaseLayout);
@@ -1868,7 +1878,41 @@ var __jsx = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement;
 
 class Index extends react__WEBPACK_IMPORTED_MODULE_0___default.a.Component {
   render() {
-    return __jsx(_components_layouts_BaseLayout__WEBPACK_IMPORTED_MODULE_1__["default"], null, __jsx(reactstrap__WEBPACK_IMPORTED_MODULE_2__["Container"], null));
+    return __jsx(_components_layouts_BaseLayout__WEBPACK_IMPORTED_MODULE_1__["default"], {
+      className: "cover"
+    }, __jsx("div", {
+      className: "main-section"
+    }, __jsx("div", {
+      className: "background-image"
+    }, __jsx("img", {
+      src: "/static/images/background-index.png"
+    })), __jsx(reactstrap__WEBPACK_IMPORTED_MODULE_2__["Container"], null, __jsx(reactstrap__WEBPACK_IMPORTED_MODULE_2__["Row"], null, __jsx(reactstrap__WEBPACK_IMPORTED_MODULE_2__["Col"], {
+      md: "6"
+    }, __jsx("div", {
+      className: "hero-section"
+    }, __jsx("div", {
+      className: "flipper"
+    }, __jsx("div", {
+      className: "back"
+    }, __jsx("div", {
+      className: "hero-section-content"
+    }, __jsx("h2", null, " Front End Web Developer, Deep Learning, Data Enthusiast "), __jsx("div", {
+      className: "hero-section-content-intro"
+    }, "Have a look at my portfolio and job history.")), __jsx("img", {
+      className: "image",
+      src: "/static/images/section-1.png"
+    }), __jsx("div", {
+      className: "shadow-custom"
+    }, __jsx("div", {
+      className: "shadow-inner"
+    }, " ")))))), __jsx(reactstrap__WEBPACK_IMPORTED_MODULE_2__["Col"], {
+      md: "6",
+      className: "hero-welcome-wrapper"
+    }, __jsx("div", {
+      className: "hero-welcome-text"
+    }, __jsx("h1", null, "Welcome to the portfolio website of ", __jsx("b", null, "Elio Jordan Lopes"), ".", __jsx("br", null), __jsx("br", null), "Get informed, collaborate and discover projects I work on!")), __jsx("div", {
+      className: "hero-welcome-bio"
+    }, __jsx("h1", null, "Let's take a look on my work.")))))));
   }
 
 }
@@ -1888,7 +1932,7 @@ class Index extends react__WEBPACK_IMPORTED_MODULE_0___default.a.Component {
 
 /***/ }),
 
-/***/ 5:
+/***/ 3:
 /*!******************************!*\
   !*** multi ./pages/index.js ***!
   \******************************/
