@@ -118,5 +118,12 @@ html, body {
   height: 100%;
   width: 100%; }
 
+.self-typed {
+  font-size: 31px;
+  font-weight: bold;
+  letter-spacing: 2px;
+  color: white;
+  margin-top: 10px; }
+
 
 /*# sourceMappingURL=styles.chunk.css.map*/

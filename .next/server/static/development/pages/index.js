@@ -1871,12 +1871,20 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_layouts_BaseLayout__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./../components/layouts/BaseLayout */ "./components/layouts/BaseLayout.js");
 /* harmony import */ var reactstrap__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! reactstrap */ "reactstrap");
 /* harmony import */ var reactstrap__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(reactstrap__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var react_typed__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-typed */ "react-typed");
+/* harmony import */ var react_typed__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(react_typed__WEBPACK_IMPORTED_MODULE_3__);
 var __jsx = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement;
 
 
 
 
+
 class Index extends react__WEBPACK_IMPORTED_MODULE_0___default.a.Component {
+  constructor(props) {
+    super(props);
+    this.roles = ['DevELIOper', 'Tech Lover', 'Avid Reader', 'Illustrator', 'ReactJS', 'Data Science Enthusiast', 'Team Player'];
+  }
+
   render() {
     return __jsx(_components_layouts_BaseLayout__WEBPACK_IMPORTED_MODULE_1__["default"], {
       className: "cover"
@@ -1910,7 +1918,17 @@ class Index extends react__WEBPACK_IMPORTED_MODULE_0___default.a.Component {
       className: "hero-welcome-wrapper"
     }, __jsx("div", {
       className: "hero-welcome-text"
-    }, __jsx("h1", null, "Welcome to the portfolio website of ", __jsx("b", null, "Elio Jordan Lopes"), ".", __jsx("br", null), __jsx("br", null), "Get informed, collaborate and discover projects I work on!")), __jsx("div", {
+    }, __jsx("h1", null, "Welcome to the portfolio website of ", __jsx("b", null, "Elio Jordan Lopes"), ".", __jsx("br", null), __jsx("br", null), "Get informed, collaborate and discover projects I work on!")), __jsx(react_typed__WEBPACK_IMPORTED_MODULE_3___default.a, {
+      loop: true,
+      typeSpeed: 60,
+      backSpeed: 60,
+      strings: this.roles,
+      backDelay: 1000,
+      loopCount: 0,
+      showCursor: true,
+      className: "self-typed",
+      cursorChar: "|"
+    }), __jsx("div", {
       className: "hero-welcome-bio"
     }, __jsx("h1", null, "Let's take a look on my work.")))))));
   }
@@ -2040,6 +2058,17 @@ module.exports = require("react");
 /***/ (function(module, exports) {
 
 module.exports = require("react-is");
+
+/***/ }),
+
+/***/ "react-typed":
+/*!******************************!*\
+  !*** external "react-typed" ***!
+  \******************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = require("react-typed");
 
 /***/ }),
 
