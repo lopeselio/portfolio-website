@@ -6,7 +6,7 @@ import Typed from 'react-typed'
 class Index extends React.Component {
   constructor (props) {
     super(props)
-    this.roles = ['DevELIOper', 'Tech Lover', 'Avid Reader', 'Illustrator', 'ReactJS', 'Data Science Enthusiast', 'Team Player']
+    this.roles = ['Developer', 'Tech Lover', 'Avid Reader', 'Designer', 'Illustrator', 'ReactJS', 'Data Science Enthusiast', 'Team Player']
   }
 
   render () {

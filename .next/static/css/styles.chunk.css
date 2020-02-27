@@ -125,5 +125,9 @@ html, body {
   color: white;
   margin-top: 10px; }
 
+.title-brand {
+  font-weight: bolder;
+  color: #9c9c9c !important; }
+
 
 /*# sourceMappingURL=styles.chunk.css.map*/

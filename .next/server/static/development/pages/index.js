@@ -136,53 +136,122 @@ const BaseLayout = props => {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var styled_jsx_style__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! styled-jsx/style */ "styled-jsx/style");
-/* harmony import */ var styled_jsx_style__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(styled_jsx_style__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "react");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var next_link__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! next/link */ "./node_modules/next/link.js");
-/* harmony import */ var next_link__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(next_link__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _styles_main_scss__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../styles/main.scss */ "./styles/main.scss");
-/* harmony import */ var _styles_main_scss__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_styles_main_scss__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return Example; });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var next_link__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! next/link */ "./node_modules/next/link.js");
+/* harmony import */ var next_link__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(next_link__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var reactstrap__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! reactstrap */ "reactstrap");
+/* harmony import */ var reactstrap__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(reactstrap__WEBPACK_IMPORTED_MODULE_2__);
+var __jsx = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement;
+// import React from 'react'
+// import Link from 'next/link'
+// import '../../styles/main.scss'
+// class Header extends React.Component {
+//   render () {
+//     return (
+//       <>
+// <Link href='/'>
+//   <a style={{ fontSize: '20px' }}> Home</a>
+// </Link>
+//         <Link href='/about'>
+//           <a> About</a>
+//         </Link>
+//         <Link href='/portfolios'>
+//           <a> Portfolio</a>
+//         </Link>
+//         <Link href='/blogs'>
+//           <a> Blog</a>
+//         </Link>
+//         <Link href='/cv'>
+//           <a> CV</a>
+//         </Link>
+//         {/* <NextLink route='test' params={{id:'2'}}>Test 2</NextLink>
+//         <NextLink route='test' params={{id:'5'}}>Test 5</NextLink> */}
+//         <style jsx>
+//           {
+//             `
+//             a {
+//               font-size: 20px
+//             };
+//             .customClass {
+//               color: red;
+//               font-size: 20px;
+//             }
+//             `
+//           }
+//         </style>
+//       </>
+//     )
+//   }
+// }
+// export default Header
 
-var __jsx = react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement;
 
 
 
+const BsNavLink = props => {
+  const {
+    route,
+    title
+  } = props;
+  return __jsx(next_link__WEBPACK_IMPORTED_MODULE_1___default.a, {
+    href: route
+  }, __jsx("a", {
+    className: "nav-link"
+  }, " ", title, " "));
+};
 
-class Header extends react__WEBPACK_IMPORTED_MODULE_1___default.a.Component {
+class Example extends react__WEBPACK_IMPORTED_MODULE_0___default.a.Component {
+  constructor(props) {
+    super(props);
+    this.toggle = this.toggle.bind(this);
+    this.state = {
+      isOpen: false
+    };
+  }
+
+  toggle() {
+    this.setState({
+      isOpen: !this.state.isOpen
+    });
+  }
+
   render() {
-    return __jsx(react__WEBPACK_IMPORTED_MODULE_1___default.a.Fragment, null, __jsx(next_link__WEBPACK_IMPORTED_MODULE_2___default.a, {
+    return __jsx("div", null, __jsx(reactstrap__WEBPACK_IMPORTED_MODULE_2__["Navbar"], {
+      color: "light",
+      light: true,
+      expand: "md"
+    }, __jsx(reactstrap__WEBPACK_IMPORTED_MODULE_2__["NavbarBrand"], {
+      className: "title-brand",
       href: "/"
-    }, __jsx("a", {
-      style: {
-        fontSize: '20px'
-      },
-      className: "jsx-3267449548"
-    }, " Home")), __jsx(next_link__WEBPACK_IMPORTED_MODULE_2___default.a, {
-      href: "/about"
-    }, __jsx("a", {
-      className: "jsx-3267449548"
-    }, " About")), __jsx(next_link__WEBPACK_IMPORTED_MODULE_2___default.a, {
-      href: "/portfolios"
-    }, __jsx("a", {
-      className: "jsx-3267449548"
-    }, " Portfolio")), __jsx(next_link__WEBPACK_IMPORTED_MODULE_2___default.a, {
-      href: "/blogs"
-    }, __jsx("a", {
-      className: "jsx-3267449548"
-    }, " Blog")), __jsx(next_link__WEBPACK_IMPORTED_MODULE_2___default.a, {
-      href: "/cv"
-    }, __jsx("a", {
-      className: "jsx-3267449548"
-    }, " CV")), __jsx(styled_jsx_style__WEBPACK_IMPORTED_MODULE_0___default.a, {
-      id: "3267449548"
-    }, "a.jsx-3267449548{font-size:20px;}.customClass.jsx-3267449548{color:red;font-size:20px;}\n/*# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIkM6XFxVc2Vyc1xcRWxpb1xcRGVza3RvcFxcUG9ydGZvbGlvLVdlYnNpdGVcXGNvbXBvbmVudHNcXHNoYXJlZFxcSGVhZGVyLmpzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQTZCWSxBQUlZLEFBRWEsVUFDSyxLQUhqQixVQUlBIiwiZmlsZSI6IkM6XFxVc2Vyc1xcRWxpb1xcRGVza3RvcFxcUG9ydGZvbGlvLVdlYnNpdGVcXGNvbXBvbmVudHNcXHNoYXJlZFxcSGVhZGVyLmpzIiwic291cmNlc0NvbnRlbnQiOlsiaW1wb3J0IFJlYWN0IGZyb20gJ3JlYWN0J1xyXG5pbXBvcnQgTGluayBmcm9tICduZXh0L2xpbmsnXHJcblxyXG5pbXBvcnQgJy4uLy4uL3N0eWxlcy9tYWluLnNjc3MnXHJcblxyXG5jbGFzcyBIZWFkZXIgZXh0ZW5kcyBSZWFjdC5Db21wb25lbnQge1xyXG4gIHJlbmRlciAoKSB7XHJcbiAgICByZXR1cm4gKFxyXG4gICAgICA8PlxyXG4gICAgICAgIDxMaW5rIGhyZWY9Jy8nPlxyXG4gICAgICAgICAgPGEgc3R5bGU9e3sgZm9udFNpemU6ICcyMHB4JyB9fT4gSG9tZTwvYT5cclxuICAgICAgICA8L0xpbms+XHJcbiAgICAgICAgPExpbmsgaHJlZj0nL2Fib3V0Jz5cclxuICAgICAgICAgIDxhPiBBYm91dDwvYT5cclxuICAgICAgICA8L0xpbms+XHJcbiAgICAgICAgPExpbmsgaHJlZj0nL3BvcnRmb2xpb3MnPlxyXG4gICAgICAgICAgPGE+IFBvcnRmb2xpbzwvYT5cclxuICAgICAgICA8L0xpbms+XHJcbiAgICAgICAgPExpbmsgaHJlZj0nL2Jsb2dzJz5cclxuICAgICAgICAgIDxhPiBCbG9nPC9hPlxyXG4gICAgICAgIDwvTGluaz5cclxuICAgICAgICA8TGluayBocmVmPScvY3YnPlxyXG4gICAgICAgICAgPGE+IENWPC9hPlxyXG4gICAgICAgIDwvTGluaz5cclxuICAgICAgICB7LyogPE5leHRMaW5rIHJvdXRlPSd0ZXN0JyBwYXJhbXM9e3tpZDonMid9fT5UZXN0IDI8L05leHRMaW5rPlxyXG4gICAgICAgIDxOZXh0TGluayByb3V0ZT0ndGVzdCcgcGFyYW1zPXt7aWQ6JzUnfX0+VGVzdCA1PC9OZXh0TGluaz4gKi99XHJcblxyXG4gICAgICAgIDxzdHlsZSBqc3g+XHJcbiAgICAgICAgICB7XHJcbiAgICAgICAgICAgIGBcclxuICAgICAgICAgICAgYSB7XHJcbiAgICAgICAgICAgICAgZm9udC1zaXplOiAyMHB4XHJcbiAgICAgICAgICAgIH07XHJcbiAgICAgICAgICAgIC5jdXN0b21DbGFzcyB7XHJcbiAgICAgICAgICAgICAgY29sb3I6IHJlZDtcclxuICAgICAgICAgICAgICBmb250LXNpemU6IDIwcHg7XHJcbiAgICAgICAgICAgIH1cclxuICAgICAgICAgICAgYFxyXG4gICAgICAgICAgfVxyXG4gICAgICAgIDwvc3R5bGU+XHJcblxyXG4gICAgICA8Lz5cclxuXHJcbiAgICApXHJcbiAgfVxyXG59XHJcbmV4cG9ydCBkZWZhdWx0IEhlYWRlclxyXG4iXX0= */\n/*@ sourceURL=C:\\\\Users\\\\Elio\\\\Desktop\\\\Portfolio-Website\\\\components\\\\shared\\\\Header.js */"));
+    }, "DevELIOper"), __jsx(reactstrap__WEBPACK_IMPORTED_MODULE_2__["NavbarToggler"], {
+      onClick: this.toggle
+    }), __jsx(reactstrap__WEBPACK_IMPORTED_MODULE_2__["Collapse"], {
+      isOpen: this.state.isOpen,
+      navbar: true
+    }, __jsx(reactstrap__WEBPACK_IMPORTED_MODULE_2__["Nav"], {
+      className: "ml-auto",
+      navbar: true
+    }, __jsx(reactstrap__WEBPACK_IMPORTED_MODULE_2__["NavItem"], null, __jsx(BsNavLink, {
+      route: "/",
+      title: "Home"
+    })), __jsx(reactstrap__WEBPACK_IMPORTED_MODULE_2__["NavItem"], null, __jsx(BsNavLink, {
+      route: "/about",
+      title: "About"
+    })), __jsx(reactstrap__WEBPACK_IMPORTED_MODULE_2__["NavItem"], null, __jsx(BsNavLink, {
+      route: "/portfolios",
+      title: "Portfolio"
+    })), __jsx(reactstrap__WEBPACK_IMPORTED_MODULE_2__["NavItem"], null, __jsx(BsNavLink, {
+      route: "/blogs",
+      title: "Blog"
+    })), __jsx(reactstrap__WEBPACK_IMPORTED_MODULE_2__["NavItem"], null, __jsx(BsNavLink, {
+      route: "/cv",
+      title: "CV"
+    }))))));
   }
 
 }
-
-/* harmony default export */ __webpack_exports__["default"] = (Header);
 
 /***/ }),
 
@@ -1882,7 +1951,7 @@ var __jsx = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement;
 class Index extends react__WEBPACK_IMPORTED_MODULE_0___default.a.Component {
   constructor(props) {
     super(props);
-    this.roles = ['DevELIOper', 'Tech Lover', 'Avid Reader', 'Illustrator', 'ReactJS', 'Data Science Enthusiast', 'Team Player'];
+    this.roles = ['Developer', 'Tech Lover', 'Avid Reader', 'Designer', 'Illustrator', 'ReactJS', 'Data Science Enthusiast', 'Team Player'];
   }
 
   render() {
@@ -1936,17 +2005,6 @@ class Index extends react__WEBPACK_IMPORTED_MODULE_0___default.a.Component {
 }
 
 /* harmony default export */ __webpack_exports__["default"] = (Index);
-
-/***/ }),
-
-/***/ "./styles/main.scss":
-/*!**************************!*\
-  !*** ./styles/main.scss ***!
-  \**************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-
 
 /***/ }),
 
@@ -2080,17 +2138,6 @@ module.exports = require("react-typed");
 /***/ (function(module, exports) {
 
 module.exports = require("reactstrap");
-
-/***/ }),
-
-/***/ "styled-jsx/style":
-/*!***********************************!*\
-  !*** external "styled-jsx/style" ***!
-  \***********************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-module.exports = require("styled-jsx/style");
 
 /***/ }),
 
