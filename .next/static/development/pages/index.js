@@ -112,7 +112,7 @@ var BsNavLink = function BsNavLink(props) {
   return __jsx(next_link__WEBPACK_IMPORTED_MODULE_7___default.a, {
     href: route
   }, __jsx("a", {
-    className: "nav-link"
+    className: "nav-link port-navbar-link"
   }, " ", title, " "));
 };
 
@@ -145,11 +145,12 @@ function (_React$Component) {
     key: "render",
     value: function render() {
       return __jsx("div", null, __jsx(reactstrap__WEBPACK_IMPORTED_MODULE_8__["Navbar"], {
-        color: "light",
-        light: true,
+        className: "port-navbar port-default absolute",
+        color: "transparent",
+        dark: true,
         expand: "md"
       }, __jsx(reactstrap__WEBPACK_IMPORTED_MODULE_8__["NavbarBrand"], {
-        className: "title-brand",
+        className: "port-navbar-brand",
         href: "/"
       }, "DevELIOper"), __jsx(reactstrap__WEBPACK_IMPORTED_MODULE_8__["NavbarToggler"], {
         onClick: this.toggle
@@ -159,19 +160,29 @@ function (_React$Component) {
       }, __jsx(reactstrap__WEBPACK_IMPORTED_MODULE_8__["Nav"], {
         className: "ml-auto",
         navbar: true
-      }, __jsx(reactstrap__WEBPACK_IMPORTED_MODULE_8__["NavItem"], null, __jsx(BsNavLink, {
+      }, __jsx(reactstrap__WEBPACK_IMPORTED_MODULE_8__["NavItem"], {
+        className: "port-navbar-item"
+      }, __jsx(BsNavLink, {
         route: "/",
         title: "Home"
-      })), __jsx(reactstrap__WEBPACK_IMPORTED_MODULE_8__["NavItem"], null, __jsx(BsNavLink, {
+      })), __jsx(reactstrap__WEBPACK_IMPORTED_MODULE_8__["NavItem"], {
+        className: "port-navbar-item"
+      }, __jsx(BsNavLink, {
         route: "/about",
         title: "About"
-      })), __jsx(reactstrap__WEBPACK_IMPORTED_MODULE_8__["NavItem"], null, __jsx(BsNavLink, {
+      })), __jsx(reactstrap__WEBPACK_IMPORTED_MODULE_8__["NavItem"], {
+        className: "port-navbar-item"
+      }, __jsx(BsNavLink, {
         route: "/portfolios",
         title: "Portfolio"
-      })), __jsx(reactstrap__WEBPACK_IMPORTED_MODULE_8__["NavItem"], null, __jsx(BsNavLink, {
+      })), __jsx(reactstrap__WEBPACK_IMPORTED_MODULE_8__["NavItem"], {
+        className: "port-navbar-item"
+      }, __jsx(BsNavLink, {
         route: "/blogs",
         title: "Blog"
-      })), __jsx(reactstrap__WEBPACK_IMPORTED_MODULE_8__["NavItem"], null, __jsx(BsNavLink, {
+      })), __jsx(reactstrap__WEBPACK_IMPORTED_MODULE_8__["NavItem"], {
+        className: "port-navbar-item"
+      }, __jsx(BsNavLink, {
         route: "/cv",
         title: "CV"
       }))))));
@@ -25716,7 +25727,7 @@ function (_React$Component) {
         className: "back"
       }, __jsx("div", {
         className: "hero-section-content"
-      }, __jsx("h2", null, " Front End Web Developer, Deep Learning, Data Enthusiast "), __jsx("div", {
+      }, __jsx("h2", null, " Full Stack Web Developer "), __jsx("div", {
         className: "hero-section-content-intro"
       }, "Have a look at my portfolio and job history.")), __jsx("img", {
         className: "image",

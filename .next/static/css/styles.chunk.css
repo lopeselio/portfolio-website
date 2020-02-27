@@ -113,6 +113,54 @@
   border: 2px solid #f37d49;
   box-shadow: -17px 13px 41px rgba(13, 78, 158, 0.3); }
 
+@font-face {
+  font-family: 'Montserrat';
+  src: url("/static/fonts/Montserrat-Regular.ttf");
+  font-weight: normal;
+  font-style: normal; }
+
+@font-face {
+  font-family: 'Montserrat';
+  src: url("/static/fonts/Montserrat-Light.ttf");
+  font-weight: lighter;
+  font-style: normal; }
+
+@font-face {
+  font-family: 'Montserrat';
+  src: url("/static/fonts/Montserrat-Bold.ttf");
+  font-weight: bold;
+  font-style: normal; }
+
+@font-face {
+  font-family: 'Montserrat';
+  src: url("/static/fonts/Montserrat-Italic.ttf");
+  font-weight: normal;
+  font-style: italic; }
+
+.port-navbar.port-default {
+  width: 100%;
+  z-index: 15;
+  padding: 40px; }
+  .port-navbar.port-default .port-navbar-brand {
+    color: white;
+    font-size: 24px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: bold; }
+  .port-navbar.port-default .port-navbar-item {
+    margin-left: 10px;
+    margin-right: 10px; }
+  .port-navbar.port-default .port-navbar-link {
+    color: white;
+    font-weight: bold;
+    letter-spacing: 0.8px;
+    font-size: 18px;
+    text-transform: uppercase; }
+    .port-navbar.port-default .port-navbar-link.active {
+      color: #dba919; }
+    .port-navbar.port-default .port-navbar-link:hover, .port-navbar.port-default .port-navbar-link:focus {
+      color: #dba919; }
+
 html, body {
   font-family: 'Montserrat', 'Helvetica' !important;
   height: 100%;
@@ -128,6 +176,9 @@ html, body {
 .title-brand {
   font-weight: bolder;
   color: #9c9c9c !important; }
+
+.absolute {
+  position: absolute; }
 
 
 /*# sourceMappingURL=styles.chunk.css.map*/

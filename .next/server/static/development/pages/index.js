@@ -198,7 +198,7 @@ const BsNavLink = props => {
   return __jsx(next_link__WEBPACK_IMPORTED_MODULE_1___default.a, {
     href: route
   }, __jsx("a", {
-    className: "nav-link"
+    className: "nav-link port-navbar-link"
   }, " ", title, " "));
 };
 
@@ -219,11 +219,12 @@ class Example extends react__WEBPACK_IMPORTED_MODULE_0___default.a.Component {
 
   render() {
     return __jsx("div", null, __jsx(reactstrap__WEBPACK_IMPORTED_MODULE_2__["Navbar"], {
-      color: "light",
-      light: true,
+      className: "port-navbar port-default absolute",
+      color: "transparent",
+      dark: true,
       expand: "md"
     }, __jsx(reactstrap__WEBPACK_IMPORTED_MODULE_2__["NavbarBrand"], {
-      className: "title-brand",
+      className: "port-navbar-brand",
       href: "/"
     }, "DevELIOper"), __jsx(reactstrap__WEBPACK_IMPORTED_MODULE_2__["NavbarToggler"], {
       onClick: this.toggle
@@ -233,19 +234,29 @@ class Example extends react__WEBPACK_IMPORTED_MODULE_0___default.a.Component {
     }, __jsx(reactstrap__WEBPACK_IMPORTED_MODULE_2__["Nav"], {
       className: "ml-auto",
       navbar: true
-    }, __jsx(reactstrap__WEBPACK_IMPORTED_MODULE_2__["NavItem"], null, __jsx(BsNavLink, {
+    }, __jsx(reactstrap__WEBPACK_IMPORTED_MODULE_2__["NavItem"], {
+      className: "port-navbar-item"
+    }, __jsx(BsNavLink, {
       route: "/",
       title: "Home"
-    })), __jsx(reactstrap__WEBPACK_IMPORTED_MODULE_2__["NavItem"], null, __jsx(BsNavLink, {
+    })), __jsx(reactstrap__WEBPACK_IMPORTED_MODULE_2__["NavItem"], {
+      className: "port-navbar-item"
+    }, __jsx(BsNavLink, {
       route: "/about",
       title: "About"
-    })), __jsx(reactstrap__WEBPACK_IMPORTED_MODULE_2__["NavItem"], null, __jsx(BsNavLink, {
+    })), __jsx(reactstrap__WEBPACK_IMPORTED_MODULE_2__["NavItem"], {
+      className: "port-navbar-item"
+    }, __jsx(BsNavLink, {
       route: "/portfolios",
       title: "Portfolio"
-    })), __jsx(reactstrap__WEBPACK_IMPORTED_MODULE_2__["NavItem"], null, __jsx(BsNavLink, {
+    })), __jsx(reactstrap__WEBPACK_IMPORTED_MODULE_2__["NavItem"], {
+      className: "port-navbar-item"
+    }, __jsx(BsNavLink, {
       route: "/blogs",
       title: "Blog"
-    })), __jsx(reactstrap__WEBPACK_IMPORTED_MODULE_2__["NavItem"], null, __jsx(BsNavLink, {
+    })), __jsx(reactstrap__WEBPACK_IMPORTED_MODULE_2__["NavItem"], {
+      className: "port-navbar-item"
+    }, __jsx(BsNavLink, {
       route: "/cv",
       title: "CV"
     }))))));
@@ -1973,7 +1984,7 @@ class Index extends react__WEBPACK_IMPORTED_MODULE_0___default.a.Component {
       className: "back"
     }, __jsx("div", {
       className: "hero-section-content"
-    }, __jsx("h2", null, " Front End Web Developer, Deep Learning, Data Enthusiast "), __jsx("div", {
+    }, __jsx("h2", null, " Full Stack Web Developer "), __jsx("div", {
       className: "hero-section-content-intro"
     }, "Have a look at my portfolio and job history.")), __jsx("img", {
       className: "image",

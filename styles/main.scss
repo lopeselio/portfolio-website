@@ -2,6 +2,10 @@
 
 @import './index';
 
+@import './shared/fonts';
+
+@import './header';
+
 html, body {
   font-family: 'Montserrat', 'Helvetica' !important;
   height: 100%;
@@ -19,5 +23,9 @@ html, body {
 .title-brand {
   font-weight: bolder;
   color: rgb(156, 156, 156) !important;
+}
+
+.absolute {
+  position: absolute;
 }
 
