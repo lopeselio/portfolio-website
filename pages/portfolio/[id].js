@@ -22,9 +22,11 @@ class Portfolio extends React.Component {
     
     return(
       <BaseLayout>
+      <BasePage>
         <h1> {post.title} </h1>
         <h2>{post.body}</h2>
         <p>{post.id}</p>
+      </BasePage>
       </BaseLayout>
     )
   }

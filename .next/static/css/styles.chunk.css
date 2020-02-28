@@ -180,5 +180,8 @@ html, body {
 .absolute {
   position: absolute; }
 
+.base-page {
+  padding-top: 150px; }
+
 
 /*# sourceMappingURL=styles.chunk.css.map*/

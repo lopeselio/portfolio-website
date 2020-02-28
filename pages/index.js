@@ -24,7 +24,7 @@ class Index extends React.Component {
                   <div className='flipper'>
                     <div className='back'>
                       <div className='hero-section-content'>
-                        <h2> Full Stack Web Developer </h2>
+                        <h2> Web Developer </h2>
                         <div className='hero-section-content-intro'>
                     Have a look at my portfolio and job history.
                         </div>
