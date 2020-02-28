@@ -106,16 +106,29 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var reactstrap__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! reactstrap */ "reactstrap");
 /* harmony import */ var reactstrap__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(reactstrap__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! prop-types */ "prop-types");
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_2__);
 
 var __jsx = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement;
 
 
+
 const BasePage = props => {
+  const {
+    className
+  } = props; // const className = props.className || ''
+
   return __jsx("div", {
-    className: "base-page"
+    className: `base-page ${className}`
   }, __jsx(reactstrap__WEBPACK_IMPORTED_MODULE_1__["Container"], null, props.children));
 };
 
+BasePage.defaultProps = {
+  className: ''
+};
+BasePage.propTypes = {
+  className: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.any.isRequired
+};
 /* harmony default export */ __webpack_exports__["default"] = (BasePage);
 
 /***/ }),
@@ -1985,7 +1998,9 @@ var __jsx = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement;
 
 class About extends react__WEBPACK_IMPORTED_MODULE_0___default.a.Component {
   render() {
-    return __jsx(_components_layouts_BaseLayout__WEBPACK_IMPORTED_MODULE_1__["default"], null, __jsx(_components_BasePage__WEBPACK_IMPORTED_MODULE_2__["default"], null, __jsx("h1", null, " I am About Page ")));
+    return __jsx(_components_layouts_BaseLayout__WEBPACK_IMPORTED_MODULE_1__["default"], null, __jsx(_components_BasePage__WEBPACK_IMPORTED_MODULE_2__["default"], {
+      className: "base-page"
+    }, __jsx("h1", null, " I am About Page ")));
   }
 
 }
