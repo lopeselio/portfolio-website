@@ -202,6 +202,18 @@ const BsNavLink = props => {
   }, " ", title, " "));
 };
 
+const Login = () => {
+  return __jsx("span", {
+    className: "nav-link port-navbar-link clickable"
+  }, " Login ");
+};
+
+const Logout = () => {
+  return __jsx("span", {
+    className: "nav-link port-navbar-link clickable"
+  }, " Logout");
+};
+
 class Example extends react__WEBPACK_IMPORTED_MODULE_0___default.a.Component {
   constructor(props) {
     super(props);
@@ -259,7 +271,11 @@ class Example extends react__WEBPACK_IMPORTED_MODULE_0___default.a.Component {
     }, __jsx(BsNavLink, {
       route: "/cv",
       title: "CV"
-    }))))));
+    })), __jsx(reactstrap__WEBPACK_IMPORTED_MODULE_2__["NavItem"], {
+      className: "port-navbar-item"
+    }, __jsx(Login, null)), __jsx(reactstrap__WEBPACK_IMPORTED_MODULE_2__["NavItem"], {
+      className: "port-navbar-item"
+    }, __jsx(Logout, null))))));
   }
 
 }

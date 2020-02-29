@@ -116,6 +116,18 @@ var BsNavLink = function BsNavLink(props) {
   }, " ", title, " "));
 };
 
+var Login = function Login() {
+  return __jsx("span", {
+    className: "nav-link port-navbar-link clickable"
+  }, " Login ");
+};
+
+var Logout = function Logout() {
+  return __jsx("span", {
+    className: "nav-link port-navbar-link clickable"
+  }, " Logout");
+};
+
 var Example =
 /*#__PURE__*/
 function (_React$Component) {
@@ -185,7 +197,11 @@ function (_React$Component) {
       }, __jsx(BsNavLink, {
         route: "/cv",
         title: "CV"
-      }))))));
+      })), __jsx(reactstrap__WEBPACK_IMPORTED_MODULE_8__["NavItem"], {
+        className: "port-navbar-item"
+      }, __jsx(Login, null)), __jsx(reactstrap__WEBPACK_IMPORTED_MODULE_8__["NavItem"], {
+        className: "port-navbar-item"
+      }, __jsx(Logout, null))))));
     }
   }]);
 

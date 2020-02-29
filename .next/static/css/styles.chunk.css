@@ -184,5 +184,8 @@ html, body {
   padding-top: 150px;
   color: white; }
 
+.clickable {
+  cursor: pointer; }
+
 
 /*# sourceMappingURL=styles.chunk.css.map*/
