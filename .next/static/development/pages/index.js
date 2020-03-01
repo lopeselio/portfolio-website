@@ -25769,7 +25769,7 @@ function (_React$Component) {
         cursorChar: "|"
       }), __jsx("div", {
         className: "hero-welcome-bio"
-      }, __jsx("h1", null, "Let's take a look on my work.")))))));
+      }, __jsx("h1", null, "Have a look at my work.")))))));
     }
   }]);
 
