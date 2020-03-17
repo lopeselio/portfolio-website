@@ -11,7 +11,9 @@ class Auth0 {
       scope: 'openid profile'
     })
     this.login = this.login.bind(this)
+    this.logout = this.logout.bind(this)
     this.handleAuthentication = this.handleAuthentication.bind(this)
+    this.isAuthenticated = this.isAuthenticated.bind(this)
   }
 
   handleAuthentication () {
@@ -40,6 +42,10 @@ class Auth0 {
     Cookies.set('expiresAt', expiresAt)
   }
 
+  login () {
+    this.auth0.authorize()
+  }
+
   logout () {
     Cookies.remove('user', authResult.idTokenPayload)
     Cookies.remove('jwt', authResult.idToken)
@@ -51,8 +57,9 @@ class Auth0 {
     })
   }
 
-  login () {
-    this.auth0.authorize()
+  isAuthenticated () {
+    const expiresAt = Cookies.getJSON('expiresAt')
+    return new Date().getTime() < expiresAt
   }
 }
 

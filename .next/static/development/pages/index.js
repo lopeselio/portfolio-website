@@ -26249,7 +26249,9 @@ function () {
       scope: 'openid profile'
     });
     this.login = this.login.bind(this);
+    this.logout = this.logout.bind(this);
     this.handleAuthentication = this.handleAuthentication.bind(this);
+    this.isAuthenticated = this.isAuthenticated.bind(this);
   }
 
   Object(_babel_runtime_corejs2_helpers_esm_createClass__WEBPACK_IMPORTED_MODULE_3__["default"])(Auth0, [{
@@ -26285,6 +26287,11 @@ function () {
       js_cookie__WEBPACK_IMPORTED_MODULE_5___default.a.set('expiresAt', expiresAt);
     }
   }, {
+    key: "login",
+    value: function login() {
+      this.auth0.authorize();
+    }
+  }, {
     key: "logout",
     value: function logout() {
       js_cookie__WEBPACK_IMPORTED_MODULE_5___default.a.remove('user', authResult.idTokenPayload);
@@ -26296,9 +26303,10 @@ function () {
       });
     }
   }, {
-    key: "login",
-    value: function login() {
-      this.auth0.authorize();
+    key: "isAuthenticated",
+    value: function isAuthenticated() {
+      var expiresAt = js_cookie__WEBPACK_IMPORTED_MODULE_5___default.a.getJSON('expiresAt');
+      return new Date().getTime() < expiresAt;
     }
   }]);
 

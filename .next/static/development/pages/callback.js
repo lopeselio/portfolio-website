@@ -26221,7 +26221,9 @@ function () {
       scope: 'openid profile'
     });
     this.login = this.login.bind(this);
+    this.logout = this.logout.bind(this);
     this.handleAuthentication = this.handleAuthentication.bind(this);
+    this.isAuthenticated = this.isAuthenticated.bind(this);
   }
 
   Object(_babel_runtime_corejs2_helpers_esm_createClass__WEBPACK_IMPORTED_MODULE_3__["default"])(Auth0, [{
@@ -26257,6 +26259,11 @@ function () {
       js_cookie__WEBPACK_IMPORTED_MODULE_5___default.a.set('expiresAt', expiresAt);
     }
   }, {
+    key: "login",
+    value: function login() {
+      this.auth0.authorize();
+    }
+  }, {
     key: "logout",
     value: function logout() {
       js_cookie__WEBPACK_IMPORTED_MODULE_5___default.a.remove('user', authResult.idTokenPayload);
@@ -26268,9 +26275,10 @@ function () {
       });
     }
   }, {
-    key: "login",
-    value: function login() {
-      this.auth0.authorize();
+    key: "isAuthenticated",
+    value: function isAuthenticated() {
+      var expiresAt = js_cookie__WEBPACK_IMPORTED_MODULE_5___default.a.getJSON('expiresAt');
+      return new Date().getTime() < expiresAt;
     }
   }]);
 
@@ -26282,7 +26290,7 @@ var auth0Client = new Auth0();
 
 /***/ }),
 
-/***/ 4:
+/***/ 5:
 /*!************************************************************************************************************************************************!*\
   !*** multi next-client-pages-loader?page=%2Fcallback&absolutePagePath=C%3A%5CUsers%5CElio%5CDesktop%5CPortfolio-Website%5Cpages%5Ccallback.js ***!
   \************************************************************************************************************************************************/
@@ -26305,5 +26313,5 @@ module.exports = dll_ef0ff7c60362f24a921f;
 
 /***/ })
 
-},[[4,"static/runtime/webpack.js"]]]);
+},[[5,"static/runtime/webpack.js"]]]);
 //# sourceMappingURL=callback.js.map

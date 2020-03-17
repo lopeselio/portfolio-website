@@ -2061,7 +2061,9 @@ class Auth0 {
       scope: 'openid profile'
     });
     this.login = this.login.bind(this);
+    this.logout = this.logout.bind(this);
     this.handleAuthentication = this.handleAuthentication.bind(this);
+    this.isAuthenticated = this.isAuthenticated.bind(this);
   }
 
   handleAuthentication() {
@@ -2090,6 +2092,10 @@ class Auth0 {
     js_cookie__WEBPACK_IMPORTED_MODULE_1___default.a.set('expiresAt', expiresAt);
   }
 
+  login() {
+    this.auth0.authorize();
+  }
+
   logout() {
     js_cookie__WEBPACK_IMPORTED_MODULE_1___default.a.remove('user', authResult.idTokenPayload);
     js_cookie__WEBPACK_IMPORTED_MODULE_1___default.a.remove('jwt', authResult.idToken);
@@ -2100,8 +2106,9 @@ class Auth0 {
     });
   }
 
-  login() {
-    this.auth0.authorize();
+  isAuthenticated() {
+    const expiresAt = js_cookie__WEBPACK_IMPORTED_MODULE_1___default.a.getJSON('expiresAt');
+    return new Date().getTime() < expiresAt;
   }
 
 }
