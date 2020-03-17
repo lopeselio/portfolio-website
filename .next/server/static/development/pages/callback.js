@@ -2009,12 +2009,18 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _components_layouts_BaseLayout__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./../components/layouts/BaseLayout */ "./components/layouts/BaseLayout.js");
 /* harmony import */ var _components_BasePage__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../components/BasePage */ "./components/BasePage.js");
+/* harmony import */ var _services_auth0__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../services/auth0 */ "./services/auth0.js");
 var __jsx = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement;
 
 
 
 
+
 class Callback extends react__WEBPACK_IMPORTED_MODULE_0___default.a.Component {
+  async componentDidMount() {
+    await _services_auth0__WEBPACK_IMPORTED_MODULE_3__["default"].handleAuthentication();
+  }
+
   render() {
     return __jsx(_components_layouts_BaseLayout__WEBPACK_IMPORTED_MODULE_1__["default"], null, __jsx(_components_BasePage__WEBPACK_IMPORTED_MODULE_2__["default"], null, __jsx("h1", null, " You are Logging In ... ", __jsx("br", null), "Verifting Login Data...")));
   }
@@ -2052,13 +2058,18 @@ class Auth0 {
   }
 
   handleAuthentication() {
-    this.auth0.parseHash((err, authResult) => {
-      if (authResult && authResult.accessToken && authResult.idToken) {
-        this.setSession(authResult); // history.replace('/home')
-      } else if (err) {
-        // history.replace('/home')
-        console.log(err);
-      }
+    return new Promise((resolve, reject) => {
+      this.auth0.parseHash((err, authResult) => {
+        if (authResult && authResult.accessToken && authResult.idToken) {
+          this.setSession(authResult); // history.replace('/home')
+
+          resolve();
+        } else if (err) {
+          // history.replace('/home')
+          reject(err);
+          console.log(err);
+        }
+      });
     });
   }
 

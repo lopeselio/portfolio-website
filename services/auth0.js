@@ -14,14 +14,18 @@ class Auth0 {
   }
 
   handleAuthentication () {
-    this.auth0.parseHash((err, authResult) => {
-      if (authResult && authResult.accessToken && authResult.idToken) {
-        this.setSession(authResult)
-        // history.replace('/home')
-      } else if (err) {
-        // history.replace('/home')
-        console.log(err)
-      }
+    return new Promise((resolve, reject) => {
+      this.auth0.parseHash((err, authResult) => {
+        if (authResult && authResult.accessToken && authResult.idToken) {
+          this.setSession(authResult)
+          // history.replace('/home')
+          resolve()
+        } else if (err) {
+          // history.replace('/home')
+          reject(err)
+          console.log(err)
+        }
+      })
     })
   }
 
