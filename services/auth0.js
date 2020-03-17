@@ -10,6 +10,19 @@ class Auth0 {
       scope: 'openid'
     })
     this.login = this.login.bind(this)
+    this.handleAuthentication = this.handleAuthentication.bind(this)
+  }
+
+  handleAuthentication () {
+    this.auth0.parseHash((err, authResult) => {
+      if (authResult && authResult.accessToken && authResult.idToken) {
+        this.setSession(authResult)
+        // history.replace('/home')
+      } else if (err) {
+        // history.replace('/home')
+        console.log(err)
+      }
+    })
   }
 
   login () {
