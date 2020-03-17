@@ -25,6 +25,10 @@ class Auth0 {
     })
   }
 
+  setSession () {
+    // Save tokens!!
+  }
+
   login () {
     this.auth0.authorize()
   }
