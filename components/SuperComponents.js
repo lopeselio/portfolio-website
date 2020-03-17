@@ -1,24 +1,23 @@
-import React from 'react';
+import React from 'react'
 import BaseLayout from './../components/layouts/BaseLayout'
 
-
 class SuperComponent extends React.Component {
-
-  constructor(props) {
-    super(props);
-    this.someVariable = 'Just someVariable';
+  constructor (props) {
+    super(props)
+    this.someVariable = 'Just someVariable'
   }
 
-  alertName(title){
-    alert(title);
+  alertName (title) {
+    // alert(title)
   }
-  render() {
-    return(
+
+  render () {
+    return (
       <BaseLayout>
-      <h1> I am Blog Page </h1>
+        <h1> I am Blog Page </h1>
       </BaseLayout>
     )
   }
-} 
+}
 
-export default SuperComponent;
+export default SuperComponent

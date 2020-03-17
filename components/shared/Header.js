@@ -48,6 +48,8 @@
 
 import React from 'react'
 import Link from 'next/link'
+import auth0 from '../../services/auth0'
+
 import {
   Collapse,
   Navbar,
@@ -71,7 +73,7 @@ const BsNavLink = (props) => {
 
 const Login = () => {
   return (
-    <span className='nav-link port-navbar-link clickable'> Login </span>
+    <span onClick={auth0.login} className='nav-link port-navbar-link clickable'> Login </span>
   )
 }
 

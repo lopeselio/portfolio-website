@@ -4,10 +4,10 @@ class Auth0 {
   constructor () {
     this.auth0 = new auth0.WebAuth({
       domain: 'dev-fee5qd3s.auth0.com',
-      clientId: 'PRojVaD1nApgzyFqr90GZGI9kNxIj561',
+      clientID: 'PRojVaD1nApgzyFqr90GZGI9kNxIj561',
       redirectUri: 'http://localhost:3000/callback',
       responseType: 'token id_token',
-      scope: 'openid'
+      scope: 'openid profile'
     })
     this.login = this.login.bind(this)
     this.handleAuthentication = this.handleAuthentication.bind(this)

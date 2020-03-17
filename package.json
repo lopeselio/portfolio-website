@@ -24,6 +24,7 @@
     "@auth0/auth0-spa-js": "^1.6.4",
     "@zeit/next-css": "^1.0.1",
     "@zeit/next-sass": "^1.0.1",
+    "auth0-js": "^9.12.2",
     "axios": "^0.19.2",
     "babel-preset-es2015": "^6.24.1",
     "bootstrap": "^4.4.1",
