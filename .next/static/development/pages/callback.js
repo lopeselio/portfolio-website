@@ -26248,11 +26248,24 @@ function () {
     key: "setSession",
     value: function setSession(authResult) {
       var expiresAt = _babel_runtime_corejs2_core_js_json_stringify__WEBPACK_IMPORTED_MODULE_0___default()(authResult.expiresIn * 1000 + new Date().getTime()); // localStorage.setItem('access_token', authResult.accessToken)
+      // localStorage.setItem('id_token', authResult.idToken)
+      // localStorage.setItem('expires_at'.expiresAt)
 
 
-      localStorage.setItem('id_token', authResult.idToken);
-      localStorage.setItem('expires_at'.expiresAt);
-      js_cookie__WEBPACK_IMPORTED_MODULE_5___default.a.set;
+      js_cookie__WEBPACK_IMPORTED_MODULE_5___default.a.set('user', authResult.idTokenPayload);
+      js_cookie__WEBPACK_IMPORTED_MODULE_5___default.a.set('jwt', authResult.idToken);
+      js_cookie__WEBPACK_IMPORTED_MODULE_5___default.a.set('expiresAt', expiresAt);
+    }
+  }, {
+    key: "logout",
+    value: function logout() {
+      js_cookie__WEBPACK_IMPORTED_MODULE_5___default.a.remove('user', authResult.idTokenPayload);
+      js_cookie__WEBPACK_IMPORTED_MODULE_5___default.a.remove('jwt', authResult.idToken);
+      js_cookie__WEBPACK_IMPORTED_MODULE_5___default.a.remove('expiresAt', expiresAt);
+      this.auth0.logout({
+        returnTo: '',
+        clientID: 'PRojVaD1nApgzyFqr90GZGI9kNxIj561'
+      });
     }
   }, {
     key: "login",

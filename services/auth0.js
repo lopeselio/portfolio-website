@@ -31,12 +31,24 @@ class Auth0 {
   }
 
   setSession (authResult) {
-    let expiresAt = JSON.stringify((authResult.expiresIn * 1000) + new Date().getTime())
+    const expiresAt = JSON.stringify((authResult.expiresIn * 1000) + new Date().getTime())
     // localStorage.setItem('access_token', authResult.accessToken)
-    localStorage.setItem('id_token', authResult.idToken)
-    localStorage.setItem('expires_at'.expiresAt)
-    Cookies.set
+    // localStorage.setItem('id_token', authResult.idToken)
+    // localStorage.setItem('expires_at'.expiresAt)
+    Cookies.set('user', authResult.idTokenPayload)
+    Cookies.set('jwt', authResult.idToken)
+    Cookies.set('expiresAt', expiresAt)
+  }
 
+  logout () {
+    Cookies.remove('user', authResult.idTokenPayload)
+    Cookies.remove('jwt', authResult.idToken)
+    Cookies.remove('expiresAt', expiresAt)
+
+    this.auth0.logout({
+      returnTo: '',
+      clientID: 'PRojVaD1nApgzyFqr90GZGI9kNxIj561'
+    })
   }
 
   login () {
