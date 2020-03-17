@@ -25917,6 +25917,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_layouts_BaseLayout__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./../components/layouts/BaseLayout */ "./components/layouts/BaseLayout.js");
 /* harmony import */ var _components_BasePage__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../components/BasePage */ "./components/BasePage.js");
 /* harmony import */ var _services_auth0__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../services/auth0 */ "./services/auth0.js");
+/* harmony import */ var next_router__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! next/router */ "./node_modules/next/dist/client/router.js");
+/* harmony import */ var next_router__WEBPACK_IMPORTED_MODULE_10___default = /*#__PURE__*/__webpack_require__.n(next_router__WEBPACK_IMPORTED_MODULE_10__);
 
 
 
@@ -25924,6 +25926,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var __jsx = react__WEBPACK_IMPORTED_MODULE_6___default.a.createElement;
+
 
 
 
@@ -25951,11 +25954,14 @@ function (_React$Component) {
               return _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.awrap(_services_auth0__WEBPACK_IMPORTED_MODULE_9__["default"].handleAuthentication());
 
             case 2:
+              this.props.router.push('/');
+
+            case 3:
             case "end":
               return _context.stop();
           }
         }
-      });
+      }, null, this);
     }
   }, {
     key: "render",
@@ -25967,7 +25973,7 @@ function (_React$Component) {
   return Callback;
 }(react__WEBPACK_IMPORTED_MODULE_6___default.a.Component);
 
-/* harmony default export */ __webpack_exports__["default"] = (Callback);
+/* harmony default export */ __webpack_exports__["default"] = (Object(next_router__WEBPACK_IMPORTED_MODULE_10__["withRouter"])(Callback));
 
 /***/ }),
 

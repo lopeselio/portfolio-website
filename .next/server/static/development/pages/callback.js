@@ -2010,7 +2010,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_layouts_BaseLayout__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./../components/layouts/BaseLayout */ "./components/layouts/BaseLayout.js");
 /* harmony import */ var _components_BasePage__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../components/BasePage */ "./components/BasePage.js");
 /* harmony import */ var _services_auth0__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../services/auth0 */ "./services/auth0.js");
+/* harmony import */ var next_router__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! next/router */ "next/router");
+/* harmony import */ var next_router__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(next_router__WEBPACK_IMPORTED_MODULE_4__);
 var __jsx = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement;
+
 
 
 
@@ -2019,6 +2022,7 @@ var __jsx = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement;
 class Callback extends react__WEBPACK_IMPORTED_MODULE_0___default.a.Component {
   async componentDidMount() {
     await _services_auth0__WEBPACK_IMPORTED_MODULE_3__["default"].handleAuthentication();
+    this.props.router.push('/');
   }
 
   render() {
@@ -2027,7 +2031,7 @@ class Callback extends react__WEBPACK_IMPORTED_MODULE_0___default.a.Component {
 
 }
 
-/* harmony default export */ __webpack_exports__["default"] = (Callback);
+/* harmony default export */ __webpack_exports__["default"] = (Object(next_router__WEBPACK_IMPORTED_MODULE_4__["withRouter"])(Callback));
 
 /***/ }),
 
@@ -2162,6 +2166,17 @@ module.exports = require("core-js/library/fn/symbol/iterator");
 /***/ (function(module, exports) {
 
 module.exports = require("core-js/library/fn/weak-map");
+
+/***/ }),
+
+/***/ "next/router":
+/*!******************************!*\
+  !*** external "next/router" ***!
+  \******************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = require("next/router");
 
 /***/ }),
 
