@@ -1,4 +1,5 @@
 import auth0 from 'auth0-js'
+import Cookies from 'js-cookie'
 
 class Auth0 {
   constructor () {
@@ -29,8 +30,13 @@ class Auth0 {
     })
   }
 
-  setSession () {
-    // Save tokens!!
+  setSession (authResult) {
+    let expiresAt = JSON.stringify((authResult.expiresIn * 1000) + new Date().getTime())
+    // localStorage.setItem('access_token', authResult.accessToken)
+    localStorage.setItem('id_token', authResult.idToken)
+    localStorage.setItem('expires_at'.expiresAt)
+    Cookies.set
+
   }
 
   login () {
