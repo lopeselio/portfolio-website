@@ -33,7 +33,7 @@ class Portfolios extends React.Component {
 
     console.log(this.props)
     return (
-      <BaseLayout>
+      <BaseLayout {...this.props.auth}>
         <BasePage>
           <h1> I am Portfolios Page </h1>
           <ul>

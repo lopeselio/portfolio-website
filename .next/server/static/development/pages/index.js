@@ -112,11 +112,14 @@ var __jsx = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement;
 const BaseLayout = props => {
   const {
     className,
-    children
+    children,
+    isAuthenticated
   } = props;
   return __jsx("div", {
     className: "layout-container"
-  }, __jsx(_shared_Header__WEBPACK_IMPORTED_MODULE_1__["default"], null), __jsx("main", {
+  }, __jsx(_shared_Header__WEBPACK_IMPORTED_MODULE_1__["default"], {
+    isAuthenticated: isAuthenticated
+  }), __jsx("main", {
     className: `cover ${className}`
   }, __jsx("div", {
     className: "wrapper"
@@ -234,6 +237,9 @@ class Example extends react__WEBPACK_IMPORTED_MODULE_0___default.a.Component {
   }
 
   render() {
+    const {
+      isAuthenticated
+    } = this.props;
     return __jsx("div", null, __jsx(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Navbar"], {
       className: "port-navbar port-default absolute",
       color: "transparent",
@@ -275,9 +281,9 @@ class Example extends react__WEBPACK_IMPORTED_MODULE_0___default.a.Component {
     }, __jsx(BsNavLink, {
       route: "/cv",
       title: "CV"
-    })), !_services_auth0__WEBPACK_IMPORTED_MODULE_2__["default"].isAuthenticated && __jsx(reactstrap__WEBPACK_IMPORTED_MODULE_3__["NavItem"], {
+    })), !isAuthenticated && __jsx(reactstrap__WEBPACK_IMPORTED_MODULE_3__["NavItem"], {
       className: "port-navbar-item"
-    }, __jsx(Login, null)), _services_auth0__WEBPACK_IMPORTED_MODULE_2__["default"].isAuthenticated && __jsx(reactstrap__WEBPACK_IMPORTED_MODULE_3__["NavItem"], {
+    }, __jsx(Login, null)), isAuthenticated && __jsx(reactstrap__WEBPACK_IMPORTED_MODULE_3__["NavItem"], {
       className: "port-navbar-item"
     }, __jsx(Logout, null))))));
   }
@@ -1975,6 +1981,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_typed__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(react_typed__WEBPACK_IMPORTED_MODULE_3__);
 var __jsx = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement;
 
+function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
+
+
 
 
 
@@ -1986,9 +1995,9 @@ class Index extends react__WEBPACK_IMPORTED_MODULE_0___default.a.Component {
   }
 
   render() {
-    return __jsx(_components_layouts_BaseLayout__WEBPACK_IMPORTED_MODULE_1__["default"], {
+    return __jsx(_components_layouts_BaseLayout__WEBPACK_IMPORTED_MODULE_1__["default"], _extends({
       className: "cover"
-    }, __jsx("div", {
+    }, this.props.auth), __jsx("div", {
       className: "main-section"
     }, __jsx("div", {
       className: "background-image"

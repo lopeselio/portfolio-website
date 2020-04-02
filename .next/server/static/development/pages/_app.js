@@ -422,6 +422,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _services_auth0__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./../services/auth0 */ "./services/auth0.js");
 var __jsx = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement;
 
+function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
+
+
  // Stylings
 
 
@@ -434,8 +437,8 @@ class MyApp extends next_app__WEBPACK_IMPORTED_MODULE_1___default.a {
     ctx
   }) {
     let pageProps = {};
-    const isAuthenticated = false ? undefined : _services_auth0__WEBPACK_IMPORTED_MODULE_4__["default"].serverAuth(ctx.req);
-    console.log(isAuthenticated); // let isAuthenticated;
+    const isAuthenticated = false ? undefined : _services_auth0__WEBPACK_IMPORTED_MODULE_4__["default"].serverAuth(ctx.req); // console.log(isAuthenticated)
+    // let isAuthenticated;
     // if (process.browser) {
     //   isAuthenticated = 'clientAuth();'
     // } else {
@@ -446,17 +449,24 @@ class MyApp extends next_app__WEBPACK_IMPORTED_MODULE_1___default.a {
       pageProps = await Component.getInitialProps(ctx);
     }
 
+    const auth = {
+      isAuthenticated
+    };
     return {
-      pageProps
+      pageProps,
+      auth
     };
   }
 
   render() {
     const {
       Component,
-      pageProps
+      pageProps,
+      auth
     } = this.props;
-    return __jsx(next_app__WEBPACK_IMPORTED_MODULE_1__["Container"], null, __jsx(Component, pageProps));
+    return __jsx(next_app__WEBPACK_IMPORTED_MODULE_1__["Container"], null, __jsx(Component, _extends({}, pageProps, {
+      auth: auth
+    })));
   }
 
 }
