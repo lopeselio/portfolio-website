@@ -127,6 +127,7 @@ var Login = function Login() {
 
 var Logout = function Logout() {
   return __jsx("span", {
+    onClick: _services_auth0__WEBPACK_IMPORTED_MODULE_8__["default"].logout,
     className: "nav-link port-navbar-link clickable"
   }, " Logout");
 };
@@ -200,9 +201,9 @@ function (_React$Component) {
       }, __jsx(BsNavLink, {
         route: "/cv",
         title: "CV"
-      })), __jsx(reactstrap__WEBPACK_IMPORTED_MODULE_9__["NavItem"], {
+      })), !_services_auth0__WEBPACK_IMPORTED_MODULE_8__["default"].isAuthenticated && __jsx(reactstrap__WEBPACK_IMPORTED_MODULE_9__["NavItem"], {
         className: "port-navbar-item"
-      }, __jsx(Login, null)), __jsx(reactstrap__WEBPACK_IMPORTED_MODULE_9__["NavItem"], {
+      }, __jsx(Login, null)), _services_auth0__WEBPACK_IMPORTED_MODULE_8__["default"].isAuthenticated && __jsx(reactstrap__WEBPACK_IMPORTED_MODULE_9__["NavItem"], {
         className: "port-navbar-item"
       }, __jsx(Logout, null))))));
     }

@@ -213,6 +213,7 @@ const Login = () => {
 
 const Logout = () => {
   return __jsx("span", {
+    onClick: _services_auth0__WEBPACK_IMPORTED_MODULE_2__["default"].logout,
     className: "nav-link port-navbar-link clickable"
   }, " Logout");
 };
@@ -274,9 +275,9 @@ class Example extends react__WEBPACK_IMPORTED_MODULE_0___default.a.Component {
     }, __jsx(BsNavLink, {
       route: "/cv",
       title: "CV"
-    })), __jsx(reactstrap__WEBPACK_IMPORTED_MODULE_3__["NavItem"], {
+    })), !_services_auth0__WEBPACK_IMPORTED_MODULE_2__["default"].isAuthenticated && __jsx(reactstrap__WEBPACK_IMPORTED_MODULE_3__["NavItem"], {
       className: "port-navbar-item"
-    }, __jsx(Login, null)), __jsx(reactstrap__WEBPACK_IMPORTED_MODULE_3__["NavItem"], {
+    }, __jsx(Login, null)), _services_auth0__WEBPACK_IMPORTED_MODULE_2__["default"].isAuthenticated && __jsx(reactstrap__WEBPACK_IMPORTED_MODULE_3__["NavItem"], {
       className: "port-navbar-item"
     }, __jsx(Logout, null))))));
   }
