@@ -88,7 +88,7 @@ module.exports =
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 4);
+/******/ 	return __webpack_require__(__webpack_require__.s = 5);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -153,12 +153,14 @@ const BaseLayout = props => {
   const {
     className,
     children,
-    isAuthenticated
+    isAuthenticated,
+    user
   } = props;
   return __jsx("div", {
     className: "layout-container"
   }, __jsx(_shared_Header__WEBPACK_IMPORTED_MODULE_1__["default"], {
-    isAuthenticated: isAuthenticated
+    isAuthenticated: isAuthenticated,
+    user: user
   }), __jsx("main", {
     className: `cover ${className}`
   }, __jsx("div", {
@@ -278,8 +280,10 @@ class Example extends react__WEBPACK_IMPORTED_MODULE_0___default.a.Component {
 
   render() {
     const {
-      isAuthenticated
-    } = this.props;
+      isAuthenticated,
+      user
+    } = this.props; // const { isAuthenticated } = this.props
+
     return __jsx("div", null, __jsx(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Navbar"], {
       className: "port-navbar port-default absolute",
       color: "transparent",
@@ -325,7 +329,11 @@ class Example extends react__WEBPACK_IMPORTED_MODULE_0___default.a.Component {
       className: "port-navbar-item"
     }, __jsx(Login, null)), isAuthenticated && __jsx(reactstrap__WEBPACK_IMPORTED_MODULE_3__["NavItem"], {
       className: "port-navbar-item"
-    }, __jsx(Logout, null))))));
+    }, __jsx(Logout, null)), isAuthenticated && __jsx(reactstrap__WEBPACK_IMPORTED_MODULE_3__["NavItem"], {
+      className: "port-navbar-item"
+    }, __jsx("span", {
+      className: "nav-link port-navbar-link"
+    }, " ", user.name, " "))))));
   }
 
 }
@@ -2055,8 +2063,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var auth0_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(auth0_js__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var js_cookie__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! js-cookie */ "js-cookie");
 /* harmony import */ var js_cookie__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(js_cookie__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var jsonwebtoken__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! jsonwebtoken */ "jsonwebtoken");
+/* harmony import */ var jsonwebtoken__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(jsonwebtoken__WEBPACK_IMPORTED_MODULE_2__);
 
- // import jwt from 'jsonwebtoken'
+
+
 
 class Auth0 {
   constructor() {
@@ -2069,8 +2080,7 @@ class Auth0 {
     });
     this.login = this.login.bind(this);
     this.logout = this.logout.bind(this);
-    this.handleAuthentication = this.handleAuthentication.bind(this);
-    this.isAuthenticated = this.isAuthenticated.bind(this);
+    this.handleAuthentication = this.handleAuthentication.bind(this); // this.isAuthenticated = this.isAuthenticated.bind(this)
   }
 
   handleAuthentication() {
@@ -2119,13 +2129,27 @@ class Auth0 {
     return new Date().getTime() < expiresAt;
   }
 
+  verifyToken(token) {
+    if (token) {
+      const decodedToken = jsonwebtoken__WEBPACK_IMPORTED_MODULE_2___default.a.decode(token);
+      const expiresAt = decodedToken.exp * 1000;
+      return decodedToken && new Date().getTime() < expiresAt ? decodedToken : undefined;
+    }
+
+    return undefined;
+  }
+
   clientAuth() {
-    return this.isAuthenticated();
+    // return this.isAuthenticated()
+    const token = js_cookie__WEBPACK_IMPORTED_MODULE_1___default.a.getJSON('jwt');
+    const verifiedToken = this.verifyToken(token);
+    console.log(verifiedToken);
+    return token;
   }
 
   serverAuth(req) {
     if (req.headers.cookie) {
-      const expiresAtCookie = req.headers.cookie.split(';').find(c => c.trim().startsWith('expiresAt=')); // const cookies = req.handlers.cookie
+      const tokenCookie = req.headers.cookie.split(';').find(c => c.trim().startsWith('jwt=')); // const cookies = req.handlers.cookie
       // console.log(cookies)
       // const splittedCookies = cookies.split(';')
       // console.log(splittedCookies)
@@ -2136,12 +2160,14 @@ class Auth0 {
       // const expiresAt = expiresAtArray[1]
       // console.log(expiresAt)
 
-      if (!expiresAtCookie) {
+      if (!tokenCookie) {
         return undefined;
       }
 
-      const expiresAt = expiresAtCookie.split('=')[1];
-      return new Date().getTime() < expiresAt;
+      const token = tokenCookie.split('=')[1];
+      const verifiedToken = this.verifyToken(token); // return new Date().getTime() < expiresAt
+
+      return verifiedToken;
     }
   }
 
@@ -2152,7 +2178,7 @@ const auth0Client = new Auth0();
 
 /***/ }),
 
-/***/ 4:
+/***/ 5:
 /*!*********************************!*\
   !*** multi ./pages/callback.js ***!
   \*********************************/
@@ -2238,6 +2264,17 @@ module.exports = require("core-js/library/fn/weak-map");
 /***/ (function(module, exports) {
 
 module.exports = require("js-cookie");
+
+/***/ }),
+
+/***/ "jsonwebtoken":
+/*!*******************************!*\
+  !*** external "jsonwebtoken" ***!
+  \*******************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = require("jsonwebtoken");
 
 /***/ }),
 

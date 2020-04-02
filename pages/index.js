@@ -10,6 +10,7 @@ class Index extends React.Component {
   }
 
   render () {
+    const { isAuthenticated, user } = this.props.auth
     return (
       <BaseLayout className='cover' {...this.props.auth}>
         <div className='main-section'>
@@ -40,8 +41,9 @@ class Index extends React.Component {
               <Col md='6' className='hero-welcome-wrapper'>
                 <div className='hero-welcome-text'>
                   <h1>
-              Welcome to the portfolio website of <b>Elio Jordan Lopes</b>.<br /><br />
-              Get informed, collaborate and discover projects I work on!
+                    {isAuthenticated && <span> {user.name} </span>}
+                     Welcome to the portfolio website of <b>Elio Jordan Lopes</b>.<br /><br />
+                     Get informed, collaborate and discover projects I work on!
                   </h1>
                 </div>
                 <Typed
