@@ -419,9 +419,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var bootstrap_dist_css_bootstrap_min_css__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(bootstrap_dist_css_bootstrap_min_css__WEBPACK_IMPORTED_MODULE_2__);
 /* harmony import */ var _styles_main_scss__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./../styles/main.scss */ "./styles/main.scss");
 /* harmony import */ var _styles_main_scss__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_styles_main_scss__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _services_auth0__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./../services/auth0 */ "./services/auth0.js");
 var __jsx = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement;
 
  // Stylings
+
 
 
 
@@ -432,6 +434,13 @@ class MyApp extends next_app__WEBPACK_IMPORTED_MODULE_1___default.a {
     ctx
   }) {
     let pageProps = {};
+    const isAuthenticated = false ? undefined : _services_auth0__WEBPACK_IMPORTED_MODULE_4__["default"].serverAuth(ctx.req);
+    console.log(isAuthenticated); // let isAuthenticated;
+    // if (process.browser) {
+    //   isAuthenticated = 'clientAuth();'
+    // } else {
+    //   isAuthenticated = 'serverAuth();'
+    // }
 
     if (Component.getInitialProps) {
       pageProps = await Component.getInitialProps(ctx);
@@ -451,6 +460,116 @@ class MyApp extends next_app__WEBPACK_IMPORTED_MODULE_1___default.a {
   }
 
 }
+
+/***/ }),
+
+/***/ "./services/auth0.js":
+/*!***************************!*\
+  !*** ./services/auth0.js ***!
+  \***************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var auth0_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! auth0-js */ "auth0-js");
+/* harmony import */ var auth0_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(auth0_js__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var js_cookie__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! js-cookie */ "js-cookie");
+/* harmony import */ var js_cookie__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(js_cookie__WEBPACK_IMPORTED_MODULE_1__);
+
+ // import jwt from 'jsonwebtoken'
+
+class Auth0 {
+  constructor() {
+    this.auth0 = new auth0_js__WEBPACK_IMPORTED_MODULE_0___default.a.WebAuth({
+      domain: 'dev-fee5qd3s.auth0.com',
+      clientID: 'PRojVaD1nApgzyFqr90GZGI9kNxIj561',
+      redirectUri: 'http://localhost:3000/callback',
+      responseType: 'token id_token',
+      scope: 'openid profile'
+    });
+    this.login = this.login.bind(this);
+    this.logout = this.logout.bind(this);
+    this.handleAuthentication = this.handleAuthentication.bind(this);
+    this.isAuthenticated = this.isAuthenticated.bind(this);
+  }
+
+  handleAuthentication() {
+    return new Promise((resolve, reject) => {
+      this.auth0.parseHash((err, authResult) => {
+        if (authResult && authResult.accessToken && authResult.idToken) {
+          this.setSession(authResult); // history.replace('/home')
+
+          resolve();
+        } else if (err) {
+          // history.replace('/home')
+          reject(err);
+          console.log(err);
+        }
+      });
+    });
+  }
+
+  setSession(authResult) {
+    const expiresAt = JSON.stringify(authResult.expiresIn * 1000 + new Date().getTime()); // localStorage.setItem('access_token', authResult.accessToken)
+    // localStorage.setItem('id_token', authResult.idToken)
+    // localStorage.setItem('expires_at'.expiresAt)
+
+    js_cookie__WEBPACK_IMPORTED_MODULE_1___default.a.set('user', authResult.idTokenPayload);
+    js_cookie__WEBPACK_IMPORTED_MODULE_1___default.a.set('jwt', authResult.idToken);
+    js_cookie__WEBPACK_IMPORTED_MODULE_1___default.a.set('expiresAt', expiresAt);
+  }
+
+  login() {
+    this.auth0.authorize();
+  }
+
+  logout() {
+    js_cookie__WEBPACK_IMPORTED_MODULE_1___default.a.remove('user');
+    js_cookie__WEBPACK_IMPORTED_MODULE_1___default.a.remove('jwt');
+    js_cookie__WEBPACK_IMPORTED_MODULE_1___default.a.remove('expiresAt');
+    this.auth0.logout({
+      returnTo: '',
+      clientID: 'PRojVaD1nApgzyFqr90GZGI9kNxIj561'
+    });
+  }
+
+  isAuthenticated() {
+    const expiresAt = js_cookie__WEBPACK_IMPORTED_MODULE_1___default.a.getJSON('expiresAt'); // console.log(new Date().getTime() < expiresAt)
+
+    return new Date().getTime() < expiresAt;
+  }
+
+  clientAuth() {
+    return this.isAuthenticated();
+  }
+
+  serverAuth(req) {
+    if (req.headers.cookie) {
+      const expiresAtCookie = req.headers.cookie.split(';').find(c => c.trim().startsWith('expiresAt=')); // const cookies = req.handlers.cookie
+      // console.log(cookies)
+      // const splittedCookies = cookies.split(';')
+      // console.log(splittedCookies)
+      // const expiresAtCookie = splittedCookies.find(c => c.trim().startsWith('expiresAt='))
+      // console.log(expiresAtCookie)
+      // const expiresAtArray = expiresAtCookie.split('=')
+      // console.log(expiresAtArray)
+      // const expiresAt = expiresAtArray[1]
+      // console.log(expiresAt)
+
+      if (!expiresAtCookie) {
+        return undefined;
+      }
+
+      const expiresAt = expiresAtCookie.split('=')[1];
+      return new Date().getTime() < expiresAt;
+    }
+  }
+
+}
+
+const auth0Client = new Auth0();
+/* harmony default export */ __webpack_exports__["default"] = (auth0Client);
 
 /***/ }),
 
@@ -474,6 +593,28 @@ class MyApp extends next_app__WEBPACK_IMPORTED_MODULE_1___default.a {
 
 module.exports = __webpack_require__(/*! private-next-pages/_app.js */"./pages/_app.js");
 
+
+/***/ }),
+
+/***/ "auth0-js":
+/*!***************************!*\
+  !*** external "auth0-js" ***!
+  \***************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = require("auth0-js");
+
+/***/ }),
+
+/***/ "js-cookie":
+/*!****************************!*\
+  !*** external "js-cookie" ***!
+  \****************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = require("js-cookie");
 
 /***/ }),
 

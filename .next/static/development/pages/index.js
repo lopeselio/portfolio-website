@@ -26234,7 +26234,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-
+ // import jwt from 'jsonwebtoken'
 
 var Auth0 =
 /*#__PURE__*/
@@ -26295,9 +26295,9 @@ function () {
   }, {
     key: "logout",
     value: function logout() {
-      js_cookie__WEBPACK_IMPORTED_MODULE_5___default.a.remove('user', authResult.idTokenPayload);
-      js_cookie__WEBPACK_IMPORTED_MODULE_5___default.a.remove('jwt', authResult.idToken);
-      js_cookie__WEBPACK_IMPORTED_MODULE_5___default.a.remove('expiresAt', expiresAt);
+      js_cookie__WEBPACK_IMPORTED_MODULE_5___default.a.remove('user');
+      js_cookie__WEBPACK_IMPORTED_MODULE_5___default.a.remove('jwt');
+      js_cookie__WEBPACK_IMPORTED_MODULE_5___default.a.remove('expiresAt');
       this.auth0.logout({
         returnTo: '',
         clientID: 'PRojVaD1nApgzyFqr90GZGI9kNxIj561'
@@ -26306,8 +26306,39 @@ function () {
   }, {
     key: "isAuthenticated",
     value: function isAuthenticated() {
-      var expiresAt = js_cookie__WEBPACK_IMPORTED_MODULE_5___default.a.getJSON('expiresAt');
+      var expiresAt = js_cookie__WEBPACK_IMPORTED_MODULE_5___default.a.getJSON('expiresAt'); // console.log(new Date().getTime() < expiresAt)
+
       return new Date().getTime() < expiresAt;
+    }
+  }, {
+    key: "clientAuth",
+    value: function clientAuth() {
+      return this.isAuthenticated();
+    }
+  }, {
+    key: "serverAuth",
+    value: function serverAuth(req) {
+      if (req.headers.cookie) {
+        var expiresAtCookie = req.headers.cookie.split(';').find(function (c) {
+          return c.trim().startsWith('expiresAt=');
+        }); // const cookies = req.handlers.cookie
+        // console.log(cookies)
+        // const splittedCookies = cookies.split(';')
+        // console.log(splittedCookies)
+        // const expiresAtCookie = splittedCookies.find(c => c.trim().startsWith('expiresAt='))
+        // console.log(expiresAtCookie)
+        // const expiresAtArray = expiresAtCookie.split('=')
+        // console.log(expiresAtArray)
+        // const expiresAt = expiresAtArray[1]
+        // console.log(expiresAt)
+
+        if (!expiresAtCookie) {
+          return undefined;
+        }
+
+        var expiresAt = expiresAtCookie.split('=')[1];
+        return new Date().getTime() < expiresAt;
+      }
     }
   }]);
 
