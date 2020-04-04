@@ -135,12 +135,12 @@ export default class Example extends React.Component {
                     <Logout />
                   </NavItem>
               }
-              // {
-              //   isAuthenticated &&
-              //     <NavItem className='port-navbar-item'>
-              //       <span className='nav-link port-navbar-link'> {user.name} </span>
-              //     </NavItem>
-              // }
+              {
+                isAuthenticated &&
+                  <NavItem className='port-navbar-item'>
+                    <span className='nav-link port-navbar-link'> {user.name} </span>
+                  </NavItem>
+              }
             </Nav>
           </Collapse>
         </Navbar>
