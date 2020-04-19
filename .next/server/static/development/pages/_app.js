@@ -437,7 +437,7 @@ class MyApp extends next_app__WEBPACK_IMPORTED_MODULE_1___default.a {
     ctx
   }) {
     let pageProps = {};
-    const user = false ? undefined : _services_auth0__WEBPACK_IMPORTED_MODULE_4__["default"].serverAuth(ctx.req); // console.log(isAuthenticated)
+    const user = false ? undefined : await _services_auth0__WEBPACK_IMPORTED_MODULE_4__["default"].serverAuth(ctx.req); // console.log(isAuthenticated)
 
     if (Component.getInitialProps) {
       pageProps = await Component.getInitialProps(ctx);
@@ -485,6 +485,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var js_cookie__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(js_cookie__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var jsonwebtoken__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! jsonwebtoken */ "jsonwebtoken");
 /* harmony import */ var jsonwebtoken__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(jsonwebtoken__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! axios */ "axios");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_3__);
+
 
 
 
@@ -543,31 +546,52 @@ class Auth0 {
     });
   }
 
-  isAuthenticated() {
-    const expiresAt = js_cookie__WEBPACK_IMPORTED_MODULE_1___default.a.getJSON('expiresAt'); // console.log(new Date().getTime() < expiresAt)
+  async getJWKS() {
+    const res = await axios__WEBPACK_IMPORTED_MODULE_3___default.a.get('https://dev-fee5qd3s.auth0.com/.well-known/jwks.json');
+    const jwks = res.data;
+    return jwks;
+  } // isAuthenticated () {
+  //   const expiresAt = Cookies.getJSON('expiresAt')
+  //   // console.log(new Date().getTime() < expiresAt)
+  //   return new Date().getTime() < expiresAt
+  // }
 
-    return new Date().getTime() < expiresAt;
-  }
 
-  verifyToken(token) {
+  async verifyToken(token) {
     if (token) {
-      const decodedToken = jsonwebtoken__WEBPACK_IMPORTED_MODULE_2___default.a.decode(token);
-      const expiresAt = decodedToken.exp * 1000;
-      return decodedToken && new Date().getTime() < expiresAt ? decodedToken : undefined;
+      const decodedToken = jsonwebtoken__WEBPACK_IMPORTED_MODULE_2___default.a.decode(token, {
+        complete: true
+      });
+      const jwks = await this.getJWKS();
+      const jwk = jwks.keys[0]; // BUILD CERTIFICATE
+
+      let cert = jwk.x5c[0];
+      cert = cert.match(/.{1,64}/g).join('\n');
+      cert = `-----BEGIN CERTIFICATE-----\n${cert}\n-----END CERTIFICATE-----\n`;
+
+      if (jwk.kid === decodedToken.header.kid) {
+        try {
+          const verifiedToken = jsonwebtoken__WEBPACK_IMPORTED_MODULE_2___default.a.verify(token, cert);
+          const expiresAt = verifiedToken.exp * 1000;
+          return verifiedToken && new Date().getTime() < expiresAt ? verifiedToken : undefined;
+        } catch (err) {
+          return undefined;
+        }
+      }
     }
 
     return undefined;
   }
 
-  clientAuth() {
+  async clientAuth() {
     // return this.isAuthenticated()
     const token = js_cookie__WEBPACK_IMPORTED_MODULE_1___default.a.getJSON('jwt');
-    const verifiedToken = this.verifyToken(token);
-    console.log(verifiedToken);
-    return token;
+    const verifiedToken = this.verifyToken(token); // console.log(verifiedToken)
+
+    return verifiedToken;
   }
 
-  serverAuth(req) {
+  async serverAuth(req) {
     if (req.headers.cookie) {
       const tokenCookie = req.headers.cookie.split(';').find(c => c.trim().startsWith('jwt=')); // const cookies = req.handlers.cookie
       // console.log(cookies)
@@ -629,6 +653,17 @@ module.exports = __webpack_require__(/*! private-next-pages/_app.js */"./pages/_
 /***/ (function(module, exports) {
 
 module.exports = require("auth0-js");
+
+/***/ }),
+
+/***/ "axios":
+/*!************************!*\
+  !*** external "axios" ***!
+  \************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = require("axios");
 
 /***/ }),
 
