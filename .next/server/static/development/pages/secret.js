@@ -133,6 +133,30 @@ BasePage.propTypes = {
 
 /***/ }),
 
+/***/ "./components/hoc/withAuth.js":
+/*!************************************!*\
+  !*** ./components/hoc/withAuth.js ***!
+  \************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+var __jsx = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement;
+
+/* harmony default export */ __webpack_exports__["default"] = (function (Component) {
+  return class withAuth extends react__WEBPACK_IMPORTED_MODULE_0___default.a.Component {
+    render() {
+      return __jsx(Component, null);
+    }
+
+  };
+});
+
+/***/ }),
+
 /***/ "./components/layouts/BaseLayout.js":
 /*!******************************************!*\
   !*** ./components/layouts/BaseLayout.js ***!
@@ -2024,31 +2048,42 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _components_layouts_BaseLayout__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./../components/layouts/BaseLayout */ "./components/layouts/BaseLayout.js");
 /* harmony import */ var _components_BasePage__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../components/BasePage */ "./components/BasePage.js");
+/* harmony import */ var _components_hoc_withAuth__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../components/hoc/withAuth */ "./components/hoc/withAuth.js");
 var __jsx = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement;
 
 
 
 
+
 class Secret extends react__WEBPACK_IMPORTED_MODULE_0___default.a.Component {
-  renderSecretPage() {
-    const {
-      isAuthenticated
-    } = this.props.auth;
-
-    if (isAuthenticated) {
-      return __jsx(_components_layouts_BaseLayout__WEBPACK_IMPORTED_MODULE_1__["default"], this.props.auth, __jsx(_components_BasePage__WEBPACK_IMPORTED_MODULE_2__["default"], null, __jsx("h1", null, " I am Secret Page "), __jsx("p", null, " Secret Content Here ")));
-    } else {
-      return __jsx(_components_layouts_BaseLayout__WEBPACK_IMPORTED_MODULE_1__["default"], this.props.auth, __jsx(_components_BasePage__WEBPACK_IMPORTED_MODULE_2__["default"], null, __jsx("h1", null, " You are not authenticated. Please Login to gain access.  ")));
-    }
-  }
-
+  // renderSecretPage () {
+  //   const { isAuthenticated } = this.props.auth
+  //   if (isAuthenticated) {
+  //     return (
+  //       <BaseLayout {...this.props.auth}>
+  //         <BasePage>
+  //           <h1> I am Secret Page </h1>
+  //           <p> Secret Content Here </p>
+  //         </BasePage>
+  //       </BaseLayout>
+  //     )
+  //   } else {
+  //     return (
+  //       <BaseLayout {...this.props.auth}>
+  //         <BasePage>
+  //           <h1> You are not authenticated. Please Login to gain access.  </h1>
+  //         </BasePage>
+  //       </BaseLayout>
+  //     )
+  //   }
+  // }
   render() {
-    return this.renderSecretPage();
+    return __jsx(_components_layouts_BaseLayout__WEBPACK_IMPORTED_MODULE_1__["default"], this.props.auth, __jsx(_components_BasePage__WEBPACK_IMPORTED_MODULE_2__["default"], null, __jsx("h1", null, " You are not authenticated. Please Login to gain access.  ")));
   }
 
 }
 
-/* harmony default export */ __webpack_exports__["default"] = (Secret);
+/* harmony default export */ __webpack_exports__["default"] = (Object(_components_hoc_withAuth__WEBPACK_IMPORTED_MODULE_3__["default"])(Secret));
 
 /***/ }),
 
