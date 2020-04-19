@@ -2025,7 +2025,7 @@ class Index extends react__WEBPACK_IMPORTED_MODULE_0___default.a.Component {
       className: "back"
     }, __jsx("div", {
       className: "hero-section-content"
-    }, __jsx("h2", null, " Web Developer "), __jsx("div", {
+    }, __jsx("h2", null, " Full Stack Web Developer "), __jsx("div", {
       className: "hero-section-content-intro"
     }, "Have a look at my portfolio and job history.")), __jsx("img", {
       className: "image",
@@ -2039,7 +2039,7 @@ class Index extends react__WEBPACK_IMPORTED_MODULE_0___default.a.Component {
       className: "hero-welcome-wrapper"
     }, __jsx("div", {
       className: "hero-welcome-text"
-    }, __jsx("h1", null, isAuthenticated && __jsx("span", null, " ", user.name, " "), "Welcome to the portfolio website of ", __jsx("b", null, "Elio Jordan Lopes"), ".", __jsx("br", null), __jsx("br", null), "Get informed, collaborate and discover projects I work on!")), __jsx(react_typed__WEBPACK_IMPORTED_MODULE_3___default.a, {
+    }, __jsx("h1", null, isAuthenticated && __jsx("span", null, " ", __jsx("b", null, " ", user.name, " "), " "), "Welcome to the portfolio website of ", __jsx("b", null, "Elio Jordan Lopes"), ".", __jsx("br", null), __jsx("br", null), "Get informed, collaborate and discover projects I work on!")), __jsx(react_typed__WEBPACK_IMPORTED_MODULE_3___default.a, {
       loop: true,
       typeSpeed: 60,
       backSpeed: 60,

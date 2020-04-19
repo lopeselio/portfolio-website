@@ -438,12 +438,6 @@ class MyApp extends next_app__WEBPACK_IMPORTED_MODULE_1___default.a {
   }) {
     let pageProps = {};
     const user = false ? undefined : _services_auth0__WEBPACK_IMPORTED_MODULE_4__["default"].serverAuth(ctx.req); // console.log(isAuthenticated)
-    // let isAuthenticated;
-    // if (process.browser) {
-    //   isAuthenticated = 'clientAuth();'
-    // } else {
-    //   isAuthenticated = 'serverAuth();'
-    // }
 
     if (Component.getInitialProps) {
       pageProps = await Component.getInitialProps(ctx);
@@ -453,6 +447,7 @@ class MyApp extends next_app__WEBPACK_IMPORTED_MODULE_1___default.a {
       user,
       isAuthenticated: !!user
     };
+    console.log(auth);
     return {
       pageProps,
       auth

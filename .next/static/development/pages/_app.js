@@ -37723,12 +37723,6 @@ function (_App) {
               Component = _ref.Component, router = _ref.router, ctx = _ref.ctx;
               pageProps = {};
               user = true ? _services_auth0__WEBPACK_IMPORTED_MODULE_11__["default"].clientAuth() : undefined; // console.log(isAuthenticated)
-              // let isAuthenticated;
-              // if (process.browser) {
-              //   isAuthenticated = 'clientAuth();'
-              // } else {
-              //   isAuthenticated = 'serverAuth();'
-              // }
 
               if (!Component.getInitialProps) {
                 _context.next = 7;
@@ -37746,12 +37740,13 @@ function (_App) {
                 user: user,
                 isAuthenticated: !!user
               };
+              console.log(auth);
               return _context.abrupt("return", {
                 pageProps: pageProps,
                 auth: auth
               });
 
-            case 9:
+            case 10:
             case "end":
               return _context.stop();
           }

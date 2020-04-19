@@ -10,19 +10,11 @@ export default class MyApp extends App {
     let pageProps = {}
     const user = process.browser ? auth0.clientAuth() : auth0.serverAuth(ctx.req)
     // console.log(isAuthenticated)
-
-    // let isAuthenticated;
-
-    // if (process.browser) {
-    //   isAuthenticated = 'clientAuth();'
-    // } else {
-    //   isAuthenticated = 'serverAuth();'
-    // }
-
     if (Component.getInitialProps) {
       pageProps = await Component.getInitialProps(ctx)
     }
     const auth = { user, isAuthenticated: !!user }
+    console.log(auth)
     return { pageProps, auth }
   }
 
