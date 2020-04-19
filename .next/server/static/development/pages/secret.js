@@ -149,7 +149,7 @@ var __jsx = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement;
 /* harmony default export */ __webpack_exports__["default"] = (function (Component) {
   return class withAuth extends react__WEBPACK_IMPORTED_MODULE_0___default.a.Component {
     render() {
-      return __jsx(Component, null);
+      return __jsx(Component, this.props);
     }
 
   };

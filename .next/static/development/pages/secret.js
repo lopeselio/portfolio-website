@@ -75,7 +75,7 @@ var __jsx = react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement;
       Object(_babel_runtime_corejs2_helpers_esm_createClass__WEBPACK_IMPORTED_MODULE_1__["default"])(withAuth, [{
         key: "render",
         value: function render() {
-          return __jsx(Component, null);
+          return __jsx(Component, this.props);
         }
       }]);
 
