@@ -41,7 +41,7 @@ class Index extends React.Component {
               <Col md='6' className='hero-welcome-wrapper'>
                 <div className='hero-welcome-text'>
                   <h1>
-                    {isAuthenticated && <span> <b> {user.name} </b> </span>}
+                    {isAuthenticated && <span> <b> {user.nickname} </b> </span>}
                     Welcome to the portfolio website of <b>Elio Jordan Lopes</b>.<br /><br />
                     Get informed, collaborate and discover projects I work on!
                   </h1>

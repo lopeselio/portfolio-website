@@ -447,7 +447,8 @@ class MyApp extends next_app__WEBPACK_IMPORTED_MODULE_1___default.a {
       user,
       isAuthenticated: !!user
     };
-    console.log(auth);
+    console.log(auth); // console.log(uname)
+
     return {
       pageProps,
       auth
@@ -522,8 +523,8 @@ class Auth0 {
     const expiresAt = JSON.stringify(authResult.expiresIn * 1000 + new Date().getTime()); // localStorage.setItem('access_token', authResult.accessToken)
     // localStorage.setItem('id_token', authResult.idToken)
     // localStorage.setItem('expires_at'.expiresAt)
+    // Cookies.set('user', authResult.idTokenPayload)
 
-    js_cookie__WEBPACK_IMPORTED_MODULE_1___default.a.set('user', authResult.idTokenPayload);
     js_cookie__WEBPACK_IMPORTED_MODULE_1___default.a.set('jwt', authResult.idToken);
     js_cookie__WEBPACK_IMPORTED_MODULE_1___default.a.set('expiresAt', expiresAt);
   }

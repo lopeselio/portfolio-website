@@ -293,7 +293,7 @@ class Example extends react__WEBPACK_IMPORTED_MODULE_0___default.a.Component {
       className: "port-navbar-item"
     }, __jsx("span", {
       className: "nav-link port-navbar-link"
-    }, " ", user.name, " "))))));
+    }, " ", user.nickname, " "))))));
   }
 
 }
@@ -2039,7 +2039,7 @@ class Index extends react__WEBPACK_IMPORTED_MODULE_0___default.a.Component {
       className: "hero-welcome-wrapper"
     }, __jsx("div", {
       className: "hero-welcome-text"
-    }, __jsx("h1", null, isAuthenticated && __jsx("span", null, " ", __jsx("b", null, " ", user.name, " "), " "), "Welcome to the portfolio website of ", __jsx("b", null, "Elio Jordan Lopes"), ".", __jsx("br", null), __jsx("br", null), "Get informed, collaborate and discover projects I work on!")), __jsx(react_typed__WEBPACK_IMPORTED_MODULE_3___default.a, {
+    }, __jsx("h1", null, isAuthenticated && __jsx("span", null, " ", __jsx("b", null, " ", user.nickname, " "), " "), "Welcome to the portfolio website of ", __jsx("b", null, "Elio Jordan Lopes"), ".", __jsx("br", null), __jsx("br", null), "Get informed, collaborate and discover projects I work on!")), __jsx(react_typed__WEBPACK_IMPORTED_MODULE_3___default.a, {
       loop: true,
       typeSpeed: 60,
       backSpeed: 60,
@@ -2113,8 +2113,8 @@ class Auth0 {
     const expiresAt = JSON.stringify(authResult.expiresIn * 1000 + new Date().getTime()); // localStorage.setItem('access_token', authResult.accessToken)
     // localStorage.setItem('id_token', authResult.idToken)
     // localStorage.setItem('expires_at'.expiresAt)
+    // Cookies.set('user', authResult.idTokenPayload)
 
-    js_cookie__WEBPACK_IMPORTED_MODULE_1___default.a.set('user', authResult.idTokenPayload);
     js_cookie__WEBPACK_IMPORTED_MODULE_1___default.a.set('jwt', authResult.idToken);
     js_cookie__WEBPACK_IMPORTED_MODULE_1___default.a.set('expiresAt', expiresAt);
   }

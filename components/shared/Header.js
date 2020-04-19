@@ -138,7 +138,7 @@ export default class Example extends React.Component {
               {
                 isAuthenticated &&
                   <NavItem className='port-navbar-item'>
-                    <span className='nav-link port-navbar-link'> {user.name} </span>
+                    <span className='nav-link port-navbar-link'> {user.nickname} </span>
                   </NavItem>
               }
 
