@@ -74,8 +74,11 @@ class Auth0 {
   async verifyToken (token) {
     if (token) {
       const decodedToken = jwt.decode(token, { complete: true })
+      if (!decodedToken) { return undefined }
       const jwks = await this.getJWKS()
+      console.log(jwks)
       const jwk = jwks.keys[0]
+      console.log(jwk)
       // BUILD CERTIFICATE
       let cert = jwk.x5c[0]
       cert = cert.match(/.{1,64}/g).join('\n')

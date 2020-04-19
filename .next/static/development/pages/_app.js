@@ -39732,48 +39732,59 @@ function () {
           switch (_context2.prev = _context2.next) {
             case 0:
               if (!token) {
-                _context2.next = 19;
+                _context2.next = 23;
                 break;
               }
 
               decodedToken = jsonwebtoken__WEBPACK_IMPORTED_MODULE_7___default.a.decode(token, {
                 complete: true
               });
-              _context2.next = 4;
-              return _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.awrap(this.getJWKS());
+
+              if (decodedToken) {
+                _context2.next = 4;
+                break;
+              }
+
+              return _context2.abrupt("return", undefined);
 
             case 4:
+              _context2.next = 6;
+              return _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.awrap(this.getJWKS());
+
+            case 6:
               jwks = _context2.sent;
-              jwk = jwks.keys[0]; // BUILD CERTIFICATE
+              console.log(jwks);
+              jwk = jwks.keys[0];
+              console.log(jwk); // BUILD CERTIFICATE
 
               cert = jwk.x5c[0];
               cert = cert.match(/.{1,64}/g).join('\n');
               cert = "-----BEGIN CERTIFICATE-----\n".concat(cert, "\n-----END CERTIFICATE-----\n");
 
               if (!(jwk.kid === decodedToken.header.kid)) {
-                _context2.next = 19;
+                _context2.next = 23;
                 break;
               }
 
-              _context2.prev = 10;
+              _context2.prev = 14;
               verifiedToken = jsonwebtoken__WEBPACK_IMPORTED_MODULE_7___default.a.verify(token, cert);
               expiresAt = verifiedToken.exp * 1000;
               return _context2.abrupt("return", verifiedToken && new Date().getTime() < expiresAt ? verifiedToken : undefined);
 
-            case 16:
-              _context2.prev = 16;
-              _context2.t0 = _context2["catch"](10);
-              return _context2.abrupt("return", undefined);
-
-            case 19:
-              return _context2.abrupt("return", undefined);
-
             case 20:
+              _context2.prev = 20;
+              _context2.t0 = _context2["catch"](14);
+              return _context2.abrupt("return", undefined);
+
+            case 23:
+              return _context2.abrupt("return", undefined);
+
+            case 24:
             case "end":
               return _context2.stop();
           }
         }
-      }, null, this, [[10, 16]]);
+      }, null, this, [[14, 20]]);
     }
   }, {
     key: "clientAuth",
