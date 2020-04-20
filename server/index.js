@@ -5,9 +5,23 @@ const dev = process.env.NODE_ENV !== 'production'
 const app = next({ dev })
 const handle = routes.getRequestHandler(app)
 
+const secretData = [
+  {
+    title: 'SecretData 1',
+    description: 'Plans how to build spaceship'
+  },
+  {
+    title: 'SecretData 2',
+    description: 'My secret passwords'
+  }
+]
 app.prepare()
   .then(() => {
     const server = express()
+
+    server.get('/api/v1/secret', (req, res) => {
+
+    })
 
     server.get('/portfolio/:id', (req, res) => {
     // console.log('--------Serving /portfolio/:id requests!!!--------');
