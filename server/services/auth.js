@@ -1,7 +1,7 @@
 
 // Mi{ddleWare
 exports.checkJWT = function (req, res, next) {
-  const isValidToken = true
+  const isValidToken = false
 
   if (isValidToken) {
     next()

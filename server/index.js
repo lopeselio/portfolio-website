@@ -2,7 +2,7 @@ const express = require('express')
 const next = require('next')
 const routes = require('../routes')
 // service
-const authservice = require('./services/auth')
+const authService = require('./services/auth')
 const dev = process.env.NODE_ENV !== 'production'
 const app = next({ dev })
 const handle = routes.getRequestHandler(app)
@@ -21,7 +21,7 @@ app.prepare()
   .then(() => {
     const server = express()
 
-    server.get('/api/v1/secret', authservice.checkJWT, (req, res) => {
+    server.get('/api/v1/secret', authService.checkJWT, (req, res) => {
       return res.json(secretData)
     })
 
