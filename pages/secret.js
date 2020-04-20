@@ -23,17 +23,18 @@ class Secret extends React.Component {
     if (secretData && secretData.length > 0) {
       return secretData.map((data, index) => {
         return (
-          <div>
-            <p> </p>
+          <div key={index}>
+            <p> {data.title} </p>
+            <p> {data.description} </p>
           </div>
         )
       })
     }
+    return null
   }
 
   render () {
     const { superSecretValue } = this.props
-    debugger
     console.log(this.state)
     return (
       <BaseLayout {...this.props.auth}>
