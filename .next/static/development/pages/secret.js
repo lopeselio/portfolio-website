@@ -57014,9 +57014,9 @@ function (_React$Component) {
   }, {
     key: "render",
     value: function render() {
-      var superSecretValue = this.props.superSecretValue;
-      console.log(this.state);
-      return __jsx(_components_layouts_BaseLayout__WEBPACK_IMPORTED_MODULE_9__["default"], this.props.auth, __jsx(_components_BasePage__WEBPACK_IMPORTED_MODULE_10__["default"], null, __jsx("h1", null, " I am Secret Page "), __jsx("p", null, " Secret Content Here "), __jsx("h2", null, " ", superSecretValue, " ")));
+      var superSecretValue = this.props.superSecretValue; // console.log(this.state)
+
+      return __jsx(_components_layouts_BaseLayout__WEBPACK_IMPORTED_MODULE_9__["default"], this.props.auth, __jsx(_components_BasePage__WEBPACK_IMPORTED_MODULE_10__["default"], null, __jsx("h1", null, " I am Secret Page "), __jsx("p", null, " Secret Content Here "), __jsx("h2", null, " ", superSecretValue, " "), this.displaySecretData()));
     }
   }], [{
     key: "getInitialProps",
