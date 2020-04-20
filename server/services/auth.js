@@ -1,15 +1,17 @@
 const jwt = require('exprss-jwt')
-// Mi{ddleWare
-exports.checkJWT = function (req, res, next) {
-  const isValidToken = false
+const jwksRsa = require('jwks-rsa')
+// MiddleWare
 
-  if (isValidToken) {
-    res.user = {
-      name: 'Elio',
-      lastname: 'Lopes'
-    }
-    next()
-  } else {
-    return res.status(401).send({ title: 'Not Authorized', detail: 'Please login in order to get our data' })
-  }
-}
+exports.checkJWT = jwt({
+  secret: jwksClient({
+    cache: true, // Default Value
+    rateLimit: true,
+    jwksRequestsPerMinute: 15,
+    // cacheMaxEntries: 5, // Default value
+    // cacheMaxAge: ms('10m'), // Default value
+    jwksUri: 'https://dev-fee5qd3s.auth0.com/.well-known/jwks.json'
+  }),
+  audience: 'PRojVaD1nApgzyFqr90GZGI9kNxIj561',
+  issuer: 'https://dev-fee5qd3s.auth0.com',
+  algorithms: ['RS256']
+})
