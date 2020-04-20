@@ -2,16 +2,39 @@ import React from 'react'
 import BaseLayout from './../components/layouts/BaseLayout'
 import BasePage from '../components/BasePage'
 import withAuth from '../components/hoc/withAuth'
-
+import axios from 'axios'
 class Secret extends React.Component {
   // renderSecretPage () {
   static getInitialProps () {
-    const superSecretValue = 'super Secret Value'
+    const superSecretValue = 'Super Secret Value'
     return { superSecretValue }
+  }
+
+  async componentDidMount () {
+    const res = await axios.get('/api/v1/secret')
+    const sercretData = res.data
+    this.setState({
+      sercretData
+    })
+  }
+
+  displaySecretData () {
+    const { secretData } = this.state
+    if (secretData && secretData.length > 0) {
+      return secretData.map((data, index) => {
+        return (
+          <div>
+            <p> </p>
+          </div>
+        )
+      })
+    }
   }
 
   render () {
     const { superSecretValue } = this.props
+    debugger
+    console.log(this.state)
     return (
       <BaseLayout {...this.props.auth}>
         <BasePage>
