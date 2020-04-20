@@ -3,7 +3,7 @@ const jwksRsa = require('jwks-rsa')
 // MiddleWare
 
 exports.checkJWT = jwt({
-  secret: jwksClient({
+  secret: jwksRsa({
     cache: true, // Default Value
     rateLimit: true,
     jwksRequestsPerMinute: 15,
