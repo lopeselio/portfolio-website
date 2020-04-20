@@ -1,4 +1,4 @@
-
+const jwt = require('exprss-jwt')
 // Mi{ddleWare
 exports.checkJWT = function (req, res, next) {
   const isValidToken = false
