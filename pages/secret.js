@@ -10,6 +10,10 @@ class Secret extends React.Component {
     return { superSecretValue }
   }
 
+  state = {
+    secretData: []
+  }
+
   async componentDidMount () {
     const res = await axios.get('/api/v1/secret')
     const sercretData = res.data
