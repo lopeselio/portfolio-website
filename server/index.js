@@ -20,21 +20,21 @@ app.prepare()
     const server = express()
 
     server.get('/api/v1/secret', (req, res) => {
-
+      return res.json(secretData)
     })
 
-    server.get('/portfolio/:id', (req, res) => {
-    // console.log('--------Serving /portfolio/:id requests!!!--------');
-      const actualPage = '/portfolio'
-      const queryParams = { id: req.params.id }
-      app.render(req, res, actualPage, queryParams)
-    })
+    // server.get('/portfolio/:id', (req, res) => {
+    // // console.log('--------Serving /portfolio/:id requests!!!--------');
+    //   const actualPage = '/portfolio'
+    //   const queryParams = { id: req.params.id }
+    //   app.render(req, res, actualPage, queryParams)
+    // })
     server.get('*', (req, res) => {
     // console.log('--------Serving all of the requests!!!--------');
       return handle(req, res)
     })
 
-    server.listen(3000, (err) => {
+    server.use(handle).listen(3000, (err) => {
       if (err) throw err
       console.log('> Ready on http://localhost:3000')
     })
