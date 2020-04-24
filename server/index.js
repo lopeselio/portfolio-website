@@ -38,7 +38,7 @@ app.prepare()
 
     server.use(function (err, req, res, next) {
       if (err.name === 'UnauthorizedError') {
-        res.status(401).send('invalid token...')
+        res.status(401).send({ title: 'Unauthorized', detail: 'Unauthorized Access!' })
       }
     })
 
