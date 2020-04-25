@@ -1,9 +1,9 @@
-const jwt = require('exprss-jwt')
+const jwt = require('express-jwt')
 const jwksRsa = require('jwks-rsa')
 // MiddleWare
 
 exports.checkJWT = jwt({
-  secret: jwksRsa({
+  secret: jwksRsa.expressJwtSecret({
     cache: true, // Default Value
     rateLimit: true,
     jwksRequestsPerMinute: 15,
