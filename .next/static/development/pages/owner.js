@@ -51875,7 +51875,7 @@ var Owner = /*#__PURE__*/function (_React$Component) {
 }(react__WEBPACK_IMPORTED_MODULE_5___default.a.Component); // const withSpecificAuth = withAuth('admin')
 
 
-/* harmony default export */ __webpack_exports__["default"] = (Object(_components_hoc_withAuth__WEBPACK_IMPORTED_MODULE_8__["default"])('siteAdmin')(Owner));
+/* harmony default export */ __webpack_exports__["default"] = (Object(_components_hoc_withAuth__WEBPACK_IMPORTED_MODULE_8__["default"])('siteOwner')(Owner));
 
 /***/ }),
 

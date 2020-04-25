@@ -2397,7 +2397,7 @@ class Owner extends react__WEBPACK_IMPORTED_MODULE_0___default.a.Component {
 } // const withSpecificAuth = withAuth('admin')
 
 
-/* harmony default export */ __webpack_exports__["default"] = (Object(_components_hoc_withAuth__WEBPACK_IMPORTED_MODULE_3__["default"])('siteAdmin')(Owner));
+/* harmony default export */ __webpack_exports__["default"] = (Object(_components_hoc_withAuth__WEBPACK_IMPORTED_MODULE_3__["default"])('siteOwner')(Owner));
 
 /***/ }),
 

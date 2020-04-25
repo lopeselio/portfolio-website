@@ -17,4 +17,4 @@ class Owner extends React.Component {
 }
 // const withSpecificAuth = withAuth('admin')
 
-export default withAuth('siteAdmin')(Owner)
+export default withAuth('siteOwner')(Owner)
