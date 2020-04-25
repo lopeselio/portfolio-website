@@ -180,45 +180,41 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 
 const namespace = 'http://localhost:3000/';
-/* harmony default export */ __webpack_exports__["default"] = (function (role) {
-  return function (Component) {
-    return class withAuth extends react__WEBPACK_IMPORTED_MODULE_0___default.a.Component {
-      static async getInitialProps(args) {
-        const pageProps = (await Component.getInitialProps) && (await Component.getInitialProps(args));
-        return _objectSpread({}, pageProps);
+/* harmony default export */ __webpack_exports__["default"] = (role => Component => class withAuth extends react__WEBPACK_IMPORTED_MODULE_0___default.a.Component {
+  static async getInitialProps(args) {
+    const pageProps = (await Component.getInitialProps) && (await Component.getInitialProps(args));
+    return _objectSpread({}, pageProps);
+  }
+
+  renderProtectedPage() {
+    const {
+      isAuthenticated,
+      user
+    } = this.props.auth;
+    const userRole = user && user[`${namespace}role`];
+    let isAuthorized = false;
+
+    if (role) {
+      if (userRole && userRole === role) {
+        isAuthorized = true;
       }
+    } else {
+      isAuthorized = true;
+    }
 
-      renderProtectedPage() {
-        const {
-          isAuthenticated,
-          user
-        } = this.props.auth;
-        const userRole = user && user[`${namespace}role`];
-        let isAuthorized = false;
+    if (!isAuthenticated) {
+      return __jsx(_layouts_BaseLayout__WEBPACK_IMPORTED_MODULE_1__["default"], this.props.auth, __jsx(_BasePage__WEBPACK_IMPORTED_MODULE_2__["default"], null, __jsx("h1", null, " You are not authenticated. Please Login to gain access.  ")));
+    } else if (!isAuthorized) {
+      return __jsx(_layouts_BaseLayout__WEBPACK_IMPORTED_MODULE_1__["default"], this.props.auth, __jsx(_BasePage__WEBPACK_IMPORTED_MODULE_2__["default"], null, __jsx("h1", null, " You are not authorized. You don't have permission to visit this page  ")));
+    } else {
+      return __jsx(Component, this.props);
+    }
+  }
 
-        if (role) {
-          if (userRole && userRole === role) {
-            isAuthorized = true;
-          }
-        } else {
-          isAuthorized = true;
-        }
+  render() {
+    return this.renderProtectedPage();
+  }
 
-        if (!isAuthenticated) {
-          return __jsx(_layouts_BaseLayout__WEBPACK_IMPORTED_MODULE_1__["default"], this.props.auth, __jsx(_BasePage__WEBPACK_IMPORTED_MODULE_2__["default"], null, __jsx("h1", null, " You are not authenticated. Please Login to gain access.  ")));
-        } else if (!isAuthorized) {
-          return __jsx(_layouts_BaseLayout__WEBPACK_IMPORTED_MODULE_1__["default"], this.props.auth, __jsx(_BasePage__WEBPACK_IMPORTED_MODULE_2__["default"], null, __jsx("h1", null, " You are not authorized. You don't have permission to visit this page  ")));
-        } else {
-          return __jsx(Component, this.props);
-        }
-      }
-
-      render() {
-        return this.renderProtectedPage();
-      }
-
-    };
-  };
 });
 
 /***/ }),
