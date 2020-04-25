@@ -8,7 +8,7 @@ class Owner extends React.Component {
     return (
       <BaseLayout {...this.props.auth}>
         <BasePage>
-          <h1> I am CV Page </h1>
+          <h1> I am Owner Page </h1>
         </BasePage>
 
       </BaseLayout>
@@ -16,4 +16,4 @@ class Owner extends React.Component {
   }
 }
 
-export default Owner
+export default withAuth(Owner, 'admin')

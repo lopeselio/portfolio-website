@@ -88,7 +88,7 @@ module.exports =
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 3);
+/******/ 	return __webpack_require__(__webpack_require__.s = 8);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -2305,10 +2305,10 @@ if (false) {} else {
 
 /***/ }),
 
-/***/ "./pages/portfolios.js":
-/*!*****************************!*\
-  !*** ./pages/portfolios.js ***!
-  \*****************************/
+/***/ "./pages/callback.js":
+/*!***************************!*\
+  !*** ./pages/callback.js ***!
+  \***************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -2316,12 +2316,11 @@ if (false) {} else {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _components_layouts_BaseLayout__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../components/layouts/BaseLayout */ "./components/layouts/BaseLayout.js");
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! axios */ "axios");
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _components_BasePage__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../components/BasePage */ "./components/BasePage.js");
-/* harmony import */ var _routes__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../routes */ "./routes.js");
-/* harmony import */ var _routes__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_routes__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var _components_layouts_BaseLayout__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./../components/layouts/BaseLayout */ "./components/layouts/BaseLayout.js");
+/* harmony import */ var _components_BasePage__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../components/BasePage */ "./components/BasePage.js");
+/* harmony import */ var _services_auth0__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../services/auth0 */ "./services/auth0.js");
+/* harmony import */ var next_router__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! next/router */ "next/router");
+/* harmony import */ var next_router__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(next_router__WEBPACK_IMPORTED_MODULE_4__);
 var __jsx = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement;
 
 
@@ -2329,61 +2328,19 @@ var __jsx = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement;
 
 
 
-class Portfolios extends react__WEBPACK_IMPORTED_MODULE_0___default.a.Component {
-  static async getInitialProps() {
-    let posts = [];
-
-    try {
-      const response = await axios__WEBPACK_IMPORTED_MODULE_2___default.a.get('https://jsonplaceholder.typicode.com/posts');
-      posts = response.data;
-    } catch (err) {
-      console.error(err);
-    }
-
-    return {
-      posts: posts.splice(0, 10)
-    };
-  }
-
-  renderPosts(posts) {
-    return posts.map((post, index) => {
-      return __jsx("li", {
-        key: index
-      }, __jsx(_routes__WEBPACK_IMPORTED_MODULE_4__["Link"], {
-        as: `/portfolio/${post.id}`,
-        href: "/portfolio/[id]"
-      }, __jsx("a", {
-        style: {
-          fontSize: '20px'
-        }
-      }, " ", post.title, " ")));
-    });
+class Callback extends react__WEBPACK_IMPORTED_MODULE_0___default.a.Component {
+  async componentDidMount() {
+    await _services_auth0__WEBPACK_IMPORTED_MODULE_3__["default"].handleAuthentication();
+    this.props.router.push('/');
   }
 
   render() {
-    const {
-      posts
-    } = this.props;
-    console.log(this.props);
-    return __jsx(_components_layouts_BaseLayout__WEBPACK_IMPORTED_MODULE_1__["default"], this.props.auth, __jsx(_components_BasePage__WEBPACK_IMPORTED_MODULE_3__["default"], null, __jsx("h1", null, " I am Portfolios Page "), __jsx("ul", null, this.renderPosts(posts))));
+    return __jsx(_components_layouts_BaseLayout__WEBPACK_IMPORTED_MODULE_1__["default"], null, __jsx(_components_BasePage__WEBPACK_IMPORTED_MODULE_2__["default"], null, __jsx("h1", null, " You are Logging In ... ", __jsx("br", null), "Verifting Login Data...")));
   }
 
 }
 
-/* harmony default export */ __webpack_exports__["default"] = (Portfolios);
-
-/***/ }),
-
-/***/ "./routes.js":
-/*!*******************!*\
-  !*** ./routes.js ***!
-  \*******************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-const routes = __webpack_require__(/*! next-routes */ "next-routes");
-
-module.exports = routes().add('test', '/test/:id');
+/* harmony default export */ __webpack_exports__["default"] = (Object(next_router__WEBPACK_IMPORTED_MODULE_4__["withRouter"])(Callback));
 
 /***/ }),
 
@@ -2532,14 +2489,14 @@ const auth0Client = new Auth0();
 
 /***/ }),
 
-/***/ 3:
-/*!***********************************!*\
-  !*** multi ./pages/portfolios.js ***!
-  \***********************************/
+/***/ 8:
+/*!*********************************!*\
+  !*** multi ./pages/callback.js ***!
+  \*********************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\Users\Elio\Desktop\Portfolio-Website\pages\portfolios.js */"./pages/portfolios.js");
+module.exports = __webpack_require__(/*! C:\Users\Elio\Desktop\Portfolio-Website\pages\callback.js */"./pages/callback.js");
 
 
 /***/ }),
@@ -2588,14 +2545,14 @@ module.exports = require("jsonwebtoken");
 
 /***/ }),
 
-/***/ "next-routes":
+/***/ "next/router":
 /*!******************************!*\
-  !*** external "next-routes" ***!
+  !*** external "next/router" ***!
   \******************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = require("next-routes");
+module.exports = require("next/router");
 
 /***/ }),
 
@@ -2655,4 +2612,4 @@ module.exports = require("url");
 /***/ })
 
 /******/ });
-//# sourceMappingURL=portfolios.js.map
+//# sourceMappingURL=callback.js.map
