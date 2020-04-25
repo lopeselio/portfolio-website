@@ -12,6 +12,6 @@ exports.checkJWT = jwt({
     jwksUri: 'https://dev-fee5qd3s.auth0.com/.well-known/jwks.json'
   }),
   audience: 'PRojVaD1nApgzyFqr90GZGI9kNxIj561',
-  issuer: 'https://dev-fee5qd3s.auth0.com',
+  issuer: 'https://dev-fee5qd3s.auth0.com/',
   algorithms: ['RS256']
 })
