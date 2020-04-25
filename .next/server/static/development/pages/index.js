@@ -318,6 +318,28 @@ class Example extends react__WEBPACK_IMPORTED_MODULE_0___default.a.Component {
 
 /***/ }),
 
+/***/ "./helpers/utils.js":
+/*!**************************!*\
+  !*** ./helpers/utils.js ***!
+  \**************************/
+/*! exports provided: getCookiesFromReq */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getCookiesFromReq", function() { return getCookiesFromReq; });
+const getCookiesFromReq = (req, cookieKey) => {
+  const cookie = req.headers.cookie.split(';').find(c => c.trim().startsWith(`${cookieKey}=`));
+
+  if (!cookie) {
+    return undefined;
+  }
+
+  return cookie.split('=')[1];
+};
+
+/***/ }),
+
 /***/ "./node_modules/next/dist/client/link.js":
 /*!***********************************************!*\
   !*** ./node_modules/next/dist/client/link.js ***!
@@ -2349,6 +2371,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var jsonwebtoken__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(jsonwebtoken__WEBPACK_IMPORTED_MODULE_2__);
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! axios */ "axios");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _helpers_utils__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../helpers/utils */ "./helpers/utils.js");
+
 
 
 
@@ -2462,24 +2486,8 @@ class Auth0 {
 
   async serverAuth(req) {
     if (req.headers.cookie) {
-      const tokenCookie = req.headers.cookie.split(';').find(c => c.trim().startsWith('jwt=')); // const cookies = req.handlers.cookie
-      // console.log(cookies)
-      // const splittedCookies = cookies.split(';')
-      // console.log(splittedCookies)
-      // const expiresAtCookie = splittedCookies.find(c => c.trim().startsWith('expiresAt='))
-      // console.log(expiresAtCookie)
-      // const expiresAtArray = expiresAtCookie.split('=')
-      // console.log(expiresAtArray)
-      // const expiresAt = expiresAtArray[1]
-      // console.log(expiresAt)
-
-      if (!tokenCookie) {
-        return undefined;
-      }
-
-      const token = tokenCookie.split('=')[1];
-      const verifiedToken = this.verifyToken(token); // return new Date().getTime() < expiresAt
-
+      const token = Object(_helpers_utils__WEBPACK_IMPORTED_MODULE_4__["getCookiesFromReq"])(req, 'jwt');
+      const verifiedToken = this.verifyToken(token);
       return verifiedToken;
     }
   }

@@ -230,6 +230,30 @@ var Example = /*#__PURE__*/function (_React$Component) {
 
 /***/ }),
 
+/***/ "./helpers/utils.js":
+/*!**************************!*\
+  !*** ./helpers/utils.js ***!
+  \**************************/
+/*! exports provided: getCookiesFromReq */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getCookiesFromReq", function() { return getCookiesFromReq; });
+var getCookiesFromReq = function getCookiesFromReq(req, cookieKey) {
+  var cookie = req.headers.cookie.split(';').find(function (c) {
+    return c.trim().startsWith("".concat(cookieKey, "="));
+  });
+
+  if (!cookie) {
+    return undefined;
+  }
+
+  return cookie.split('=')[1];
+};
+
+/***/ }),
+
 /***/ "./node_modules/@babel/runtime/helpers/assertThisInitialized.js":
 /*!**********************************************************************!*\
   !*** ./node_modules/@babel/runtime/helpers/assertThisInitialized.js ***!
@@ -51803,6 +51827,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var jsonwebtoken__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(jsonwebtoken__WEBPACK_IMPORTED_MODULE_5__);
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_6__);
+/* harmony import */ var _helpers_utils__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../helpers/utils */ "./helpers/utils.js");
+
 
 
 
@@ -51989,43 +52015,21 @@ var Auth0 = /*#__PURE__*/function () {
   }, {
     key: "serverAuth",
     value: function serverAuth(req) {
-      var tokenCookie, token, verifiedToken;
+      var token, verifiedToken;
       return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.async(function serverAuth$(_context4) {
         while (1) {
           switch (_context4.prev = _context4.next) {
             case 0:
               if (!req.headers.cookie) {
-                _context4.next = 7;
-                break;
-              }
-
-              tokenCookie = req.headers.cookie.split(';').find(function (c) {
-                return c.trim().startsWith('jwt=');
-              }); // const cookies = req.handlers.cookie
-              // console.log(cookies)
-              // const splittedCookies = cookies.split(';')
-              // console.log(splittedCookies)
-              // const expiresAtCookie = splittedCookies.find(c => c.trim().startsWith('expiresAt='))
-              // console.log(expiresAtCookie)
-              // const expiresAtArray = expiresAtCookie.split('=')
-              // console.log(expiresAtArray)
-              // const expiresAt = expiresAtArray[1]
-              // console.log(expiresAt)
-
-              if (tokenCookie) {
                 _context4.next = 4;
                 break;
               }
 
-              return _context4.abrupt("return", undefined);
-
-            case 4:
-              token = tokenCookie.split('=')[1];
-              verifiedToken = this.verifyToken(token); // return new Date().getTime() < expiresAt
-
+              token = Object(_helpers_utils__WEBPACK_IMPORTED_MODULE_7__["getCookiesFromReq"])(req, 'jwt');
+              verifiedToken = this.verifyToken(token);
               return _context4.abrupt("return", verifiedToken);
 
-            case 7:
+            case 4:
             case "end":
               return _context4.stop();
           }
