@@ -79,88 +79,90 @@ function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Re
 
 
 var namespace = 'http://localhost:3000/';
-/* harmony default export */ __webpack_exports__["default"] = (function (Component, role) {
-  return /*#__PURE__*/function (_React$Component) {
-    Object(_babel_runtime_helpers_esm_inherits__WEBPACK_IMPORTED_MODULE_4__["default"])(withAuth, _React$Component);
+/* harmony default export */ __webpack_exports__["default"] = (function (role) {
+  return function (Component) {
+    return /*#__PURE__*/function (_React$Component) {
+      Object(_babel_runtime_helpers_esm_inherits__WEBPACK_IMPORTED_MODULE_4__["default"])(withAuth, _React$Component);
 
-    var _super = _createSuper(withAuth);
+      var _super = _createSuper(withAuth);
 
-    function withAuth() {
-      Object(_babel_runtime_helpers_esm_classCallCheck__WEBPACK_IMPORTED_MODULE_2__["default"])(this, withAuth);
+      function withAuth() {
+        Object(_babel_runtime_helpers_esm_classCallCheck__WEBPACK_IMPORTED_MODULE_2__["default"])(this, withAuth);
 
-      return _super.apply(this, arguments);
-    }
+        return _super.apply(this, arguments);
+      }
 
-    Object(_babel_runtime_helpers_esm_createClass__WEBPACK_IMPORTED_MODULE_3__["default"])(withAuth, [{
-      key: "renderProtectedPage",
-      value: function renderProtectedPage() {
-        var _this$props$auth = this.props.auth,
-            isAuthenticated = _this$props$auth.isAuthenticated,
-            user = _this$props$auth.user;
-        var userRole = user && user["".concat(namespace, "role")];
-        var isAuthorized = false;
+      Object(_babel_runtime_helpers_esm_createClass__WEBPACK_IMPORTED_MODULE_3__["default"])(withAuth, [{
+        key: "renderProtectedPage",
+        value: function renderProtectedPage() {
+          var _this$props$auth = this.props.auth,
+              isAuthenticated = _this$props$auth.isAuthenticated,
+              user = _this$props$auth.user;
+          var userRole = user && user["".concat(namespace, "role")];
+          var isAuthorized = false;
 
-        if (role) {
-          if (userRole && userRole === role) {
+          if (role) {
+            if (userRole && userRole === role) {
+              isAuthorized = true;
+            }
+          } else {
             isAuthorized = true;
           }
-        } else {
-          isAuthorized = true;
-        }
 
-        if (!isAuthenticated) {
-          return __jsx(_layouts_BaseLayout__WEBPACK_IMPORTED_MODULE_8__["default"], this.props.auth, __jsx(_BasePage__WEBPACK_IMPORTED_MODULE_9__["default"], null, __jsx("h1", null, " You are not authenticated. Please Login to gain access.  ")));
-        } else if (!isAuthorized) {
-          return __jsx(_layouts_BaseLayout__WEBPACK_IMPORTED_MODULE_8__["default"], this.props.auth, __jsx(_BasePage__WEBPACK_IMPORTED_MODULE_9__["default"], null, __jsx("h1", null, " You are not authorized. You don't have permission to visit this page  ")));
-        } else {
-          return __jsx(Component, this.props);
-        }
-      }
-    }, {
-      key: "render",
-      value: function render() {
-        return this.renderProtectedPage();
-      }
-    }], [{
-      key: "getInitialProps",
-      value: function getInitialProps(args) {
-        var pageProps;
-        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.async(function getInitialProps$(_context) {
-          while (1) {
-            switch (_context.prev = _context.next) {
-              case 0:
-                _context.next = 2;
-                return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.awrap(Component.getInitialProps);
-
-              case 2:
-                _context.t0 = _context.sent;
-
-                if (!_context.t0) {
-                  _context.next = 7;
-                  break;
-                }
-
-                _context.next = 6;
-                return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.awrap(Component.getInitialProps(args));
-
-              case 6:
-                _context.t0 = _context.sent;
-
-              case 7:
-                pageProps = _context.t0;
-                return _context.abrupt("return", _objectSpread({}, pageProps));
-
-              case 9:
-              case "end":
-                return _context.stop();
-            }
+          if (!isAuthenticated) {
+            return __jsx(_layouts_BaseLayout__WEBPACK_IMPORTED_MODULE_8__["default"], this.props.auth, __jsx(_BasePage__WEBPACK_IMPORTED_MODULE_9__["default"], null, __jsx("h1", null, " You are not authenticated. Please Login to gain access.  ")));
+          } else if (!isAuthorized) {
+            return __jsx(_layouts_BaseLayout__WEBPACK_IMPORTED_MODULE_8__["default"], this.props.auth, __jsx(_BasePage__WEBPACK_IMPORTED_MODULE_9__["default"], null, __jsx("h1", null, " You are not authorized. You don't have permission to visit this page  ")));
+          } else {
+            return __jsx(Component, this.props);
           }
-        }, null, null, null, Promise);
-      }
-    }]);
+        }
+      }, {
+        key: "render",
+        value: function render() {
+          return this.renderProtectedPage();
+        }
+      }], [{
+        key: "getInitialProps",
+        value: function getInitialProps(args) {
+          var pageProps;
+          return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.async(function getInitialProps$(_context) {
+            while (1) {
+              switch (_context.prev = _context.next) {
+                case 0:
+                  _context.next = 2;
+                  return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.awrap(Component.getInitialProps);
 
-    return withAuth;
-  }(react__WEBPACK_IMPORTED_MODULE_7___default.a.Component);
+                case 2:
+                  _context.t0 = _context.sent;
+
+                  if (!_context.t0) {
+                    _context.next = 7;
+                    break;
+                  }
+
+                  _context.next = 6;
+                  return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.awrap(Component.getInitialProps(args));
+
+                case 6:
+                  _context.t0 = _context.sent;
+
+                case 7:
+                  pageProps = _context.t0;
+                  return _context.abrupt("return", _objectSpread({}, pageProps));
+
+                case 9:
+                case "end":
+                  return _context.stop();
+              }
+            }
+          }, null, null, null, Promise);
+        }
+      }]);
+
+      return withAuth;
+    }(react__WEBPACK_IMPORTED_MODULE_7___default.a.Component);
+  };
 });
 
 /***/ }),
@@ -51870,9 +51872,10 @@ var Owner = /*#__PURE__*/function (_React$Component) {
   }]);
 
   return Owner;
-}(react__WEBPACK_IMPORTED_MODULE_5___default.a.Component);
+}(react__WEBPACK_IMPORTED_MODULE_5___default.a.Component); // const withSpecificAuth = withAuth('admin')
 
-/* harmony default export */ __webpack_exports__["default"] = (Object(_components_hoc_withAuth__WEBPACK_IMPORTED_MODULE_8__["default"])(Owner, 'admin'));
+
+/* harmony default export */ __webpack_exports__["default"] = (Object(_components_hoc_withAuth__WEBPACK_IMPORTED_MODULE_8__["default"])('siteAdmin')(Owner));
 
 /***/ }),
 
@@ -52115,18 +52118,6 @@ var auth0Client = new Auth0();
 
 /***/ }),
 
-/***/ 11:
-/*!******************************************************************************************************************************************!*\
-  !*** multi next-client-pages-loader?page=%2Fowner&absolutePagePath=C%3A%5CUsers%5CElio%5CDesktop%5CPortfolio-Website%5Cpages%5Cowner.js ***!
-  \******************************************************************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports = __webpack_require__(/*! next-client-pages-loader?page=%2Fowner&absolutePagePath=C%3A%5CUsers%5CElio%5CDesktop%5CPortfolio-Website%5Cpages%5Cowner.js! */"./node_modules/next/dist/build/webpack/loaders/next-client-pages-loader.js?page=%2Fowner&absolutePagePath=C%3A%5CUsers%5CElio%5CDesktop%5CPortfolio-Website%5Cpages%5Cowner.js!./");
-
-
-/***/ }),
-
 /***/ 3:
 /*!**********************!*\
   !*** util (ignored) ***!
@@ -52171,6 +52162,18 @@ module.exports = __webpack_require__(/*! next-client-pages-loader?page=%2Fowner&
 
 /***/ }),
 
+/***/ 9:
+/*!******************************************************************************************************************************************!*\
+  !*** multi next-client-pages-loader?page=%2Fowner&absolutePagePath=C%3A%5CUsers%5CElio%5CDesktop%5CPortfolio-Website%5Cpages%5Cowner.js ***!
+  \******************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = __webpack_require__(/*! next-client-pages-loader?page=%2Fowner&absolutePagePath=C%3A%5CUsers%5CElio%5CDesktop%5CPortfolio-Website%5Cpages%5Cowner.js! */"./node_modules/next/dist/build/webpack/loaders/next-client-pages-loader.js?page=%2Fowner&absolutePagePath=C%3A%5CUsers%5CElio%5CDesktop%5CPortfolio-Website%5Cpages%5Cowner.js!./");
+
+
+/***/ }),
+
 /***/ "dll-reference dll_c2e10d183b950a67d9e7":
 /*!*******************************************!*\
   !*** external "dll_c2e10d183b950a67d9e7" ***!
@@ -52182,5 +52185,5 @@ module.exports = dll_c2e10d183b950a67d9e7;
 
 /***/ })
 
-},[[11,"static/runtime/webpack.js"]]]);
+},[[9,"static/runtime/webpack.js"]]]);
 //# sourceMappingURL=owner.js.map

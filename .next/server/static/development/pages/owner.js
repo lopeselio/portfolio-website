@@ -88,7 +88,7 @@ module.exports =
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 7);
+/******/ 	return __webpack_require__(__webpack_require__.s = 5);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -180,42 +180,44 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 
 const namespace = 'http://localhost:3000/';
-/* harmony default export */ __webpack_exports__["default"] = (function (Component, role) {
-  return class withAuth extends react__WEBPACK_IMPORTED_MODULE_0___default.a.Component {
-    static async getInitialProps(args) {
-      const pageProps = (await Component.getInitialProps) && (await Component.getInitialProps(args));
-      return _objectSpread({}, pageProps);
-    }
+/* harmony default export */ __webpack_exports__["default"] = (function (role) {
+  return function (Component) {
+    return class withAuth extends react__WEBPACK_IMPORTED_MODULE_0___default.a.Component {
+      static async getInitialProps(args) {
+        const pageProps = (await Component.getInitialProps) && (await Component.getInitialProps(args));
+        return _objectSpread({}, pageProps);
+      }
 
-    renderProtectedPage() {
-      const {
-        isAuthenticated,
-        user
-      } = this.props.auth;
-      const userRole = user && user[`${namespace}role`];
-      let isAuthorized = false;
+      renderProtectedPage() {
+        const {
+          isAuthenticated,
+          user
+        } = this.props.auth;
+        const userRole = user && user[`${namespace}role`];
+        let isAuthorized = false;
 
-      if (role) {
-        if (userRole && userRole === role) {
+        if (role) {
+          if (userRole && userRole === role) {
+            isAuthorized = true;
+          }
+        } else {
           isAuthorized = true;
         }
-      } else {
-        isAuthorized = true;
+
+        if (!isAuthenticated) {
+          return __jsx(_layouts_BaseLayout__WEBPACK_IMPORTED_MODULE_1__["default"], this.props.auth, __jsx(_BasePage__WEBPACK_IMPORTED_MODULE_2__["default"], null, __jsx("h1", null, " You are not authenticated. Please Login to gain access.  ")));
+        } else if (!isAuthorized) {
+          return __jsx(_layouts_BaseLayout__WEBPACK_IMPORTED_MODULE_1__["default"], this.props.auth, __jsx(_BasePage__WEBPACK_IMPORTED_MODULE_2__["default"], null, __jsx("h1", null, " You are not authorized. You don't have permission to visit this page  ")));
+        } else {
+          return __jsx(Component, this.props);
+        }
       }
 
-      if (!isAuthenticated) {
-        return __jsx(_layouts_BaseLayout__WEBPACK_IMPORTED_MODULE_1__["default"], this.props.auth, __jsx(_BasePage__WEBPACK_IMPORTED_MODULE_2__["default"], null, __jsx("h1", null, " You are not authenticated. Please Login to gain access.  ")));
-      } else if (!isAuthorized) {
-        return __jsx(_layouts_BaseLayout__WEBPACK_IMPORTED_MODULE_1__["default"], this.props.auth, __jsx(_BasePage__WEBPACK_IMPORTED_MODULE_2__["default"], null, __jsx("h1", null, " You are not authorized. You don't have permission to visit this page  ")));
-      } else {
-        return __jsx(Component, this.props);
+      render() {
+        return this.renderProtectedPage();
       }
-    }
 
-    render() {
-      return this.renderProtectedPage();
-    }
-
+    };
   };
 });
 
@@ -2396,9 +2398,10 @@ class Owner extends react__WEBPACK_IMPORTED_MODULE_0___default.a.Component {
     return __jsx(_components_layouts_BaseLayout__WEBPACK_IMPORTED_MODULE_1__["default"], this.props.auth, __jsx(_components_BasePage__WEBPACK_IMPORTED_MODULE_2__["default"], null, __jsx("h1", null, " I am Owner Page ")));
   }
 
-}
+} // const withSpecificAuth = withAuth('admin')
 
-/* harmony default export */ __webpack_exports__["default"] = (Object(_components_hoc_withAuth__WEBPACK_IMPORTED_MODULE_3__["default"])(Owner, 'admin'));
+
+/* harmony default export */ __webpack_exports__["default"] = (Object(_components_hoc_withAuth__WEBPACK_IMPORTED_MODULE_3__["default"])('siteAdmin')(Owner));
 
 /***/ }),
 
@@ -2547,7 +2550,7 @@ const auth0Client = new Auth0();
 
 /***/ }),
 
-/***/ 7:
+/***/ 5:
 /*!******************************!*\
   !*** multi ./pages/owner.js ***!
   \******************************/
