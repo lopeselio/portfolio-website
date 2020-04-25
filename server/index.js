@@ -25,16 +25,17 @@ app.prepare()
       return res.json(secretData)
     })
 
+    server.get('*', (req, res) => {
+      // console.log('--------Serving all of the requests!!!--------');
+      return handle(req, res)
+    })
+
     // server.get('/portfolio/:id', (req, res) => {
     // // console.log('--------Serving /portfolio/:id requests!!!--------');
     //   const actualPage = '/portfolio'
     //   const queryParams = { id: req.params.id }
     //   app.render(req, res, actualPage, queryParams)
     // })
-    server.get('*', (req, res) => {
-    // console.log('--------Serving all of the requests!!!--------');
-      return handle(req, res)
-    })
 
     server.use(function (err, req, res, next) {
       if (err.name === 'UnauthorizedError') {
