@@ -88,7 +88,7 @@ module.exports =
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 5);
+/******/ 	return __webpack_require__(__webpack_require__.s = 7);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -112,6 +112,48 @@ module.exports = require("next/dist/next-server/lib/router-context.js");
 /***/ (function(module, exports) {
 
 module.exports = require("next/dist/next-server/lib/utils.js");
+
+/***/ }),
+
+/***/ "./actions/index.js":
+/*!**************************!*\
+  !*** ./actions/index.js ***!
+  \**************************/
+/*! exports provided: getSecretData */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getSecretData", function() { return getSecretData; });
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "axios");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var js_cookie__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! js-cookie */ "js-cookie");
+/* harmony import */ var js_cookie__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(js_cookie__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _helpers_utils__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../helpers/utils */ "./helpers/utils.js");
+
+
+
+
+const setAuthHeader = req => {
+  const token = req ? Object(_helpers_utils__WEBPACK_IMPORTED_MODULE_2__["getCookieFromReq"])(req, 'jwt') : js_cookie__WEBPACK_IMPORTED_MODULE_1___default.a.getJSON('jwt');
+
+  if (token) {
+    return {
+      headers: {
+        authorization: `Bearer ${js_cookie__WEBPACK_IMPORTED_MODULE_1___default.a.getJSON('jwt')}`
+      }
+    };
+  }
+
+  return undefined;
+};
+
+const getSecretData = async req => {
+  const url = 'http://localhost:3000/api/v1/secret';
+  return axios__WEBPACK_IMPORTED_MODULE_0___default.a.get(url, setAuthHeader(req)).then(response => {
+    return response.data;
+  });
+};
 
 /***/ }),
 
@@ -439,6 +481,7 @@ const getCookieFromReq = (req, cookieKey) => {
     return undefined;
   }
 
+  ;
   return cookie.split('=')[1];
 };
 
@@ -2369,10 +2412,10 @@ if (false) {} else {
 
 /***/ }),
 
-/***/ "./pages/owner.js":
-/*!************************!*\
-  !*** ./pages/owner.js ***!
-  \************************/
+/***/ "./pages/secret.js":
+/*!*************************!*\
+  !*** ./pages/secret.js ***!
+  \*************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -2380,24 +2423,77 @@ if (false) {} else {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _components_layouts_BaseLayout__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./../components/layouts/BaseLayout */ "./components/layouts/BaseLayout.js");
+/* harmony import */ var _components_layouts_BaseLayout__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../components/layouts/BaseLayout */ "./components/layouts/BaseLayout.js");
 /* harmony import */ var _components_BasePage__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../components/BasePage */ "./components/BasePage.js");
 /* harmony import */ var _components_hoc_withAuth__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../components/hoc/withAuth */ "./components/hoc/withAuth.js");
+/* harmony import */ var _actions__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../actions */ "./actions/index.js");
 var __jsx = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement;
 
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 
 
 
-class Owner extends react__WEBPACK_IMPORTED_MODULE_0___default.a.Component {
-  render() {
-    return __jsx(_components_layouts_BaseLayout__WEBPACK_IMPORTED_MODULE_1__["default"], this.props.auth, __jsx(_components_BasePage__WEBPACK_IMPORTED_MODULE_2__["default"], null, __jsx("h1", null, " I am Owner Page ")));
+
+
+
+class Secret extends react__WEBPACK_IMPORTED_MODULE_0___default.a.Component {
+  constructor(...args) {
+    super(...args);
+
+    _defineProperty(this, "state", {
+      secretData: []
+    });
   }
 
-} // const withSpecificAuth = withAuth('admin')
+  static async getInitialProps({
+    req
+  }) {
+    const anotherSecretData = await Object(_actions__WEBPACK_IMPORTED_MODULE_4__["getSecretData"])(req);
+    return {
+      anotherSecretData
+    };
+  } // constructor(props) {
+  //   super();
+  //   this.state = {
+  //     secretData: []
+  //   }
+  // }
 
 
-/* harmony default export */ __webpack_exports__["default"] = (Object(_components_hoc_withAuth__WEBPACK_IMPORTED_MODULE_3__["default"])('siteOwner')(Owner));
+  async componentDidMount() {
+    const secretData = await Object(_actions__WEBPACK_IMPORTED_MODULE_4__["getSecretData"])();
+    this.setState({
+      secretData
+    });
+  }
+
+  displaySecretData() {
+    const {
+      secretData
+    } = this.state;
+
+    if (secretData && secretData.length > 0) {
+      return secretData.map((data, index) => {
+        return __jsx("div", {
+          key: index
+        }, __jsx("p", null, " ", data.title), __jsx("p", null, " ", data.description));
+      });
+    }
+
+    return null;
+  }
+
+  render() {
+    const {
+      superSecretValue
+    } = this.props;
+    return __jsx(_components_layouts_BaseLayout__WEBPACK_IMPORTED_MODULE_1__["default"], this.props.auth, __jsx(_components_BasePage__WEBPACK_IMPORTED_MODULE_2__["default"], null, __jsx("h1", null, " I am Secret Page "), __jsx("p", null, " Secret Content Here "), __jsx("h2", null, " ", superSecretValue, " "), this.displaySecretData()));
+  }
+
+}
+
+/* harmony default export */ __webpack_exports__["default"] = (Object(_components_hoc_withAuth__WEBPACK_IMPORTED_MODULE_3__["default"])()(Secret));
 
 /***/ }),
 
@@ -2546,14 +2642,14 @@ const auth0Client = new Auth0();
 
 /***/ }),
 
-/***/ 5:
-/*!******************************!*\
-  !*** multi ./pages/owner.js ***!
-  \******************************/
+/***/ 7:
+/*!*******************************!*\
+  !*** multi ./pages/secret.js ***!
+  \*******************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\Users\Elio\Desktop\Portfolio-Website\pages\owner.js */"./pages/owner.js");
+module.exports = __webpack_require__(/*! C:\Users\Elio\Desktop\Portfolio-Website\pages\secret.js */"./pages/secret.js");
 
 
 /***/ }),
@@ -2658,4 +2754,4 @@ module.exports = require("url");
 /***/ })
 
 /******/ });
-//# sourceMappingURL=owner.js.map
+//# sourceMappingURL=secret.js.map

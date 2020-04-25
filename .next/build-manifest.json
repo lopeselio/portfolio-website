@@ -30,7 +30,7 @@
       "static/runtime/webpack.js",
       "static/runtime/main.js"
     ],
-    "/owner": [
+    "/secret": [
       "static/runtime/webpack.js",
       "static/runtime/main.js"
     ]

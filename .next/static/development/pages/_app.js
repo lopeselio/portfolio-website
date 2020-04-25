@@ -19,6 +19,7 @@ var getCookieFromReq = function getCookieFromReq(req, cookieKey) {
     return undefined;
   }
 
+  ;
   return cookie.split('=')[1];
 };
 

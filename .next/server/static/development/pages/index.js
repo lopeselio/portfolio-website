@@ -335,6 +335,7 @@ const getCookieFromReq = (req, cookieKey) => {
     return undefined;
   }
 
+  ;
   return cookie.split('=')[1];
 };
 
