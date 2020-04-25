@@ -11,3 +11,7 @@ const setAuthHeader = () => {
 export const getSecretData = aysnc () => {
   return await axios.get('/api/v1/secret', setAuthHeader() ).then(response => {return response.data})
 }
+
+export const getSecretDataServer = async () => {
+  return await axios.get('http://localhost:3000/api/v1/secret', setAuthHeader() ).then(response => {return response.data})
+}

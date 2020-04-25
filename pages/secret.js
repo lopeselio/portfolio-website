@@ -5,9 +5,10 @@ import withAuth from '../components/hoc/withAuth'
 import { getSecretData } from '../actions'
 class Secret extends React.Component {
   // renderSecretPage () {
-  static getInitialProps () {
-    const superSecretValue = 'Super Secret Value'
-    return { superSecretValue }
+  static aysnc getInitialProps () {
+    const anotherSecretData = process.browser ? await getSecretData : await getSecretDataServer
+    console.log(anotherSecretData)
+    return { anotherSecretData }
   }
 
   state = {
