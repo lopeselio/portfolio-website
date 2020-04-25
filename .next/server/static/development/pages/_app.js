@@ -108,13 +108,13 @@ module.exports = require("next/dist/next-server/lib/utils.js");
 /*!**************************!*\
   !*** ./helpers/utils.js ***!
   \**************************/
-/*! exports provided: getCookiesFromReq */
+/*! exports provided: getCookieFromReq */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getCookiesFromReq", function() { return getCookiesFromReq; });
-const getCookiesFromReq = (req, cookieKey) => {
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getCookieFromReq", function() { return getCookieFromReq; });
+const getCookieFromReq = (req, cookieKey) => {
   const cookie = req.headers.cookie.split(';').find(c => c.trim().startsWith(`${cookieKey}=`));
 
   if (!cookie) {
@@ -503,7 +503,7 @@ class Auth0 {
 
   async serverAuth(req) {
     if (req.headers.cookie) {
-      const token = Object(_helpers_utils__WEBPACK_IMPORTED_MODULE_4__["getCookiesFromReq"])(req, 'jwt');
+      const token = Object(_helpers_utils__WEBPACK_IMPORTED_MODULE_4__["getCookieFromReq"])(req, 'jwt');
       const verifiedToken = this.verifyToken(token);
       return verifiedToken;
     }

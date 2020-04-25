@@ -4,13 +4,13 @@
 /*!**************************!*\
   !*** ./helpers/utils.js ***!
   \**************************/
-/*! exports provided: getCookiesFromReq */
+/*! exports provided: getCookieFromReq */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getCookiesFromReq", function() { return getCookiesFromReq; });
-var getCookiesFromReq = function getCookiesFromReq(req, cookieKey) {
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getCookieFromReq", function() { return getCookieFromReq; });
+var getCookieFromReq = function getCookieFromReq(req, cookieKey) {
   var cookie = req.headers.cookie.split(';').find(function (c) {
     return c.trim().startsWith("".concat(cookieKey, "="));
   });
@@ -34882,7 +34882,7 @@ var Auth0 = /*#__PURE__*/function () {
                 break;
               }
 
-              token = Object(_helpers_utils__WEBPACK_IMPORTED_MODULE_7__["getCookiesFromReq"])(req, 'jwt');
+              token = Object(_helpers_utils__WEBPACK_IMPORTED_MODULE_7__["getCookieFromReq"])(req, 'jwt');
               verifiedToken = this.verifyToken(token);
               return _context4.abrupt("return", verifiedToken);
 

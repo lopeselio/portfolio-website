@@ -88,7 +88,7 @@ module.exports =
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 5);
+/******/ 	return __webpack_require__(__webpack_require__.s = 3);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -112,6 +112,46 @@ module.exports = require("next/dist/next-server/lib/router-context.js");
 /***/ (function(module, exports) {
 
 module.exports = require("next/dist/next-server/lib/utils.js");
+
+/***/ }),
+
+/***/ "./components/BasePage.js":
+/*!********************************!*\
+  !*** ./components/BasePage.js ***!
+  \********************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var reactstrap__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! reactstrap */ "reactstrap");
+/* harmony import */ var reactstrap__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(reactstrap__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! prop-types */ "prop-types");
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_2__);
+
+var __jsx = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement;
+
+
+
+const BasePage = props => {
+  const {
+    className
+  } = props; // const className = props.className || ''
+
+  return __jsx("div", {
+    className: `base-page ${className}`
+  }, __jsx(reactstrap__WEBPACK_IMPORTED_MODULE_1__["Container"], null, props.children));
+};
+
+BasePage.defaultProps = {
+  className: ''
+};
+BasePage.propTypes = {
+  className: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.any.isRequired
+};
+/* harmony default export */ __webpack_exports__["default"] = (BasePage);
 
 /***/ }),
 
@@ -2265,10 +2305,10 @@ if (false) {} else {
 
 /***/ }),
 
-/***/ "./pages/index.js":
-/*!************************!*\
-  !*** ./pages/index.js ***!
-  \************************/
+/***/ "./pages/portfolios.js":
+/*!*****************************!*\
+  !*** ./pages/portfolios.js ***!
+  \*****************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -2276,81 +2316,74 @@ if (false) {} else {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _components_layouts_BaseLayout__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./../components/layouts/BaseLayout */ "./components/layouts/BaseLayout.js");
-/* harmony import */ var reactstrap__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! reactstrap */ "reactstrap");
-/* harmony import */ var reactstrap__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(reactstrap__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var react_typed__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-typed */ "react-typed");
-/* harmony import */ var react_typed__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(react_typed__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _components_layouts_BaseLayout__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../components/layouts/BaseLayout */ "./components/layouts/BaseLayout.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! axios */ "axios");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _components_BasePage__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../components/BasePage */ "./components/BasePage.js");
+/* harmony import */ var _routes__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../routes */ "./routes.js");
+/* harmony import */ var _routes__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_routes__WEBPACK_IMPORTED_MODULE_4__);
 var __jsx = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement;
 
-function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
 
 
 
 
 
+class Portfolios extends react__WEBPACK_IMPORTED_MODULE_0___default.a.Component {
+  static async getInitialProps() {
+    let posts = [];
 
-class Index extends react__WEBPACK_IMPORTED_MODULE_0___default.a.Component {
-  constructor(props) {
-    super(props);
-    this.roles = ['Developer', 'Tech Lover', 'Avid Reader', 'Designer', 'Illustrator', 'ReactJS', 'Data Science Enthusiast', 'Team Player'];
+    try {
+      const response = await axios__WEBPACK_IMPORTED_MODULE_2___default.a.get('https://jsonplaceholder.typicode.com/posts');
+      posts = response.data;
+    } catch (err) {
+      console.error(err);
+    }
+
+    return {
+      posts: posts.splice(0, 10)
+    };
+  }
+
+  renderPosts(posts) {
+    return posts.map((post, index) => {
+      return __jsx("li", {
+        key: index
+      }, __jsx(_routes__WEBPACK_IMPORTED_MODULE_4__["Link"], {
+        as: `/portfolio/${post.id}`,
+        href: "/portfolio/[id]"
+      }, __jsx("a", {
+        style: {
+          fontSize: '20px'
+        }
+      }, " ", post.title, " ")));
+    });
   }
 
   render() {
     const {
-      isAuthenticated,
-      user
-    } = this.props.auth;
-    return __jsx(_components_layouts_BaseLayout__WEBPACK_IMPORTED_MODULE_1__["default"], _extends({
-      className: "cover"
-    }, this.props.auth), __jsx("div", {
-      className: "main-section"
-    }, __jsx("div", {
-      className: "background-image"
-    }, __jsx("img", {
-      src: "/static/images/background-index.png"
-    })), __jsx(reactstrap__WEBPACK_IMPORTED_MODULE_2__["Container"], null, __jsx(reactstrap__WEBPACK_IMPORTED_MODULE_2__["Row"], null, __jsx(reactstrap__WEBPACK_IMPORTED_MODULE_2__["Col"], {
-      md: "6"
-    }, __jsx("div", {
-      className: "hero-section"
-    }, __jsx("div", {
-      className: "flipper"
-    }, __jsx("div", {
-      className: "back"
-    }, __jsx("div", {
-      className: "hero-section-content"
-    }, __jsx("h2", null, " Full Stack Web Developer "), __jsx("div", {
-      className: "hero-section-content-intro"
-    }, "Have a look at my portfolio and job history.")), __jsx("img", {
-      className: "image",
-      src: "/static/images/section-1.png"
-    }), __jsx("div", {
-      className: "shadow-custom"
-    }, __jsx("div", {
-      className: "shadow-inner"
-    }, " ")))))), __jsx(reactstrap__WEBPACK_IMPORTED_MODULE_2__["Col"], {
-      md: "6",
-      className: "hero-welcome-wrapper"
-    }, __jsx("div", {
-      className: "hero-welcome-text"
-    }, __jsx("h1", null, "Hola ", isAuthenticated && __jsx("span", null, " ", __jsx("b", null, " ", user.name, " "), " "), ",", __jsx("br", null), "Welcome to the portfolio website of ", __jsx("b", null, "Elio Jordan Lopes"), ".", __jsx("br", null), __jsx("br", null), "Get informed, collaborate and discover projects I work on!")), __jsx(react_typed__WEBPACK_IMPORTED_MODULE_3___default.a, {
-      loop: true,
-      typeSpeed: 60,
-      backSpeed: 60,
-      strings: this.roles,
-      backDelay: 1000,
-      loopCount: 0,
-      showCursor: true,
-      className: "self-typed",
-      cursorChar: "|"
-    }), __jsx("div", {
-      className: "hero-welcome-bio"
-    }, __jsx("h1", null, "Have a look at my work.")))))));
+      posts
+    } = this.props;
+    console.log(this.props);
+    return __jsx(_components_layouts_BaseLayout__WEBPACK_IMPORTED_MODULE_1__["default"], this.props.auth, __jsx(_components_BasePage__WEBPACK_IMPORTED_MODULE_3__["default"], null, __jsx("h1", null, " I am Portfolios Page "), __jsx("ul", null, this.renderPosts(posts))));
   }
 
 }
 
-/* harmony default export */ __webpack_exports__["default"] = (Index);
+/* harmony default export */ __webpack_exports__["default"] = (Portfolios);
+
+/***/ }),
+
+/***/ "./routes.js":
+/*!*******************!*\
+  !*** ./routes.js ***!
+  \*******************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+const routes = __webpack_require__(/*! next-routes */ "next-routes");
+
+module.exports = routes().add('test', '/test/:id');
 
 /***/ }),
 
@@ -2499,14 +2532,14 @@ const auth0Client = new Auth0();
 
 /***/ }),
 
-/***/ 5:
-/*!******************************!*\
-  !*** multi ./pages/index.js ***!
-  \******************************/
+/***/ 3:
+/*!***********************************!*\
+  !*** multi ./pages/portfolios.js ***!
+  \***********************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\Users\Elio\Desktop\Portfolio-Website\pages\index.js */"./pages/index.js");
+module.exports = __webpack_require__(/*! C:\Users\Elio\Desktop\Portfolio-Website\pages\portfolios.js */"./pages/portfolios.js");
 
 
 /***/ }),
@@ -2555,6 +2588,17 @@ module.exports = require("jsonwebtoken");
 
 /***/ }),
 
+/***/ "next-routes":
+/*!******************************!*\
+  !*** external "next-routes" ***!
+  \******************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = require("next-routes");
+
+/***/ }),
+
 /***/ "prop-types":
 /*!*****************************!*\
   !*** external "prop-types" ***!
@@ -2588,17 +2632,6 @@ module.exports = require("react");
 
 /***/ }),
 
-/***/ "react-typed":
-/*!******************************!*\
-  !*** external "react-typed" ***!
-  \******************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-module.exports = require("react-typed");
-
-/***/ }),
-
 /***/ "reactstrap":
 /*!*****************************!*\
   !*** external "reactstrap" ***!
@@ -2622,4 +2655,4 @@ module.exports = require("url");
 /***/ })
 
 /******/ });
-//# sourceMappingURL=index.js.map
+//# sourceMappingURL=portfolios.js.map

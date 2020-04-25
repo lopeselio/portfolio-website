@@ -4,10 +4,10 @@ import BasePage from '../components/BasePage'
 import withAuth from '../components/hoc/withAuth'
 import { getSecretData } from '../actions'
 class Secret extends React.Component {
-  static aysnc getInitialProps ({ req }) {
-    const anotherSecretData = await getSecretData(req);
-    // console.log(anotherSecretData)
-    return { anotherSecretData }
+  static async getInitialProps({req}) {
+    const anotherSecretData =  await getSecretData(req);
+
+    return { anotherSecretData };
   }
 
   state = {
