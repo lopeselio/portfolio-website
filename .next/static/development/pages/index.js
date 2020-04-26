@@ -21,9 +21,15 @@ var BaseLayout = function BaseLayout(props) {
       children = props.children,
       isAuthenticated = props.isAuthenticated,
       user = props.user;
+  var headerType = props.headerType || 'default';
   return __jsx("div", {
     className: "layout-container"
-  }, __jsx(_shared_Header__WEBPACK_IMPORTED_MODULE_1__["default"], {
+  }, headerType === 'index' && __jsx(_shared_Header__WEBPACK_IMPORTED_MODULE_1__["default"], {
+    className: "port-nav-index",
+    isAuthenticated: isAuthenticated,
+    user: user
+  }), headerType === 'default' && __jsx(_shared_Header__WEBPACK_IMPORTED_MODULE_1__["default"], {
+    className: "port-nav-default",
     isAuthenticated: isAuthenticated,
     user: user
   }), __jsx("main", {
@@ -130,10 +136,11 @@ var Example = /*#__PURE__*/function (_React$Component) {
     value: function render() {
       var _this$props = this.props,
           isAuthenticated = _this$props.isAuthenticated,
-          user = _this$props.user; // const { isAuthenticated } = this.props
+          user = _this$props.user,
+          className = _this$props.className; // const { isAuthenticated } = this.props
 
       return __jsx("div", null, __jsx(reactstrap__WEBPACK_IMPORTED_MODULE_9__["Navbar"], {
-        className: "port-navbar port-default absolute",
+        className: "port-navbar port-nav-base absolute ".concat(className),
         color: "transparent",
         dark: true,
         expand: "md"
@@ -51713,7 +51720,9 @@ var Index = /*#__PURE__*/function (_React$Component) {
           user = _this$props$auth.user;
       return __jsx(_components_layouts_BaseLayout__WEBPACK_IMPORTED_MODULE_7__["default"], Object(_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({
         className: "cover"
-      }, this.props.auth), __jsx("div", {
+      }, this.props.auth, {
+        headerType: "index"
+      }), __jsx("div", {
         className: "main-section"
       }, __jsx("div", {
         className: "background-image"
@@ -52005,6 +52014,18 @@ var auth0Client = new Auth0();
 
 /***/ }),
 
+/***/ 10:
+/*!*************************************************************************************************************************************!*\
+  !*** multi next-client-pages-loader?page=%2F&absolutePagePath=C%3A%5CUsers%5CElio%5CDesktop%5CPortfolio-Website%5Cpages%5Cindex.js ***!
+  \*************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = __webpack_require__(/*! next-client-pages-loader?page=%2F&absolutePagePath=C%3A%5CUsers%5CElio%5CDesktop%5CPortfolio-Website%5Cpages%5Cindex.js! */"./node_modules/next/dist/build/webpack/loaders/next-client-pages-loader.js?page=%2F&absolutePagePath=C%3A%5CUsers%5CElio%5CDesktop%5CPortfolio-Website%5Cpages%5Cindex.js!./");
+
+
+/***/ }),
+
 /***/ 3:
 /*!**********************!*\
   !*** util (ignored) ***!
@@ -52049,18 +52070,6 @@ var auth0Client = new Auth0();
 
 /***/ }),
 
-/***/ 7:
-/*!*************************************************************************************************************************************!*\
-  !*** multi next-client-pages-loader?page=%2F&absolutePagePath=C%3A%5CUsers%5CElio%5CDesktop%5CPortfolio-Website%5Cpages%5Cindex.js ***!
-  \*************************************************************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports = __webpack_require__(/*! next-client-pages-loader?page=%2F&absolutePagePath=C%3A%5CUsers%5CElio%5CDesktop%5CPortfolio-Website%5Cpages%5Cindex.js! */"./node_modules/next/dist/build/webpack/loaders/next-client-pages-loader.js?page=%2F&absolutePagePath=C%3A%5CUsers%5CElio%5CDesktop%5CPortfolio-Website%5Cpages%5Cindex.js!./");
-
-
-/***/ }),
-
 /***/ "dll-reference dll_c2e10d183b950a67d9e7":
 /*!*******************************************!*\
   !*** external "dll_c2e10d183b950a67d9e7" ***!
@@ -52072,5 +52081,5 @@ module.exports = dll_c2e10d183b950a67d9e7;
 
 /***/ })
 
-},[[7,"static/runtime/webpack.js"]]]);
+},[[10,"static/runtime/webpack.js"]]]);
 //# sourceMappingURL=index.js.map

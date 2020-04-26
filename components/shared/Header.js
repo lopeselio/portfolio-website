@@ -51,11 +51,11 @@ export default class Example extends React.Component {
   }
 
   render () {
-    const { isAuthenticated, user } = this.props
+    const { isAuthenticated, user, className } = this.props
     // const { isAuthenticated } = this.props
     return (
       <div>
-        <Navbar className='port-navbar port-default absolute' color='transparent' dark expand='md'>
+        <Navbar className={`port-navbar port-nav-base absolute ${className}`} color='transparent' dark expand='md'>
           <NavbarBrand className='port-navbar-brand' href='/'>DevELIOper</NavbarBrand>
           <NavbarToggler onClick={this.toggle} />
           <Collapse isOpen={this.state.isOpen} navbar>

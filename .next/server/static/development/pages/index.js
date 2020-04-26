@@ -88,7 +88,7 @@ module.exports =
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 3);
+/******/ 	return __webpack_require__(__webpack_require__.s = 6);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -138,9 +138,15 @@ const BaseLayout = props => {
     isAuthenticated,
     user
   } = props;
+  const headerType = props.headerType || 'default';
   return __jsx("div", {
     className: "layout-container"
-  }, __jsx(_shared_Header__WEBPACK_IMPORTED_MODULE_1__["default"], {
+  }, headerType === 'index' && __jsx(_shared_Header__WEBPACK_IMPORTED_MODULE_1__["default"], {
+    className: "port-nav-index",
+    isAuthenticated: isAuthenticated,
+    user: user
+  }), headerType === 'default' && __jsx(_shared_Header__WEBPACK_IMPORTED_MODULE_1__["default"], {
+    className: "port-nav-default",
     isAuthenticated: isAuthenticated,
     user: user
   }), __jsx("main", {
@@ -221,11 +227,12 @@ class Example extends react__WEBPACK_IMPORTED_MODULE_0___default.a.Component {
   render() {
     const {
       isAuthenticated,
-      user
+      user,
+      className
     } = this.props; // const { isAuthenticated } = this.props
 
     return __jsx("div", null, __jsx(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Navbar"], {
-      className: "port-navbar port-default absolute",
+      className: `port-navbar port-nav-base absolute ${className}`,
       color: "transparent",
       dark: true,
       expand: "md"
@@ -2262,7 +2269,9 @@ class Index extends react__WEBPACK_IMPORTED_MODULE_0___default.a.Component {
     } = this.props.auth;
     return __jsx(_components_layouts_BaseLayout__WEBPACK_IMPORTED_MODULE_1__["default"], _extends({
       className: "cover"
-    }, this.props.auth), __jsx("div", {
+    }, this.props.auth, {
+      headerType: "index"
+    }), __jsx("div", {
       className: "main-section"
     }, __jsx("div", {
       className: "background-image"
@@ -2458,7 +2467,7 @@ const auth0Client = new Auth0();
 
 /***/ }),
 
-/***/ 3:
+/***/ 6:
 /*!******************************!*\
   !*** multi ./pages/index.js ***!
   \******************************/

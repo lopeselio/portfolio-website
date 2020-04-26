@@ -6,6 +6,9 @@
 
 @import './header';
 
+@import './shared/colors';
+
+
 html, body {
   font-family: 'Montserrat', 'Helvetica' !important;
   height: 100%;
@@ -20,21 +23,31 @@ html, body {
   margin-top: 10px;
 }
 
-.title-brand {
-  font-weight: bolder;
-  color: rgb(156, 156, 156) !important;
-}
+// .title-brand {
+//   font-weight: bolder;
+//   color: rgb(156, 156, 156) !important;
+// }
 
 .absolute {
   position: absolute;
-}
-
-.base-page {
-  padding-top: 150px;
-  color: white;;
 }
 
 .clickable {
   cursor: pointer;;
 } 
 
+.base-page {
+  padding-top: 150px;
+  color: white;
+  background-color: #ecedee;
+  min-height: 100vh;
+
+  .page-header {
+    .page-header-title {
+      font-weight: 700;
+      color: black;
+      display: inline-block;
+      margin-bottom: 20px;
+    }
+  }
+}

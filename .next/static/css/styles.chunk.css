@@ -31,7 +31,6 @@
 
 .cover {
   background-image: linear-gradient(45deg, #00aeef 0%, #096fb9 100%);
-  overflow: hidden;
   position: relative; }
 
 .wrapper {
@@ -137,29 +136,33 @@
   font-weight: normal;
   font-style: italic; }
 
-.port-navbar.port-default {
+.port-navbar.port-nav-base {
   width: 100%;
   z-index: 15;
   padding: 40px; }
-  .port-navbar.port-default .port-navbar-brand {
+  .port-navbar.port-nav-base .port-navbar-brand {
     color: white;
     font-size: 24px;
     text-transform: uppercase;
     letter-spacing: 1px;
     font-weight: bold; }
-  .port-navbar.port-default .port-navbar-item {
+  .port-navbar.port-nav-base .port-navbar-item {
     margin-left: 10px;
     margin-right: 10px; }
-  .port-navbar.port-default .port-navbar-link {
+  .port-navbar.port-nav-base .port-navbar-link {
     color: white;
     font-weight: bold;
     letter-spacing: 0.8px;
     font-size: 18px;
     text-transform: uppercase; }
-    .port-navbar.port-default .port-navbar-link.active {
+    .port-navbar.port-nav-base .port-navbar-link.active {
       color: #dba919; }
-    .port-navbar.port-default .port-navbar-link:hover, .port-navbar.port-default .port-navbar-link:focus {
+    .port-navbar.port-nav-base .port-navbar-link:hover, .port-navbar.port-nav-base .port-navbar-link:focus {
       color: #dba919; }
+
+.port-navbar.port-nav-base.port-nav-default {
+  padding: 30px;
+  background-color: #2C3E50 !important; }
 
 html, body {
   font-family: 'Montserrat', 'Helvetica' !important;
@@ -173,19 +176,22 @@ html, body {
   color: white;
   margin-top: 10px; }
 
-.title-brand {
-  font-weight: bolder;
-  color: #9c9c9c !important; }
-
 .absolute {
   position: absolute; }
 
-.base-page {
-  padding-top: 150px;
-  color: white; }
-
 .clickable {
   cursor: pointer; }
+
+.base-page {
+  padding-top: 150px;
+  color: white;
+  background-color: #ecedee;
+  min-height: 100vh; }
+  .base-page .page-header .page-header-title {
+    font-weight: 700;
+    color: black;
+    display: inline-block;
+    margin-bottom: 20px; }
 
 
 /*# sourceMappingURL=styles.chunk.css.map*/
