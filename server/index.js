@@ -24,8 +24,9 @@ app.prepare()
     server.get('/api/v1/secret', authService.checkJWT, (req, res) => {
       return res.json(secretData)
     })
-    
+
     server.get('/api/v1/onlysiteowner', authService.checkJWT, (req, res) => {
+      console.log(req.user)
       return res.json(secretData)
     })
 
