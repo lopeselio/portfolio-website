@@ -219,7 +219,7 @@ html, body {
 
 .base-page {
   padding-top: 150px;
-  color: white;
+  color: black;
   background-color: #ecedee;
   min-height: 100vh; }
   .base-page .page-header .page-header-title {
