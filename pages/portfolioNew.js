@@ -3,11 +3,11 @@ import React from 'react'
 import BaseLayout from './../components/layouts/BaseLayout'
 import BasePage from '../components/BasePage'
 
-class About extends React.Component {
+class PortfolioNew extends React.Component {
   render () {
     return (
       <BaseLayout {...this.props.auth}>
-        <BasePage className='about-page' title='I am About Page'>
+        <BasePage className='about-page' title='Create New Portfolio'>
         </BasePage>
         {/* <Header/> */}
       </BaseLayout>
@@ -15,4 +15,4 @@ class About extends React.Component {
   }
 }
 
-export default About
+export default PortfolioNew
