@@ -88,7 +88,7 @@ module.exports =
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 3);
+/******/ 	return __webpack_require__(__webpack_require__.s = 6);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -112,115 +112,6 @@ module.exports = require("next/dist/next-server/lib/router-context.js");
 /***/ (function(module, exports) {
 
 module.exports = require("next/dist/next-server/lib/utils.js");
-
-/***/ }),
-
-/***/ "./components/BasePage.js":
-/*!********************************!*\
-  !*** ./components/BasePage.js ***!
-  \********************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var reactstrap__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! reactstrap */ "reactstrap");
-/* harmony import */ var reactstrap__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(reactstrap__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! prop-types */ "prop-types");
-/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_2__);
-
-var __jsx = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement;
-
-
-
-const BasePage = props => {
-  const {
-    className,
-    title
-  } = props; // const className = props.className || ''
-
-  return __jsx("div", {
-    className: `base-page ${className}`
-  }, __jsx(reactstrap__WEBPACK_IMPORTED_MODULE_1__["Container"], null, title && __jsx("div", {
-    className: "page-header"
-  }, __jsx("h1", {
-    className: "page-header-title"
-  }, title)), props.children));
-};
-
-BasePage.defaultProps = {
-  className: ''
-};
-BasePage.propTypes = {
-  className: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.any.isRequired
-};
-/* harmony default export */ __webpack_exports__["default"] = (BasePage);
-
-/***/ }),
-
-/***/ "./components/hoc/withAuth.js":
-/*!************************************!*\
-  !*** ./components/hoc/withAuth.js ***!
-  \************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _layouts_BaseLayout__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../layouts/BaseLayout */ "./components/layouts/BaseLayout.js");
-/* harmony import */ var _BasePage__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../BasePage */ "./components/BasePage.js");
-var __jsx = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement;
-
-function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
-
-function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
-
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
-
-
-
-const namespace = 'http://localhost:3000/';
-/* harmony default export */ __webpack_exports__["default"] = (role => Component => class withAuth extends react__WEBPACK_IMPORTED_MODULE_0___default.a.Component {
-  static async getInitialProps(args) {
-    const pageProps = (await Component.getInitialProps) && (await Component.getInitialProps(args));
-    return _objectSpread({}, pageProps);
-  }
-
-  renderProtectedPage() {
-    const {
-      isAuthenticated,
-      user
-    } = this.props.auth;
-    const userRole = user && user[`${namespace}role`];
-    let isAuthorized = false;
-
-    if (role) {
-      if (userRole && userRole === role) {
-        isAuthorized = true;
-      }
-    } else {
-      isAuthorized = true;
-    }
-
-    if (!isAuthenticated) {
-      return __jsx(_layouts_BaseLayout__WEBPACK_IMPORTED_MODULE_1__["default"], this.props.auth, __jsx(_BasePage__WEBPACK_IMPORTED_MODULE_2__["default"], null, __jsx("h1", null, " You are not authenticated. Please Login to gain access.  ")));
-    } else if (!isAuthorized) {
-      return __jsx(_layouts_BaseLayout__WEBPACK_IMPORTED_MODULE_1__["default"], this.props.auth, __jsx(_BasePage__WEBPACK_IMPORTED_MODULE_2__["default"], null, __jsx("h1", null, " You are not authorized. You don't have permission to visit this page  ")));
-    } else {
-      return __jsx(Component, this.props);
-    }
-  }
-
-  render() {
-    return this.renderProtectedPage();
-  }
-
-});
 
 /***/ }),
 
@@ -2336,10 +2227,10 @@ if (false) {} else {
 
 /***/ }),
 
-/***/ "./pages/portfolioNew.js":
-/*!*******************************!*\
-  !*** ./pages/portfolioNew.js ***!
-  \*******************************/
+/***/ "./pages/index.js":
+/*!************************!*\
+  !*** ./pages/index.js ***!
+  \************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -2348,26 +2239,82 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _components_layouts_BaseLayout__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./../components/layouts/BaseLayout */ "./components/layouts/BaseLayout.js");
-/* harmony import */ var _components_BasePage__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../components/BasePage */ "./components/BasePage.js");
-/* harmony import */ var _components_hoc_withAuth__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../components/hoc/withAuth */ "./components/hoc/withAuth.js");
+/* harmony import */ var reactstrap__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! reactstrap */ "reactstrap");
+/* harmony import */ var reactstrap__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(reactstrap__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var react_typed__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-typed */ "react-typed");
+/* harmony import */ var react_typed__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(react_typed__WEBPACK_IMPORTED_MODULE_3__);
 var __jsx = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement;
- // import Header from './../components/shared/Header'
+
+function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
 
 
 
 
 
-class PortfolioNew extends react__WEBPACK_IMPORTED_MODULE_0___default.a.Component {
+
+class Index extends react__WEBPACK_IMPORTED_MODULE_0___default.a.Component {
+  constructor(props) {
+    super(props);
+    this.roles = ['Developer', 'Tech Lover', 'Avid Reader', 'Designer', 'Illustrator', 'ReactJS', 'Data Science Enthusiast', 'Team Player'];
+  }
+
   render() {
-    return __jsx(_components_layouts_BaseLayout__WEBPACK_IMPORTED_MODULE_1__["default"], this.props.auth, __jsx(_components_BasePage__WEBPACK_IMPORTED_MODULE_2__["default"], {
-      className: "portfolio-create-page",
-      title: "Create New Portfolio"
-    }));
+    const {
+      isAuthenticated,
+      user
+    } = this.props.auth;
+    return __jsx(_components_layouts_BaseLayout__WEBPACK_IMPORTED_MODULE_1__["default"], _extends({
+      className: "cover"
+    }, this.props.auth, {
+      headerType: "index"
+    }), __jsx("div", {
+      className: "main-section"
+    }, __jsx("div", {
+      className: "background-image"
+    }, __jsx("img", {
+      src: "/static/images/background-index.png"
+    })), __jsx(reactstrap__WEBPACK_IMPORTED_MODULE_2__["Container"], null, __jsx(reactstrap__WEBPACK_IMPORTED_MODULE_2__["Row"], null, __jsx(reactstrap__WEBPACK_IMPORTED_MODULE_2__["Col"], {
+      md: "6"
+    }, __jsx("div", {
+      className: "hero-section"
+    }, __jsx("div", {
+      className: "flipper"
+    }, __jsx("div", {
+      className: "back"
+    }, __jsx("div", {
+      className: "hero-section-content"
+    }, __jsx("h2", null, " Full Stack Web Developer "), __jsx("div", {
+      className: "hero-section-content-intro"
+    }, "Have a look at my portfolio and job history.")), __jsx("img", {
+      className: "image",
+      src: "/static/images/section-1.png"
+    }), __jsx("div", {
+      className: "shadow-custom"
+    }, __jsx("div", {
+      className: "shadow-inner"
+    }, " ")))))), __jsx(reactstrap__WEBPACK_IMPORTED_MODULE_2__["Col"], {
+      md: "6",
+      className: "hero-welcome-wrapper"
+    }, __jsx("div", {
+      className: "hero-welcome-text"
+    }, __jsx("h1", null, "Hola ", isAuthenticated && __jsx("span", null, " ", __jsx("b", null, " ", user.name, " "), " "), ",", __jsx("br", null), "Welcome to the portfolio website of ", __jsx("b", null, "Elio Jordan Lopes"), ".", __jsx("br", null), __jsx("br", null), "Get informed, collaborate and discover projects I work on!")), __jsx(react_typed__WEBPACK_IMPORTED_MODULE_3___default.a, {
+      loop: true,
+      typeSpeed: 60,
+      backSpeed: 60,
+      strings: this.roles,
+      backDelay: 1000,
+      loopCount: 0,
+      showCursor: true,
+      className: "self-typed",
+      cursorChar: "|"
+    }), __jsx("div", {
+      className: "hero-welcome-bio"
+    }, __jsx("h1", null, "Have a look at my work.")))))));
   }
 
 }
 
-/* harmony default export */ __webpack_exports__["default"] = (Object(_components_hoc_withAuth__WEBPACK_IMPORTED_MODULE_3__["default"])('siteOwner')(PortfolioNew));
+/* harmony default export */ __webpack_exports__["default"] = (Index);
 
 /***/ }),
 
@@ -2516,14 +2463,14 @@ const auth0Client = new Auth0();
 
 /***/ }),
 
-/***/ 3:
-/*!*************************************!*\
-  !*** multi ./pages/portfolioNew.js ***!
-  \*************************************/
+/***/ 6:
+/*!******************************!*\
+  !*** multi ./pages/index.js ***!
+  \******************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\Users\Elio\Desktop\Portfolio-Website\pages\portfolioNew.js */"./pages/portfolioNew.js");
+module.exports = __webpack_require__(/*! C:\Users\Elio\Desktop\Portfolio-Website\pages\index.js */"./pages/index.js");
 
 
 /***/ }),
@@ -2605,6 +2552,17 @@ module.exports = require("react");
 
 /***/ }),
 
+/***/ "react-typed":
+/*!******************************!*\
+  !*** external "react-typed" ***!
+  \******************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = require("react-typed");
+
+/***/ }),
+
 /***/ "reactstrap":
 /*!*****************************!*\
   !*** external "reactstrap" ***!
@@ -2628,4 +2586,4 @@ module.exports = require("url");
 /***/ })
 
 /******/ });
-//# sourceMappingURL=portfolioNew.js.map
+//# sourceMappingURL=index.js.map
