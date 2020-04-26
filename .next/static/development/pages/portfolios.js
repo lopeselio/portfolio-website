@@ -66,12 +66,8 @@ var BaseLayout = function BaseLayout(props) {
   var headerType = props.headerType || 'default';
   return __jsx("div", {
     className: "layout-container"
-  }, headerType === 'index' && __jsx(_shared_Header__WEBPACK_IMPORTED_MODULE_1__["default"], {
-    className: "port-nav-index",
-    isAuthenticated: isAuthenticated,
-    user: user
-  }), headerType === 'default' && __jsx(_shared_Header__WEBPACK_IMPORTED_MODULE_1__["default"], {
-    className: "port-nav-default",
+  }, __jsx(_shared_Header__WEBPACK_IMPORTED_MODULE_1__["default"], {
+    className: "port-nav-".concat(headerType),
     isAuthenticated: isAuthenticated,
     user: user
   }), __jsx("main", {
@@ -52380,6 +52376,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_BasePage__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../components/BasePage */ "./components/BasePage.js");
 /* harmony import */ var _routes__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../routes */ "./routes.js");
 /* harmony import */ var _routes__WEBPACK_IMPORTED_MODULE_10___default = /*#__PURE__*/__webpack_require__.n(_routes__WEBPACK_IMPORTED_MODULE_10__);
+/* harmony import */ var reactstrap__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! reactstrap */ "./node_modules/reactstrap/es/index.js");
 
 
 
@@ -52391,6 +52388,7 @@ var __jsx = react__WEBPACK_IMPORTED_MODULE_6___default.a.createElement;
 function _createSuper(Derived) { return function () { var Super = Object(_babel_runtime_helpers_esm_getPrototypeOf__WEBPACK_IMPORTED_MODULE_5__["default"])(Derived), result; if (_isNativeReflectConstruct()) { var NewTarget = Object(_babel_runtime_helpers_esm_getPrototypeOf__WEBPACK_IMPORTED_MODULE_5__["default"])(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return Object(_babel_runtime_helpers_esm_possibleConstructorReturn__WEBPACK_IMPORTED_MODULE_4__["default"])(this, result); }; }
 
 function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
+
 
 
 
@@ -52413,16 +52411,23 @@ var Portfolios = /*#__PURE__*/function (_React$Component) {
     key: "renderPosts",
     value: function renderPosts(posts) {
       return posts.map(function (post, index) {
-        return __jsx("li", {
+        return __jsx(reactstrap__WEBPACK_IMPORTED_MODULE_11__["Col"], {
+          md: "4"
+        }, __jsx(react__WEBPACK_IMPORTED_MODULE_6___default.a.Fragment, {
           key: index
-        }, __jsx(_routes__WEBPACK_IMPORTED_MODULE_10__["Link"], {
-          as: "/portfolio/".concat(post.id),
-          href: "/portfolio/[id]"
-        }, __jsx("a", {
-          style: {
-            fontSize: '20px'
-          }
-        }, " ", post.title, " ")));
+        }, __jsx("span", null, __jsx(reactstrap__WEBPACK_IMPORTED_MODULE_11__["Card"], {
+          className: "portfolio-card"
+        }, __jsx(reactstrap__WEBPACK_IMPORTED_MODULE_11__["CardHeader"], {
+          className: "portfolio-card-header"
+        }, "Some Position ", index), __jsx(reactstrap__WEBPACK_IMPORTED_MODULE_11__["CardBody"], null, __jsx("p", {
+          className: "portfolio-card-city"
+        }, " Some Location ", index, " "), __jsx(reactstrap__WEBPACK_IMPORTED_MODULE_11__["CardTitle"], {
+          className: "portfolio-card-title"
+        }, "Some Company ", index), __jsx(reactstrap__WEBPACK_IMPORTED_MODULE_11__["CardText"], {
+          className: "portfolio-card-text"
+        }, "Some Description ", index), __jsx("div", {
+          className: "readMore"
+        }, " "))))));
       });
     }
   }, {
@@ -52431,8 +52436,9 @@ var Portfolios = /*#__PURE__*/function (_React$Component) {
       var posts = this.props.posts;
       console.log(this.props);
       return __jsx(_components_layouts_BaseLayout__WEBPACK_IMPORTED_MODULE_7__["default"], this.props.auth, __jsx(_components_BasePage__WEBPACK_IMPORTED_MODULE_9__["default"], {
+        className: "portfolio-page",
         title: "Portfolios"
-      }, __jsx("ul", null, this.renderPosts(posts))));
+      }, __jsx(reactstrap__WEBPACK_IMPORTED_MODULE_11__["Row"], null, this.renderPosts(posts))));
     }
   }], [{
     key: "getInitialProps",

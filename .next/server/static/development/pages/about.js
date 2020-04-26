@@ -186,12 +186,8 @@ const BaseLayout = props => {
   const headerType = props.headerType || 'default';
   return __jsx("div", {
     className: "layout-container"
-  }, headerType === 'index' && __jsx(_shared_Header__WEBPACK_IMPORTED_MODULE_1__["default"], {
-    className: "port-nav-index",
-    isAuthenticated: isAuthenticated,
-    user: user
-  }), headerType === 'default' && __jsx(_shared_Header__WEBPACK_IMPORTED_MODULE_1__["default"], {
-    className: "port-nav-default",
+  }, __jsx(_shared_Header__WEBPACK_IMPORTED_MODULE_1__["default"], {
+    className: `port-nav-${headerType}`,
     isAuthenticated: isAuthenticated,
     user: user
   }), __jsx("main", {

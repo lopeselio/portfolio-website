@@ -186,12 +186,8 @@ const BaseLayout = props => {
   const headerType = props.headerType || 'default';
   return __jsx("div", {
     className: "layout-container"
-  }, headerType === 'index' && __jsx(_shared_Header__WEBPACK_IMPORTED_MODULE_1__["default"], {
-    className: "port-nav-index",
-    isAuthenticated: isAuthenticated,
-    user: user
-  }), headerType === 'default' && __jsx(_shared_Header__WEBPACK_IMPORTED_MODULE_1__["default"], {
-    className: "port-nav-default",
+  }, __jsx(_shared_Header__WEBPACK_IMPORTED_MODULE_1__["default"], {
+    className: `port-nav-${headerType}`,
     isAuthenticated: isAuthenticated,
     user: user
   }), __jsx("main", {
@@ -2293,7 +2289,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_BasePage__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../components/BasePage */ "./components/BasePage.js");
 /* harmony import */ var _routes__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../routes */ "./routes.js");
 /* harmony import */ var _routes__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_routes__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var reactstrap__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! reactstrap */ "reactstrap");
+/* harmony import */ var reactstrap__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(reactstrap__WEBPACK_IMPORTED_MODULE_5__);
 var __jsx = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement;
+
 
 
 
@@ -2318,16 +2317,23 @@ class Portfolios extends react__WEBPACK_IMPORTED_MODULE_0___default.a.Component 
 
   renderPosts(posts) {
     return posts.map((post, index) => {
-      return __jsx("li", {
+      return __jsx(reactstrap__WEBPACK_IMPORTED_MODULE_5__["Col"], {
+        md: "4"
+      }, __jsx(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, {
         key: index
-      }, __jsx(_routes__WEBPACK_IMPORTED_MODULE_4__["Link"], {
-        as: `/portfolio/${post.id}`,
-        href: "/portfolio/[id]"
-      }, __jsx("a", {
-        style: {
-          fontSize: '20px'
-        }
-      }, " ", post.title, " ")));
+      }, __jsx("span", null, __jsx(reactstrap__WEBPACK_IMPORTED_MODULE_5__["Card"], {
+        className: "portfolio-card"
+      }, __jsx(reactstrap__WEBPACK_IMPORTED_MODULE_5__["CardHeader"], {
+        className: "portfolio-card-header"
+      }, "Some Position ", index), __jsx(reactstrap__WEBPACK_IMPORTED_MODULE_5__["CardBody"], null, __jsx("p", {
+        className: "portfolio-card-city"
+      }, " Some Location ", index, " "), __jsx(reactstrap__WEBPACK_IMPORTED_MODULE_5__["CardTitle"], {
+        className: "portfolio-card-title"
+      }, "Some Company ", index), __jsx(reactstrap__WEBPACK_IMPORTED_MODULE_5__["CardText"], {
+        className: "portfolio-card-text"
+      }, "Some Description ", index), __jsx("div", {
+        className: "readMore"
+      }, " "))))));
     });
   }
 
@@ -2337,8 +2343,9 @@ class Portfolios extends react__WEBPACK_IMPORTED_MODULE_0___default.a.Component 
     } = this.props;
     console.log(this.props);
     return __jsx(_components_layouts_BaseLayout__WEBPACK_IMPORTED_MODULE_1__["default"], this.props.auth, __jsx(_components_BasePage__WEBPACK_IMPORTED_MODULE_3__["default"], {
+      className: "portfolio-page",
       title: "Portfolios"
-    }, __jsx("ul", null, this.renderPosts(posts))));
+    }, __jsx(reactstrap__WEBPACK_IMPORTED_MODULE_5__["Row"], null, this.renderPosts(posts))));
   }
 
 }
