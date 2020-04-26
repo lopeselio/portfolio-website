@@ -25,7 +25,7 @@ app.prepare()
       return res.json(secretData)
     })
 
-    server.get('/api/v1/onlysiteowner', authService.checkJWT, authService.checkRole('admin'), (req, res) => {
+    server.get('/api/v1/onlysiteowner', authService.checkJWT, authService.checkRole('siteOwner'), (req, res) => {
       return res.json(secretData)
     })
 
